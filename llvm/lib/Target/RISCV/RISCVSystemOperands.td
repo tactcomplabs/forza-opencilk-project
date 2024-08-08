@@ -412,3 +412,40 @@ def : SysReg<"vsiph", 0x254>;
 //===-----------------------------------------------
 
 def : SysReg<"jvt", 0x017>;
+
+//===-----------------------------------------------
+// FORZA Specific CSRs
+//===-----------------------------------------------
+def : SysReg<"ustatus", 0x880>;
+def : SysReg<"urac", 0x800>;
+def : SysReg<"upsched", 0x801>;
+def : SysReg<"zenstat", 0x802>;
+def : SysReg<"zqmstat", 0x803>;
+def : SysReg<"zqmmboxreg", 0x804>;
+
+// zqmdq0-zqmdq7 @ 0x808-0x80F
+foreach i = 0...7 in
+  def : SysReg<"zqmdq"#i, !add(0x808, i)>;
+
+// uhls0-uhls31 @ 0x820-0x83F
+foreach i = 0...31 in
+  def : SysReg<"uhls"#i, !add(0x820, i)>;
+
+def : SysReg<"zeneqc", 0x840>;
+def : SysReg<"zeneqd", 0x841>;
+def : SysReg<"zeneqs", 0x842>;
+def : SysReg<"srac", 0x900>;
+def : SysReg<"spsched", 0x901>;
+
+// shls0-shls31 @ 0x920-0x93F
+foreach i = 0...31 in
+  def : SysReg<"shls"#i, !add(0x920, i)>;
+
+def : SysReg<"hartid", 0xCC0>;
+def : SysReg<"threadid", 0xCC1>;
+def : SysReg<"msg_available", 0xCC2>;
+def : SysReg<"zenomc", 0xCC3>;
+
+// incoming_msg0-incoming_msg7 @ 0xCC8-0xCCF
+foreach i = 0...7 in
+  def : SysReg<"incoming_msg"#i, !add(0xCC8, i)>;
