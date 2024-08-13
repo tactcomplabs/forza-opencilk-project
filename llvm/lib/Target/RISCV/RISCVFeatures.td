@@ -977,6 +977,14 @@ def HasVendorXCVbi
       AssemblerPredicate<(all_of FeatureVendorXCVbi),
                          "'XCVbi' (CORE-V Immediate Branching)">;
 
+// Forza Extensions
+def FeatureVendorXForza
+    : SubtargetFeature<"xforza", "HasVendorXForza", "true",
+                       "'xforza' (TactCompLabs Forza instructions)">;
+def HasVendorXForza : Predicate<"Subtarget->hasVendorXForza()">,
+                      AssemblerPredicate<(all_of FeatureVendorXForza),
+                            "'xforza' (TactCompLabs Forza instructions)">;
+
 //===----------------------------------------------------------------------===//
 // LLVM specific features and extensions
 //===----------------------------------------------------------------------===//
