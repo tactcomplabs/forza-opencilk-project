@@ -9,5 +9,5 @@
 
 # CHECK-ASM-AND-OBJ: amo_r_add32.u a4, ra, s0
 # CHECK-ASM: encoding: [0x0b,0xa7,0x80,0x00]
-# CHECK-RV32: :[[@LINE+1]]:1: error: error: instruction requires the following: 'xforza' (TactCompLabs Forza instructions)
+# CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
 amo_r_add32.u a4, ra, s0
