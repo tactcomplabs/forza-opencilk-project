@@ -20,7 +20,7 @@
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
     mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
 class ForzaAmoIntRA<bits<7> funct7, string opcodestr>
-    : RVInstR<funct7, 0b010, OPC_CUSTOM_0, (outs GPR:$rd),
+    : RVInstR<funct7, 0b000, OPC_CUSTOM_0, (outs GPR:$rd),
               (ins GPR:$rs1, GPR:$rs2), opcodestr,
               "$rd, $rs1, $rs2"> {
 }
@@ -29,7 +29,15 @@ class ForzaAmoIntRA<bits<7> funct7, string opcodestr>
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
     mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
 class ForzaAmoFloatRA<bits<7> funct7, string opcodestr>
-    : RVInstR<funct7, 0b010, OPC_CUSTOM_0, (outs FPR64:$rd),
+    : RVInstR<funct7, 0b000, OPC_CUSTOM_0, (outs FPR64:$rd),
+              (ins GPR:$rs1, FPR64:$rs2), opcodestr,
+              "$rd, $rs1, $rs2"> {
+}
+
+let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
+    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
+class ForzaAmoFloatSpc<bits<7> funct7, bits<3> funct3, string opcodestr>
+    : RVInstR<funct7, funct3, OPC_CUSTOM_0, (outs FPR64:$rd),
               (ins GPR:$rs1, FPR64:$rs2), opcodestr,
               "$rd, $rs1, $rs2"> {
 }
@@ -260,3 +268,44 @@ def AMO_R_FSUBR64ON : ForzaAmoFloatRA<0b1101111,"amo_r_fsubr64.on">,
                 Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
 def AMO_R_THRS64ON : ForzaAmoIntRA<0b1110111,"amo_r_thrs64.on">,
                 Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FADD16U : ForzaAmoFloatSpc<0b1010000,0b010,"amo_r_fadd16.u">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FADD16NN : ForzaAmoFloatSpc<0b1010010,0b010,"amo_r_fadd16.nn">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FADD16NO : ForzaAmoFloatSpc<0b1010100,0b010,"amo_r_fadd16.no">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FADD16ON : ForzaAmoFloatSpc<0b1010110,0b010,"amo_r_fadd16.on">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FSUB16U : ForzaAmoFloatSpc<0b1100000,0b010,"amo_r_fsub16.u">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FSUB16NN : ForzaAmoFloatSpc<0b1100010,0b010,"amo_r_fsub16.nn">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FSUB16NO : ForzaAmoFloatSpc<0b1100100,0b010,"amo_r_fsub16.no">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FSUB16ON : ForzaAmoFloatSpc<0b1100110,0b010,"amo_r_fsub16.on">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FSUBR16U : ForzaAmoFloatSpc<0b1101000,0b010,"amo_r_fsubr16.u">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FSUBR16NN : ForzaAmoFloatSpc<0b1101010,0b010,"amo_r_fsubr16.nn">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FSUBR16NO : ForzaAmoFloatSpc<0b1101100,0b010,"amo_r_fsubr16.no">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_FSUBR16ON : ForzaAmoFloatSpc<0b1101110,0b010,"amo_r_fsubr16.on">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_THRS8U : ForzaAmoFloatSpc<0b1110000,0b001,"amo_r_thrs8.u">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_THRS8NN : ForzaAmoFloatSpc<0b1110010,0b001,"amo_r_thrs8.nn">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_THRS8NO : ForzaAmoFloatSpc<0b1110100,0b001,"amo_r_thrs8.no">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_THRS8ON : ForzaAmoFloatSpc<0b1110110,0b001,"amo_r_thrs8.on">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_THRS16U : ForzaAmoFloatSpc<0b1110000,0b010,"amo_r_thrs16.u">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_THRS16NN : ForzaAmoFloatSpc<0b1110010,0b010,"amo_r_thrs16.nn">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_THRS16NO : ForzaAmoFloatSpc<0b1110100,0b010,"amo_r_thrs16.no">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+def AMO_R_THRS16ON : ForzaAmoFloatSpc<0b1110110,0b010,"amo_r_thrs16.on">,
+                Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+

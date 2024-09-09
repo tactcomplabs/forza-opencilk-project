@@ -722,6 +722,20 @@ csrrs t1, spsched, zero
 # uimm12
 csrrs t2, 0x901, zero
 
+# pzop_base
+# name
+# CHECK-INST: csrrs t1, pzop_base, zero
+# CHECK-ENC: encoding: [0x73,0x23,0x20,0x90]
+# CHECK-INST-ALIAS: csrr t1, pzop_base
+# uimm12
+# CHECK-INST: csrrs t2, pzop_base, zero
+# CHECK-ENC: encoding: [0xf3,0x23,0x20,0x90]
+# CHECK-INST-ALIAS: csrr t2, pzop_base
+# name
+csrrs t1, pzop_base, zero
+# uimm12
+csrrs t2, 0x902, zero
+
 # shls0
 # name
 # CHECK-INST: csrrs t1, shls0, zero

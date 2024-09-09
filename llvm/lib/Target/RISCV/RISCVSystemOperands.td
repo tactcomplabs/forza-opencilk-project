@@ -436,6 +436,7 @@ def : SysReg<"zeneqd", 0x841>;
 def : SysReg<"zeneqs", 0x842>;
 def : SysReg<"srac", 0x900>;
 def : SysReg<"spsched", 0x901>;
+def : SysReg<"pzop_base", 0x902>;
 
 // shls0-shls31 @ 0x920-0x93F
 foreach i = 0...31 in
