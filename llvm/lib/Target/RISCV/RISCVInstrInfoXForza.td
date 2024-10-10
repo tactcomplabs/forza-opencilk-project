@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file describes the vendor extensions defined by Ventana Micro Systems.
+// This file describes the vendor extensions defined by Tactical Computing Laboratories LLC.
 //
 //===----------------------------------------------------------------------===//
 
