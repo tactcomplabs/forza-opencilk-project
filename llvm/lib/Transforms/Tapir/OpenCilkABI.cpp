@@ -309,6 +309,7 @@ void OpenCilkABI::prepareModule() {
     }
     if (GlobalVariable *AlignVar =
         M.getGlobalVariable("__cilkrts_stack_frame_align", true)) {
+      // StackFrameAlign is undefined here.
       StackFrameAlign = AlignVar->getAlign();
       // Mark this variable with private linkage, to avoid linker failures when
       // compiling with no optimizations.
@@ -328,6 +329,12 @@ void OpenCilkABI::prepareModule() {
   if (StackFrameTy->isOpaque()) {
     // Create a dummy __cilkrts_stack_frame structure
     StackFrameTy->setBody(Int64Ty);
+  } else {
+    // Promote the stack frame structure alignment to the largest convenient
+    // value given the ABI.
+    Align ABIStackAlign = M.getDataLayout().getStackAlignment();
+    if (ABIStackAlign > StackFrameAlign.valueOrOne())
+      StackFrameAlign = ABIStackAlign;
   }
   // Create declarations of all CilkRTS functions, and add basic attributes to
   // those declarations.
@@ -875,9 +882,9 @@ void OpenCilkABI::processSubTaskCall(TaskOutlineInfo &TOI, DominatorTree &DT) {
          ConstantPointerNull::get(PointerType::getUnqual(C)));
   ReplCall->setOperand(ParentSFArgNum, SF);
   Argument *ParentSFArg = TOI.Outline->getArg(ParentSFArgNum);
-  ParentSFArg->addAttr(
-      Attribute::getWithAlignment(C, StackFrameAlign.valueOrOne()));
-
+  if (StackFrameAlign)
+    ParentSFArg->addAttr(
+      Attribute::getWithAlignment(C, StackFrameAlign.value()));
   // Split the basic block containing the detach replacement just before the
   // start of the detach-replacement instructions.
   BasicBlock *DetBlock = ReplStart->getParent();
@@ -955,13 +962,13 @@ static bool findOutermostTapirRTCallsForTaskFrame(
             FoundTapirRTEnd = true;
             BasicBlock *EndBB = UI->getParent();
             assert(TFBlocks.count(EndBB) && "tapir_runtime_end not in same "
-                                            "taskframe as tapir_runtime_begin");
+                                            "taskframe as tapir_runtime_start");
             EndIters.push_back(++UI->getIterator());
           }
         }
 
         if (FoundTapirRTEnd)
-          // We found a tapir_runtime_begin in this block, so stop searching.
+          // We found a tapir_runtime_start in this block, so stop searching.
           break;
       }
     }
@@ -1070,11 +1077,6 @@ void OpenCilkABI::GetTapirRTCalls(Spindle *TaskFrame, bool IsRootTask,
 
   // Process subtaskframes recursively.
   for (Spindle *SubTF : SubTFs) {
-    // Skip any subtaskframes that are already enclosed in
-    // tapir.runtime.{start,end} intrinsics.
-    if (!SuccessorTFs.count(SubTF))
-      continue;
-
     // Skip any taskframes that are associated with subtasks.
     assert(!SubTF->getTaskFromTaskFrame() &&
            "Should not be processing spawned taskframes.");
@@ -1085,6 +1087,9 @@ void OpenCilkABI::GetTapirRTCalls(Spindle *TaskFrame, bool IsRootTask,
 
 bool OpenCilkABI::preProcessFunction(Function &F, TaskInfo &TI,
                                      bool ProcessingTapirLoops) {
+  if (Processed.contains(&F))
+    return false;
+
   if (ProcessingTapirLoops)
     // Don't do any preprocessing when outlining Tapir loops.
     return false;
@@ -1108,6 +1113,8 @@ void OpenCilkABI::postProcessFunction(Function &F, bool ProcessingTapirLoops) {
 
   if (!DebugABICalls)
     inlineCilkFunctions(F, CallsToInline);
+
+  Processed.insert(&F);
 }
 
 /// Process the Tapir instructions in an ordinary (non-spawning and not spawned)
@@ -1162,7 +1169,7 @@ bool OpenCilkABI::processOrdinaryFunction(Function &F, BasicBlock *TFEntry) {
   return Changed;
 }
 
-void OpenCilkABI::postProcessHelper(Function &F) {}
+void OpenCilkABI::postProcessHelper(Function &F) { Processed.insert(&F); }
 
 LoopOutlineProcessor *
 OpenCilkABI::getLoopOutlineProcessor(const TapirLoopInfo *TL) {

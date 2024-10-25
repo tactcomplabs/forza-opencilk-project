@@ -13,8 +13,8 @@
 #ifndef OPEN_CILK_ABI_H_
 #define OPEN_CILK_ABI_H_
 
+#include "llvm/ADT/SmallPtrSet.h"
 #include "llvm/ADT/SmallVector.h"
-#include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/IntrinsicInst.h"
 #include "llvm/Transforms/Tapir/LoweringUtils.h"
 
@@ -24,6 +24,7 @@ class TapirLoopInfo;
 
 class OpenCilkABI final : public TapirTarget {
   ValueToValueMapTy DetachCtxToStackFrame;
+  SmallPtrSet<Function *, 8> Processed;
   SmallPtrSet<CallBase *, 8> CallsToInline;
   DenseMap<BasicBlock *, SmallVector<IntrinsicInst *, 4>> TapirRTCalls;
   ValueToValueMapTy DefaultSyncLandingpad;
@@ -60,7 +61,12 @@ class OpenCilkABI final : public TapirTarget {
   FunctionCallee CilkRTSCilkForGrainsize32 = nullptr;
   FunctionCallee CilkRTSCilkForGrainsize64 = nullptr;
 
-  MaybeAlign StackFrameAlign{8};
+  // The alignment of __cilkrts_stack_frame.  This value will be increased
+  // to the ABI-prescribed stack pointer alignment of the module.  This has
+  // no runtime cost.  The bitcode file may request even greater alignment
+  // by defining a variable __cilkrts_stack_frame_align.  This may have a
+  // runtime cost by forcing overalignment of stack pointers.
+  MaybeAlign StackFrameAlign;
 
   // Accessors for CilkRTS ABI functions. When a bitcode file is loaded, these
   // functions should return the function defined in the bitcode file.
