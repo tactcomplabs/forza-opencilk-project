@@ -89,5 +89,21 @@ TARGET_BUILTIN(__builtin_riscv_sm3p1, "UiUi", "nc", "zksh")
 TARGET_BUILTIN(__builtin_riscv_ntl_load, "v.", "t", "zihintntl")
 TARGET_BUILTIN(__builtin_riscv_ntl_store, "v.", "t", "zihintntl")
 
+// Forza extension
+TARGET_BUILTIN(__forza_amo_r_add32u, "ii*i", "T", "xforza")
+TARGET_BUILTIN(__forza_amo_r_and32u, "ivi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_or32u, "ivi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_xor32u, "ivi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_smax32u, "ivi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_umax32u, "ivUi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_smin32u, "ivi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_umin32u, "ivUi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_swap32u, "ivi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_cas032u, "ivi", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_fadd32u, "fvf", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_fsub32u, "fvf", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_fsubr32u, "fvf", "t", "xforza")
+TARGET_BUILTIN(__forza_amo_r_thrs32u, "ivi", "t", "xforza")
+
 #undef BUILTIN
 #undef TARGET_BUILTIN

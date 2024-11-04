@@ -14,14 +14,36 @@
 // XForza
 //===----------------------------------------------------------------------===//
 
+//===----------------------------------------------------------------------===//
+// Forza Operand and SDNode transformation definitions.
+//===----------------------------------------------------------------------===//
+
+def forza_amo_r_add32u : SDNode<"RISCVISD::AMO_R_ADD32U",    SDTIntBinOp>;
+def forza_amo_r_and32u : SDNode<"RISCVISD::AMO_R_AND32U",    SDTIntBinOp>;
+def forza_amo_r_or32u : SDNode<"RISCVISD::AMO_R_OR32U",    SDTIntBinOp>;
+def forza_amo_r_xor32u : SDNode<"RISCVISD::AMO_R_XOR32U",    SDTIntBinOp>;
+def forza_amo_r_smax32u : SDNode<"RISCVISD::AMO_R_SMAX32U",    SDTIntBinOp>;
+def forza_amo_r_umax32u : SDNode<"RISCVISD::AMO_R_UMAX32U",    SDTIntBinOp>;
+def forza_amo_r_smin32u : SDNode<"RISCVISD::AMO_R_SMIN32U",    SDTIntBinOp>;
+def forza_amo_r_umin32u : SDNode<"RISCVISD::AMO_R_UMIN32U",    SDTIntBinOp>;
+def forza_amo_r_swap32u : SDNode<"RISCVISD::AMO_R_SWAP32U",    SDTIntBinOp>;
+def forza_amo_r_cas032u : SDNode<"RISCVISD::AMO_R_CAS032U",    SDTIntBinOp>;
+def forza_amo_r_fadd32u : SDNode<"RISCVISD::AMO_R_FADD32U",    SDTIntBinOp>;
+def forza_amo_r_fsub32u : SDNode<"RISCVISD::AMO_R_FSUB32U",    SDTIntBinOp>;
+def forza_amo_r_fsubr32u : SDNode<"RISCVISD::AMO_R_FSUBR32U",    SDTIntBinOp>;
+def forza_amo_r_thrs32u : SDNode<"RISCVISD::AMO_R_THRS32U",    SDTIntBinOp>;
+
+//===----------------------------------------------------------------------===//
 // Forza Instruction Formats
+//===----------------------------------------------------------------------===//
 
 // Integer RA-Type AMOs
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
-    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
+    mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
+//    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
 class ForzaAmoIntRA<bits<7> funct7, string opcodestr>
     : RVInstR<funct7, 0b000, OPC_CUSTOM_0, (outs GPR:$rd),
-              (ins GPR:$rs1, GPR:$rs2), opcodestr,
+              (ins GPRMem:$rs1, GPR:$rs2), opcodestr,
               "$rd, $rs1, $rs2"> {
 }
 
@@ -34,6 +56,7 @@ class ForzaAmoFloatRA<bits<7> funct7, string opcodestr>
               "$rd, $rs1, $rs2"> {
 }
 
+// Floating Point AMO's
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
     mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
 class ForzaAmoFloatSpc<bits<7> funct7, bits<3> funct3, string opcodestr>
@@ -42,7 +65,39 @@ class ForzaAmoFloatSpc<bits<7> funct7, bits<3> funct3, string opcodestr>
               "$rd, $rs1, $rs2"> {
 }
 
+// Custom I-Type Instructions
+let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
+    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
+class ForzaCustI<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
+    : RVInstI<funct3, opcode, (outs GPR:$rd),
+              (ins GPR:$rs1, simm12:$imm12), opcodestr,
+              "$rd, $rs1, $imm12"> {
+}
+
+// Custom S-Type Instructions
+let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
+    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
+class ForzaCustS<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
+    : RVInstS<funct3, opcode, (outs GPRMem:$rd),
+              (ins GPR:$rs2, GPRMem:$rs1, simm12:$imm12),
+              opcodestr, "$rs2, ${imm12}(${rs1})"> {
+}
+
+// Custom R-Type Instructions
+let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
+    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
+class ForzaCustR<bits<7> funct7, RISCVOpcode opcode, string opcodestr>
+    : RVInstR<funct7, 0b000, opcode, (outs GPR:$rd),
+              (ins GPR:$rs1, GPR:$rs2), opcodestr,
+              "$rd, $rs1, $rs2"> {
+}
+
+//OPC_OP_P
+
+
+//===----------------------------------------------------------------------===//
 // Forza Instructions
+//===----------------------------------------------------------------------===//
 
 def AMO_R_ADD32U : ForzaAmoIntRA<0b0000000,"amo_r_add32.u">,
                 Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
@@ -309,3 +364,30 @@ def AMO_R_THRS16NO : ForzaAmoFloatSpc<0b1110100,0b010,"amo_r_thrs16.no">,
 def AMO_R_THRS16ON : ForzaAmoFloatSpc<0b1110110,0b010,"amo_r_thrs16.on">,
                 Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
 
+//===----------------------------------------------------------------------===//
+// Codegen patterns
+//===----------------------------------------------------------------------===//
+
+let Predicates = [IsRV64, HasVendorXForza] in {
+  class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
+                ValueType vt2 = XLenVT>
+    : Pat<(vt1 (OpNode (vt1 GPR:$rs1), (vt2 GPRMem:$rs2))), (Inst GPR:$rs1, GPR:$rs2)>;
+  class PatGprFpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
+                ValueType vt2 = XLenVT>
+    : Pat<(vt1 (OpNode (vt1 GPR:$rs1), (vt2 FPR32:$rs2))), (Inst GPR:$rs1, FPR32:$rs2)>;
+
+  def : PatGprMemGpr<forza_amo_r_add32u,AMO_R_ADD32U>;
+  def : PatGprGpr<forza_amo_r_and32u,AMO_R_AND32U>;
+  def : PatGprGpr<forza_amo_r_or32u,AMO_R_OR32U>;
+  def : PatGprGpr<forza_amo_r_xor32u,AMO_R_XOR32U>;
+  def : PatGprGpr<forza_amo_r_smax32u,AMO_R_SMAX32U>;
+  def : PatGprGpr<forza_amo_r_umax32u,AMO_R_UMAX32U>;
+  def : PatGprGpr<forza_amo_r_smin32u,AMO_R_SMIN32U>;
+  def : PatGprGpr<forza_amo_r_umin32u,AMO_R_UMIN32U>;
+  def : PatGprGpr<forza_amo_r_swap32u,AMO_R_SWAP32U>;
+  def : PatGprGpr<forza_amo_r_cas032u,AMO_R_CAS032U>;
+  //def : PatGprFpr<forza_amo_r_fadd32u,AMO_R_FADD32U>;
+  //def : PatGprFpr<forza_amo_r_fsub32u,AMO_R_FSUB32U>;
+  //def : PatGprFpr<forza_amo_r_fsubr32u,AMO_R_FSUBR32U>;
+  def : PatGprGpr<forza_amo_r_thrs32u,AMO_R_THRS32U>;
+}

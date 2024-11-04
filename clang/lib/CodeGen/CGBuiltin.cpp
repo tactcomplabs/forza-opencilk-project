@@ -21477,6 +21477,50 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
     return Store;
   }
 
+  // Forza intrinsics
+  case RISCV::BI__forza_amo_r_add32u:
+    ID = Intrinsic::riscv_forza_amo_r_add32u;
+    break;
+  case RISCV::BI__forza_amo_r_and32u:
+    ID = Intrinsic::riscv_forza_amo_r_and32u;
+    break;
+  case RISCV::BI__forza_amo_r_or32u:
+    ID = Intrinsic::riscv_forza_amo_r_or32u;
+    break;
+  case RISCV::BI__forza_amo_r_xor32u:
+    ID = Intrinsic::riscv_forza_amo_r_xor32u;
+    break;
+  case RISCV::BI__forza_amo_r_smax32u:
+    ID = Intrinsic::riscv_forza_amo_r_smax32u;
+    break;
+  case RISCV::BI__forza_amo_r_umax32u:
+    ID = Intrinsic::riscv_forza_amo_r_umax32u;
+    break;
+  case RISCV::BI__forza_amo_r_smin32u:
+    ID = Intrinsic::riscv_forza_amo_r_smin32u;
+    break;
+  case RISCV::BI__forza_amo_r_umin32u:
+    ID = Intrinsic::riscv_forza_amo_r_umin32u;
+    break;
+  case RISCV::BI__forza_amo_r_swap32u:
+    ID = Intrinsic::riscv_forza_amo_r_swap32u;
+    break;
+  case RISCV::BI__forza_amo_r_cas032u:
+    ID = Intrinsic::riscv_forza_amo_r_cas032u;
+    break;
+  case RISCV::BI__forza_amo_r_fadd32u:
+    ID = Intrinsic::riscv_forza_amo_r_fadd32u;
+    break;
+  case RISCV::BI__forza_amo_r_fsub32u:
+    ID = Intrinsic::riscv_forza_amo_r_fsub32u;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr32u:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr32u;
+    break;
+  case RISCV::BI__forza_amo_r_thrs32u:
+    ID = Intrinsic::riscv_forza_amo_r_thrs32u;
+    break;
+
   // Vector builtins are handled from here.
 #include "clang/Basic/riscv_vector_builtin_cg.inc"
   // SiFive Vector builtins are handled from here.

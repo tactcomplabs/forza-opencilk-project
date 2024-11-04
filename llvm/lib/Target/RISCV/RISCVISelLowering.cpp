@@ -8722,6 +8722,99 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_WO_CHAIN(SDValue Op,
 
     return NewNode;
   }
+  case Intrinsic::riscv_forza_amo_r_add32u:
+  case Intrinsic::riscv_forza_amo_r_and32u:
+  case Intrinsic::riscv_forza_amo_r_or32u:
+  case Intrinsic::riscv_forza_amo_r_xor32u:
+  case Intrinsic::riscv_forza_amo_r_smax32u:
+  case Intrinsic::riscv_forza_amo_r_umax32u:
+  case Intrinsic::riscv_forza_amo_r_smin32u:
+  case Intrinsic::riscv_forza_amo_r_umin32u:
+  case Intrinsic::riscv_forza_amo_r_swap32u:
+  case Intrinsic::riscv_forza_amo_r_cas032u:
+  case Intrinsic::riscv_forza_amo_r_thrs32u: {
+    unsigned Opc = RISCVISD::AMO_R_ADD32U;
+    switch(IntNo){
+    default:
+    case Intrinsic::riscv_forza_amo_r_add32u:
+      Opc = RISCVISD::AMO_R_ADD32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_and32u:
+      Opc = RISCVISD::AMO_R_AND32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_or32u:
+      Opc = RISCVISD::AMO_R_OR32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_xor32u:
+      Opc = RISCVISD::AMO_R_XOR32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_smax32u:
+      Opc = RISCVISD::AMO_R_SMAX32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_umax32u:
+      Opc = RISCVISD::AMO_R_UMAX32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_smin32u:
+      Opc = RISCVISD::AMO_R_SMIN32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_umin32u:
+      Opc = RISCVISD::AMO_R_UMIN32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_swap32u:
+      Opc = RISCVISD::AMO_R_SWAP32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_cas032u:
+      Opc = RISCVISD::AMO_R_CAS032U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_thrs32u:
+      Opc = RISCVISD::AMO_R_THRS32U;
+      break;
+    }
+
+    if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType() == MVT::i32) {
+      SDValue NewOp0 =
+          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(1));
+      SDValue NewOp1 =
+          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(2));
+      SDValue Res =
+          DAG.getNode(Opc, DL, MVT::i64, NewOp0, NewOp1, Op.getOperand(3));
+      return DAG.getNode(ISD::TRUNCATE, DL, MVT::i32, Res);
+    }
+    return DAG.getNode(Opc, DL, XLenVT, Op.getOperand(1), Op.getOperand(2),
+                       Op.getOperand(3));
+    break;
+  }
+  case Intrinsic::riscv_forza_amo_r_fadd32u:
+  case Intrinsic::riscv_forza_amo_r_fsub32u:
+  case Intrinsic::riscv_forza_amo_r_fsubr32u: {
+    unsigned Opc = RISCVISD::AMO_R_FADD32U;
+    switch(IntNo){
+    default:
+    case Intrinsic::riscv_forza_amo_r_fadd32u:
+      Opc = RISCVISD::AMO_R_FADD32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_fsub32u:
+      Opc = RISCVISD::AMO_R_FSUB32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_fsubr32u:
+      Opc = RISCVISD::AMO_R_FSUBR32U;
+      break;
+    }
+
+    if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType().isFloatingPoint() ) {
+      SDValue NewOp0 =
+          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::f64, Op.getOperand(1));
+      SDValue NewOp1 =
+          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(2));
+      SDValue Res =
+          DAG.getNode(Opc, DL, MVT::f64, NewOp0, NewOp1, Op.getOperand(3));
+      return DAG.getNode(ISD::TRUNCATE, DL, MVT::i32, Res);
+    }
+
+    return DAG.getNode(Opc, DL, XLenVT, Op.getOperand(1), Op.getOperand(2),
+                       Op.getOperand(3));
+    break;
+  }
   }
 
   return lowerVectorIntrinsicScalars(Op, DAG, Subtarget);
@@ -18974,6 +19067,20 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(STRICT_FSETCC_VL)
   NODE_NAME_CASE(STRICT_FSETCCS_VL)
   NODE_NAME_CASE(STRICT_VFROUND_NOEXCEPT_VL)
+  NODE_NAME_CASE(AMO_R_ADD32U)
+  NODE_NAME_CASE(AMO_R_AND32U)
+  NODE_NAME_CASE(AMO_R_OR32U)
+  NODE_NAME_CASE(AMO_R_XOR32U)
+  NODE_NAME_CASE(AMO_R_SMAX32U)
+  NODE_NAME_CASE(AMO_R_UMAX32U)
+  NODE_NAME_CASE(AMO_R_SMIN32U)
+  NODE_NAME_CASE(AMO_R_UMIN32U)
+  NODE_NAME_CASE(AMO_R_SWAP32U)
+  NODE_NAME_CASE(AMO_R_CAS032U)
+  NODE_NAME_CASE(AMO_R_FADD32U)
+  NODE_NAME_CASE(AMO_R_FSUB32U)
+  NODE_NAME_CASE(AMO_R_FSUBR32U)
+  NODE_NAME_CASE(AMO_R_THRS32U)
   NODE_NAME_CASE(VWMUL_VL)
   NODE_NAME_CASE(VWMULU_VL)
   NODE_NAME_CASE(VWMULSU_VL)

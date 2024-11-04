@@ -415,6 +415,22 @@ enum NodeType : unsigned {
   STRICT_VFROUND_NOEXCEPT_VL,
   LAST_RISCV_STRICTFP_OPCODE = STRICT_VFROUND_NOEXCEPT_VL,
 
+  // Forza instructions
+  AMO_R_ADD32U,
+  AMO_R_AND32U,
+  AMO_R_OR32U,
+  AMO_R_XOR32U,
+  AMO_R_SMAX32U,
+  AMO_R_UMAX32U,
+  AMO_R_SMIN32U,
+  AMO_R_UMIN32U,
+  AMO_R_SWAP32U,
+  AMO_R_CAS032U,
+  AMO_R_FADD32U,
+  AMO_R_FSUB32U,
+  AMO_R_FSUBR32U,
+  AMO_R_THRS32U,
+
   // WARNING: Do not add anything in the end unless you want the node to
   // have memop! In fact, starting from FIRST_TARGET_MEMORY_OPCODE all
   // opcodes will be thought as target memory ops!

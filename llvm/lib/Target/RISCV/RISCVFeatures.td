@@ -980,10 +980,11 @@ def HasVendorXCVbi
 // Forza Extensions
 def FeatureVendorXForza
     : SubtargetFeature<"xforza", "HasVendorXForza", "true",
-                       "'xforza' (TactCompLabs Forza instructions)">;
-def HasVendorXForza : Predicate<"Subtarget->hasVendorXForza()">,
-                      AssemblerPredicate<(all_of FeatureVendorXForza),
-                            "'xforza' (TactCompLabs Forza instructions)">;
+                       "'XForza' (TactCompLabs Forza ops)">;
+def HasVendorXForza
+    : Predicate<"Subtarget->hasVendorXForza()">,
+      AssemblerPredicate<(all_of FeatureVendorXForza),
+                         "'XForza' (TactCompLabs Forza instructions)">;
 
 //===----------------------------------------------------------------------===//
 // LLVM specific features and extensions
