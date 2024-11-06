@@ -620,8 +620,10 @@ RISCVTargetLowering::RISCVTargetLowering(const TargetMachine &TM,
 
   setOperationAction({ISD::TRAP, ISD::DEBUGTRAP}, MVT::Other, Legal);
   setOperationAction(ISD::INTRINSIC_WO_CHAIN, MVT::Other, Custom);
-  if (Subtarget.is64Bit())
+  if (Subtarget.is64Bit()){
     setOperationAction(ISD::INTRINSIC_WO_CHAIN, MVT::i32, Custom);
+    setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i32, Custom);
+  }
 
   if (Subtarget.hasStdExtZicbop()) {
     setOperationAction(ISD::PREFETCH, MVT::Other, Legal);
@@ -12040,6 +12042,19 @@ void RISCVTargetLowering::ReplaceNodeResults(SDNode *N,
     SDValue EltHi = DAG.getNode(RISCVISD::VMV_X_S, DL, XLenVT, LShr32);
 
     Results.push_back(DAG.getNode(ISD::BUILD_PAIR, DL, MVT::i64, EltLo, EltHi));
+    break;
+  }
+  case ISD::INTRINSIC_W_CHAIN: {
+    unsigned IntNo = N->getConstantOperandVal(1);
+    switch (IntNo) {
+    default:
+      llvm_unreachable(
+          "Don't know how to custom type legalize this intrinsic!");
+    case Intrinsic::riscv_forza_amo_r_add32u:
+      LLVM_DEBUG("ReplaceNodeResults: Intrinsic::riscv_forza_amo_r_add32u");
+      return;
+      break;
+    }
     break;
   }
   case ISD::INTRINSIC_WO_CHAIN: {
