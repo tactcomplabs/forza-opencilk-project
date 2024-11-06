@@ -620,8 +620,12 @@ RISCVTargetLowering::RISCVTargetLowering(const TargetMachine &TM,
 
   setOperationAction({ISD::TRAP, ISD::DEBUGTRAP}, MVT::Other, Legal);
   setOperationAction(ISD::INTRINSIC_WO_CHAIN, MVT::Other, Custom);
+
   if (Subtarget.is64Bit()){
     setOperationAction(ISD::INTRINSIC_WO_CHAIN, MVT::i32, Custom);
+  }
+
+  if (Subtarget.hasVendorXForza()){
     setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i32, Custom);
   }
 
@@ -12044,19 +12048,6 @@ void RISCVTargetLowering::ReplaceNodeResults(SDNode *N,
     Results.push_back(DAG.getNode(ISD::BUILD_PAIR, DL, MVT::i64, EltLo, EltHi));
     break;
   }
-  case ISD::INTRINSIC_W_CHAIN: {
-    unsigned IntNo = N->getConstantOperandVal(1);
-    switch (IntNo) {
-    default:
-      llvm_unreachable(
-          "Don't know how to custom type legalize this intrinsic!");
-    case Intrinsic::riscv_forza_amo_r_add32u:
-      LLVM_DEBUG("ReplaceNodeResults: Intrinsic::riscv_forza_amo_r_add32u");
-      return;
-      break;
-    }
-    break;
-  }
   case ISD::INTRINSIC_WO_CHAIN: {
     unsigned IntNo = N->getConstantOperandVal(0);
     switch (IntNo) {
@@ -12189,6 +12180,16 @@ void RISCVTargetLowering::ReplaceNodeResults(SDNode *N,
     }
     }
     break;
+  }
+  case ISD::INTRINSIC_W_CHAIN: {
+    unsigned IntNo = N->getConstantOperandVal(1);
+    switch (IntNo) {
+    default:
+      llvm_unreachable(
+          "Can't legalize this INTRINSIC_W_CHAIN!");
+    case Intrinsic::riscv_forza_amo_r_cas032u:
+      break;
+    }
   }
   case ISD::VECREDUCE_ADD:
   case ISD::VECREDUCE_AND:
