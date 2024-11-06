@@ -368,26 +368,26 @@ def AMO_R_THRS16ON : ForzaAmoFloatSpc<0b1110110,0b010,"amo_r_thrs16.on">,
 // Codegen patterns
 //===----------------------------------------------------------------------===//
 
-let Predicates = [IsRV64, HasVendorXForza] in {
+let Predicates = [HasVendorXForza] in {
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
-    : Pat<(vt1 (OpNode (vt1 GPR:$rs1), (vt2 GPRMem:$rs2))), (Inst GPR:$rs1, GPR:$rs2)>;
+    : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;
   class PatGprFpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPR:$rs1), (vt2 FPR32:$rs2))), (Inst GPR:$rs1, FPR32:$rs2)>;
 
-  def : PatGprMemGpr<forza_amo_r_add32u,AMO_R_ADD32U>;
-  def : PatGprGpr<forza_amo_r_and32u,AMO_R_AND32U>;
-  def : PatGprGpr<forza_amo_r_or32u,AMO_R_OR32U>;
-  def : PatGprGpr<forza_amo_r_xor32u,AMO_R_XOR32U>;
-  def : PatGprGpr<forza_amo_r_smax32u,AMO_R_SMAX32U>;
-  def : PatGprGpr<forza_amo_r_umax32u,AMO_R_UMAX32U>;
-  def : PatGprGpr<forza_amo_r_smin32u,AMO_R_SMIN32U>;
-  def : PatGprGpr<forza_amo_r_umin32u,AMO_R_UMIN32U>;
-  def : PatGprGpr<forza_amo_r_swap32u,AMO_R_SWAP32U>;
-  def : PatGprGpr<forza_amo_r_cas032u,AMO_R_CAS032U>;
+  def : PatGprMemGpr<forza_amo_r_add32u,AMO_R_ADD32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_and32u,AMO_R_AND32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_or32u,AMO_R_OR32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_xor32u,AMO_R_XOR32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_smax32u,AMO_R_SMAX32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_umax32u,AMO_R_UMAX32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_smin32u,AMO_R_SMIN32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_umin32u,AMO_R_UMIN32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_swap32u,AMO_R_SWAP32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_cas032u,AMO_R_CAS032U, i32, i32>;
   //def : PatGprFpr<forza_amo_r_fadd32u,AMO_R_FADD32U>;
   //def : PatGprFpr<forza_amo_r_fsub32u,AMO_R_FSUB32U>;
   //def : PatGprFpr<forza_amo_r_fsubr32u,AMO_R_FSUBR32U>;
-  def : PatGprGpr<forza_amo_r_thrs32u,AMO_R_THRS32U>;
+  def : PatGprMemGpr<forza_amo_r_thrs32u,AMO_R_THRS32U, i32, i32>;
 }
