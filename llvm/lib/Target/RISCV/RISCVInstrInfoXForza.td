@@ -18,7 +18,8 @@
 // Forza Operand and SDNode transformation definitions.
 //===----------------------------------------------------------------------===//
 
-def forza_amo_r_add32u : SDNode<"RISCVISD::AMO_R_ADD32U",    SDTIntBinOp>;
+def forza_amo_r_add32u : SDNode<"RISCVISD::AMO_R_ADD32U", SDTIntBinOp, 
+[SDNPHasChain]>;
 def forza_amo_r_and32u : SDNode<"RISCVISD::AMO_R_AND32U",    SDTIntBinOp>;
 def forza_amo_r_or32u : SDNode<"RISCVISD::AMO_R_OR32U",    SDTIntBinOp>;
 def forza_amo_r_xor32u : SDNode<"RISCVISD::AMO_R_XOR32U",    SDTIntBinOp>;
