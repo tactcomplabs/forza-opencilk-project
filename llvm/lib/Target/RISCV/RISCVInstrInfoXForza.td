@@ -376,7 +376,8 @@ let Predicates = [HasVendorXForza] in {
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPR:$rs1), (vt2 FPR32:$rs2))), (Inst GPR:$rs1, FPR32:$rs2)>;
 
-  def : PatGprMemGpr<forza_amo_r_add32u,AMO_R_ADD32U, i32, i32>;
+  def : PatGprMemGpr<forza_amo_r_add32u,AMO_R_ADD32U>;
+  //def : PatGprMemGpr<forza_amo_r_add32u,AMO_R_ADD32U, i32, i32>;
   def : PatGprMemGpr<forza_amo_r_and32u,AMO_R_AND32U, i32, i32>;
   def : PatGprMemGpr<forza_amo_r_or32u,AMO_R_OR32U, i32, i32>;
   def : PatGprMemGpr<forza_amo_r_xor32u,AMO_R_XOR32U, i32, i32>;

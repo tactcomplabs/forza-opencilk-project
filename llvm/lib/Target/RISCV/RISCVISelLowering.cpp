@@ -9370,6 +9370,7 @@ static SDValue lowerReductionSeq(unsigned RVVOpcode, MVT ResVT,
                      DAG.getConstant(0, DL, XLenVT));
 }
 
+
 SDValue RISCVTargetLowering::lowerVECREDUCE(SDValue Op,
                                             SelectionDAG &DAG) const {
   SDLoc DL(Op);
@@ -12183,13 +12184,38 @@ void RISCVTargetLowering::ReplaceNodeResults(SDNode *N,
   }
   case ISD::INTRINSIC_W_CHAIN: {
     unsigned IntNo = N->getConstantOperandVal(1);
+    unsigned Opc = RISCVISD::AMO_R_ADD32U;
     switch (IntNo) {
     default:
+      LLVM_DEBUG(dbgs() << "Unknown intrinsic with chain: " << IntNo << "\n");
       llvm_unreachable(
-          "Can't legalize this INTRINSIC_W_CHAIN!");
+        N->getOperationName().c_str());
+    case Intrinsic::riscv_forza_amo_r_add32u:
+      Opc = RISCVISD::AMO_R_ADD32U;
+      break;
     case Intrinsic::riscv_forza_amo_r_cas032u:
+      Opc = RISCVISD::AMO_R_CAS032U;
       break;
     }
+
+    SDLoc DL(N);
+    EVT VT = N->getValueType(0); // Expected to be i32
+    SDValue Chain = N->getOperand(0);
+    SDValue Addr = N->getOperand(2); // Rs1
+    SDValue Val = N->getOperand(3);  // Rs2
+    // Promote operands to i64
+    Addr = DAG.getZExtOrTrunc(Addr, DL, MVT::i64);
+    Val = DAG.getZExtOrTrunc(Val, DL, MVT::i64);
+    // Create the custom node with operands: Chain, Addr (Rs1), Val (Rs2)
+    SDVTList VTs = DAG.getVTList(MVT::i64, MVT::Other);
+    SDValue Ops[] = {Chain, Addr, Val};
+    SDValue Result = DAG.getNode(Opc, DL, VTs, Ops);
+    // Truncate the result back to 32 bit
+    SDValue TruncResult = DAG.getNode(ISD::TRUNCATE, DL, VT, Result);
+    // Return the result and chain
+    Results.push_back(TruncResult);         // rd
+    Results.push_back(Result.getValue(1));  // updated chain
+    return;
   }
   case ISD::VECREDUCE_ADD:
   case ISD::VECREDUCE_AND:
