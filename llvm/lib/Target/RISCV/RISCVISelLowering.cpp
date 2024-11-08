@@ -8769,9 +8769,6 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_WO_CHAIN(SDValue Op,
     case Intrinsic::riscv_forza_amo_r_swap32u:
       Opc = RISCVISD::AMO_R_SWAP32U;
       break;
-    case Intrinsic::riscv_forza_amo_r_cas032u:
-      Opc = RISCVISD::AMO_R_CAS032U;
-      break;
     case Intrinsic::riscv_forza_amo_r_thrs32u:
       Opc = RISCVISD::AMO_R_THRS32U;
       break;
@@ -9027,9 +9024,6 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
       break;
     case Intrinsic::riscv_forza_amo_r_swap32u:
       Opc = RISCVISD::AMO_R_SWAP32U;
-      break;
-    case Intrinsic::riscv_forza_amo_r_cas032u:
-      Opc = RISCVISD::AMO_R_CAS032U;
       break;
     case Intrinsic::riscv_forza_amo_r_thrs32u:
       Opc = RISCVISD::AMO_R_THRS32U;
@@ -12193,8 +12187,32 @@ void RISCVTargetLowering::ReplaceNodeResults(SDNode *N,
     case Intrinsic::riscv_forza_amo_r_add32u:
       Opc = RISCVISD::AMO_R_ADD32U;
       break;
-    case Intrinsic::riscv_forza_amo_r_cas032u:
-      Opc = RISCVISD::AMO_R_CAS032U;
+    case Intrinsic::riscv_forza_amo_r_and32u:
+      Opc = RISCVISD::AMO_R_AND32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_or32u:
+      Opc = RISCVISD::AMO_R_OR32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_xor32u:
+      Opc = RISCVISD::AMO_R_XOR32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_smax32u:
+      Opc = RISCVISD::AMO_R_SMAX32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_umax32u:
+      Opc = RISCVISD::AMO_R_UMAX32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_smin32u:
+      Opc = RISCVISD::AMO_R_SMIN32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_umin32u:
+      Opc = RISCVISD::AMO_R_UMIN32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_swap32u:
+      Opc = RISCVISD::AMO_R_SWAP32U;
+      break;
+    case Intrinsic::riscv_forza_amo_r_thrs32u:
+      Opc = RISCVISD::AMO_R_THRS32U;
       break;
     }
 
@@ -19182,7 +19200,6 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SMIN32U)
   NODE_NAME_CASE(AMO_R_UMIN32U)
   NODE_NAME_CASE(AMO_R_SWAP32U)
-  NODE_NAME_CASE(AMO_R_CAS032U)
   NODE_NAME_CASE(AMO_R_FADD32U)
   NODE_NAME_CASE(AMO_R_FSUB32U)
   NODE_NAME_CASE(AMO_R_FSUBR32U)
