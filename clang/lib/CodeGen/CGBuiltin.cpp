@@ -21478,6 +21478,68 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
   }
 
   // Forza intrinsics
+  case RISCV::BI__forza_amo_r_add8u:
+    ID = Intrinsic::riscv_forza_amo_r_add8u;
+    break;
+  case RISCV::BI__forza_amo_r_and8u:
+    ID = Intrinsic::riscv_forza_amo_r_and8u;
+    break;
+  case RISCV::BI__forza_amo_r_or8u:
+    ID = Intrinsic::riscv_forza_amo_r_or8u;
+    break;
+  case RISCV::BI__forza_amo_r_xor8u:
+    ID = Intrinsic::riscv_forza_amo_r_xor8u;
+    break;
+  case RISCV::BI__forza_amo_r_smax8u:
+    ID = Intrinsic::riscv_forza_amo_r_smax8u;
+    break;
+  case RISCV::BI__forza_amo_r_umax8u:
+    ID = Intrinsic::riscv_forza_amo_r_umax8u;
+    break;
+  case RISCV::BI__forza_amo_r_smin8u:
+    ID = Intrinsic::riscv_forza_amo_r_smin8u;
+    break;
+  case RISCV::BI__forza_amo_r_umin8u:
+    ID = Intrinsic::riscv_forza_amo_r_umin8u;
+    break;
+  case RISCV::BI__forza_amo_r_swap8u:
+    ID = Intrinsic::riscv_forza_amo_r_swap8u;
+    break;
+  case RISCV::BI__forza_amo_r_thrs8u:
+    ID = Intrinsic::riscv_forza_amo_r_thrs8u;
+    break;
+
+  case RISCV::BI__forza_amo_r_add16u:
+    ID = Intrinsic::riscv_forza_amo_r_add16u;
+    break;
+  case RISCV::BI__forza_amo_r_and16u:
+    ID = Intrinsic::riscv_forza_amo_r_and16u;
+    break;
+  case RISCV::BI__forza_amo_r_or16u:
+    ID = Intrinsic::riscv_forza_amo_r_or16u;
+    break;
+  case RISCV::BI__forza_amo_r_xor16u:
+    ID = Intrinsic::riscv_forza_amo_r_xor16u;
+    break;
+  case RISCV::BI__forza_amo_r_smax16u:
+    ID = Intrinsic::riscv_forza_amo_r_smax16u;
+    break;
+  case RISCV::BI__forza_amo_r_umax16u:
+    ID = Intrinsic::riscv_forza_amo_r_umax16u;
+    break;
+  case RISCV::BI__forza_amo_r_smin16u:
+    ID = Intrinsic::riscv_forza_amo_r_smin16u;
+    break;
+  case RISCV::BI__forza_amo_r_umin16u:
+    ID = Intrinsic::riscv_forza_amo_r_umin16u;
+    break;
+  case RISCV::BI__forza_amo_r_swap16u:
+    ID = Intrinsic::riscv_forza_amo_r_swap16u;
+    break;
+  case RISCV::BI__forza_amo_r_thrs16u:
+    ID = Intrinsic::riscv_forza_amo_r_thrs16u;
+    break;
+
   case RISCV::BI__forza_amo_r_add32u:
     ID = Intrinsic::riscv_forza_amo_r_add32u;
     break;
@@ -21505,8 +21567,793 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
   case RISCV::BI__forza_amo_r_swap32u:
     ID = Intrinsic::riscv_forza_amo_r_swap32u;
     break;
-  case RISCV::BI__forza_amo_r_cas032u:
-    ID = Intrinsic::riscv_forza_amo_r_cas032u;
+  case RISCV::BI__forza_amo_r_thrs32u:
+    ID = Intrinsic::riscv_forza_amo_r_thrs32u;
+    break;
+
+  case RISCV::BI__forza_amo_r_add64u:
+    ID = Intrinsic::riscv_forza_amo_r_add64u;
+    break;
+  case RISCV::BI__forza_amo_r_and64u:
+    ID = Intrinsic::riscv_forza_amo_r_and64u;
+    break;
+  case RISCV::BI__forza_amo_r_or64u:
+    ID = Intrinsic::riscv_forza_amo_r_or64u;
+    break;
+  case RISCV::BI__forza_amo_r_xor64u:
+    ID = Intrinsic::riscv_forza_amo_r_xor64u;
+    break;
+  case RISCV::BI__forza_amo_r_smax64u:
+    ID = Intrinsic::riscv_forza_amo_r_smax64u;
+    break;
+  case RISCV::BI__forza_amo_r_umax64u:
+    ID = Intrinsic::riscv_forza_amo_r_umax64u;
+    break;
+  case RISCV::BI__forza_amo_r_smin64u:
+    ID = Intrinsic::riscv_forza_amo_r_smin64u;
+    break;
+  case RISCV::BI__forza_amo_r_umin64u:
+    ID = Intrinsic::riscv_forza_amo_r_umin64u;
+    break;
+  case RISCV::BI__forza_amo_r_swap64u:
+    ID = Intrinsic::riscv_forza_amo_r_swap64u;
+    break;
+  case RISCV::BI__forza_amo_r_thrs64u:
+    ID = Intrinsic::riscv_forza_amo_r_thrs64u;
+    break;
+
+  case RISCV::BI__forza_amo_r_add8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_add8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_and8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_and8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_or8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_or8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_xor8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_xor8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smax8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smax8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umax8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umax8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smin8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smin8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umin8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umin8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_swap8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_swap8migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_thrs8migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_thrs8migr_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_add16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_add16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_and16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_and16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_or16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_or16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_xor16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_xor16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smax16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smax16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umax16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umax16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smin16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smin16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umin16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umin16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_swap16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_swap16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_thrs16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_thrs16migr_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_add32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_add32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_and32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_and32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_or32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_or32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_xor32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_xor32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smax32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smax32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umax32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umax32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smin32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smin32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umin32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umin32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_swap32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_swap32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_thrs32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_thrs32migr_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_add64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_add64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_and64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_and64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_or64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_or64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_xor64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_xor64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smax64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smax64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umax64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umax64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smin64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smin64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umin64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umin64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_swap64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_swap64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_thrs64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_thrs64migr_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_add8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_add8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_and8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_and8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_or8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_or8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_xor8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_xor8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_smax8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_smax8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_umax8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_umax8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_smin8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_smin8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_umin8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_umin8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_swap8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_swap8migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_thrs8migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_thrs8migr_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_add16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_add16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_and16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_and16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_or16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_or16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_xor16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_xor16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_smax16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_smax16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_umax16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_umax16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_smin16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_smin16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_umin16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_umin16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_swap16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_swap16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_thrs16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_thrs16migr_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_add32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_add32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_and32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_and32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_or32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_or32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_xor32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_xor32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_smax32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_smax32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_umax32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_umax32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_smin32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_smin32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_umin32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_umin32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_swap32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_swap32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_thrs32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_thrs32migr_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_add64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_add64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_and64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_and64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_or64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_or64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_xor64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_xor64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_smax64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_smax64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_umax64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_umax64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_smin64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_smin64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_umin64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_umin64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_swap64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_swap64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_thrs64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_thrs64migr_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_add8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_add8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_and8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_and8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_or8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_or8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_xor8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_xor8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_smax8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_smax8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_umax8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_umax8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_smin8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_smin8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_umin8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_umin8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_swap8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_swap8migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_thrs8migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_thrs8migr_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_add16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_add16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_and16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_and16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_or16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_or16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_xor16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_xor16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_smax16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_smax16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_umax16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_umax16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_smin16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_smin16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_umin16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_umin16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_swap16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_swap16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_thrs16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_thrs16migr_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_add32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_add32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_and32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_and32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_or32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_or32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_xor32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_xor32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_smax32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_smax32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_umax32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_umax32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_smin32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_smin32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_umin32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_umin32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_swap32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_swap32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_thrs32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_thrs32migr_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_add64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_add64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_and64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_and64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_or64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_or64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_xor64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_xor64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_smax64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_smax64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_umax64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_umax64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_smin64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_smin64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_umin64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_umin64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_swap64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_swap64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_thrs64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_thrs64migr_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_add8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_add8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_and8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_and8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_or8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_or8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_xor8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_xor8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smax8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smax8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umax8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umax8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smin8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smin8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umin8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umin8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_swap8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_swap8rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_thrs8rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_thrs8rem_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_add16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_add16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_and16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_and16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_or16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_or16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_xor16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_xor16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smax16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smax16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umax16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umax16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smin16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smin16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umin16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umin16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_swap16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_swap16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_thrs16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_thrs16rem_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_add32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_add32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_and32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_and32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_or32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_or32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_xor32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_xor32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smax32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smax32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umax32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umax32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smin32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smin32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umin32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umin32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_swap32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_swap32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_thrs32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_thrs32rem_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_add64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_add64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_and64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_and64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_or64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_or64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_xor64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_xor64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smax64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smax64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umax64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umax64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_smin64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_smin64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_umin64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_umin64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_swap64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_swap64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_thrs64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_thrs64rem_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_add8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_add8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_and8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_and8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_or8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_or8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_xor8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_xor8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_smax8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_smax8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_umax8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_umax8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_smin8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_smin8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_umin8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_umin8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_swap8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_swap8rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_thrs8rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_thrs8rem_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_add16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_add16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_and16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_and16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_or16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_or16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_xor16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_xor16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_smax16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_smax16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_umax16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_umax16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_smin16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_smin16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_umin16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_umin16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_swap16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_swap16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_thrs16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_thrs16rem_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_add32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_add32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_and32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_and32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_or32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_or32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_xor32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_xor32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_smax32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_smax32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_umax32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_umax32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_smin32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_smin32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_umin32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_umin32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_swap32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_swap32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_thrs32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_thrs32rem_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_add64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_add64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_and64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_and64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_or64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_or64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_xor64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_xor64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_smax64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_smax64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_umax64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_umax64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_smin64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_smin64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_umin64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_umin64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_swap64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_swap64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_thrs64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_thrs64rem_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_add8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_add8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_and8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_and8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_or8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_or8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_xor8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_xor8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_smax8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_smax8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_umax8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_umax8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_smin8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_smin8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_umin8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_umin8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_swap8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_swap8rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_thrs8rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_thrs8rem_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_add16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_add16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_and16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_and16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_or16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_or16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_xor16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_xor16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_smax16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_smax16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_umax16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_umax16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_smin16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_smin16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_umin16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_umin16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_swap16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_swap16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_thrs16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_thrs16rem_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_add32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_add32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_and32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_and32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_or32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_or32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_xor32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_xor32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_smax32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_smax32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_umax32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_umax32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_smin32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_smin32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_umin32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_umin32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_swap32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_swap32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_thrs32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_thrs32rem_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_add64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_add64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_and64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_and64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_or64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_or64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_xor64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_xor64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_smax64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_smax64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_umax64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_umax64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_smin64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_smin64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_umin64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_umin64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_swap64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_swap64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_thrs64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_thrs64rem_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_fadd16u:
+    ID = Intrinsic::riscv_forza_amo_r_fadd16u;
+    break;
+  case RISCV::BI__forza_amo_r_fsub16u:
+    ID = Intrinsic::riscv_forza_amo_r_fsub16u;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr16u:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr16u;
     break;
   case RISCV::BI__forza_amo_r_fadd32u:
     ID = Intrinsic::riscv_forza_amo_r_fadd32u;
@@ -21517,9 +22364,184 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
   case RISCV::BI__forza_amo_r_fsubr32u:
     ID = Intrinsic::riscv_forza_amo_r_fsubr32u;
     break;
-  case RISCV::BI__forza_amo_r_thrs32u:
-    ID = Intrinsic::riscv_forza_amo_r_thrs32u;
+  case RISCV::BI__forza_amo_r_fadd64u:
+    ID = Intrinsic::riscv_forza_amo_r_fadd64u;
     break;
+  case RISCV::BI__forza_amo_r_fsub64u:
+    ID = Intrinsic::riscv_forza_amo_r_fsub64u;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr64u:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr64u;
+    break;
+
+  case RISCV::BI__forza_amo_r_fadd16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fadd16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsub16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsub16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr16migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr16migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fadd32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fadd32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsub32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsub32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr32migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr32migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fadd64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fadd64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsub64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsub64migr_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr64migr_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr64migr_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_fadd16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fadd16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsub16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsub16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr16migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr16migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_fadd32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fadd32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsub32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsub32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr32migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr32migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_fadd64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fadd64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsub64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsub64migr_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr64migr_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr64migr_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_fadd16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fadd16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsub16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsub16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr16migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr16migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_fadd32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fadd32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsub32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsub32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr32migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr32migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_fadd64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fadd64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsub64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsub64migr_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr64migr_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr64migr_no;
+    break;
+
+  case RISCV::BI__forza_amo_r_fadd16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fadd16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsub16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsub16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr16rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr16rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fadd32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fadd32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsub32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsub32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr32rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr32rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fadd64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fadd64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsub64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsub64rem_nn;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr64rem_nn:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr64rem_nn;
+    break;
+
+  case RISCV::BI__forza_amo_r_fadd16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fadd16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsub16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsub16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr16rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr16rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_fadd32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fadd32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsub32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsub32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr32rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr32rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_fadd64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fadd64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsub64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsub64rem_on;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr64rem_on:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr64rem_on;
+    break;
+
+  case RISCV::BI__forza_amo_r_fadd16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fadd16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsub16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsub16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr16rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr16rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_fadd32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fadd32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsub32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsub32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr32rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr32rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_fadd64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fadd64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsub64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsub64rem_no;
+    break;
+  case RISCV::BI__forza_amo_r_fsubr64rem_no:
+    ID = Intrinsic::riscv_forza_amo_r_fsubr64rem_no;
+    break;
+
 
   // Vector builtins are handled from here.
 #include "clang/Basic/riscv_vector_builtin_cg.inc"

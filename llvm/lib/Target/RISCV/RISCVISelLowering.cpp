@@ -8737,7 +8737,6 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_WO_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_smin32u:
   case Intrinsic::riscv_forza_amo_r_umin32u:
   case Intrinsic::riscv_forza_amo_r_swap32u:
-  case Intrinsic::riscv_forza_amo_r_cas032u:
   case Intrinsic::riscv_forza_amo_r_thrs32u: {
     unsigned Opc = RISCVISD::AMO_R_ADD32U;
     switch(IntNo){
@@ -8991,7 +8990,6 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_smin32u:
   case Intrinsic::riscv_forza_amo_r_umin32u:
   case Intrinsic::riscv_forza_amo_r_swap32u:
-  case Intrinsic::riscv_forza_amo_r_cas032u:
   case Intrinsic::riscv_forza_amo_r_thrs32u: {
     SDLoc DL(Op);
     MVT XLenVT = Subtarget.getXLenVT();

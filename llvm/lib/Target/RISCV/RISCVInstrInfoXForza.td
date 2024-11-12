@@ -116,6 +116,26 @@ class ForzaAmoFloatRA<bits<7> funct7, bits<3> funct3, string opcodestr>
               "$rd, $rs1, $rs2"> {
 }
 
+let hasNoSchedulingInfo = 1,
+    hasSideEffects = 1, mayLoad = 0, mayStore = 1 in
+class ForzaThreadS<bits<3> funct3, string opcodestr>
+    : RVInstS<funct3, OPC_STORE, (outs),
+              (ins GPR:$rs2, GPRMem:$rs1, simm12:$imm12),
+              opcodestr, "$rs2, ${imm12}(${rs1})">;
+
+let hasNoSchedulingInfo = 1,
+    hasSideEffects = 1, mayLoad = 0, mayStore = 0 in
+class ForzaThreadI<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
+    : RVInstI<funct3, opcode, (outs GPR:$rd), (ins GPR:$rs1, simm12:$imm12),
+              opcodestr, "$rd, $rs1, $imm12">, Sched<[WriteCSR]>;
+
+let hasNoSchedulingInfo = 1,
+    hasSideEffects = 1, mayLoad = 0, mayStore = 0 in
+class ForzaThreadR<bits<7> funct7, bits<3> funct3, RISCVOpcode opcode, string opcodestr>
+    : RVInstR<funct7, funct3, opcode, (outs GPR:$rd),
+              (ins GPR:$rs1, GPR:$rs2), opcodestr,
+              "$rd, $rs1, $rs2">, Sched<[WriteCSR]>;
+
 // Multiclass template to define instruction encodings
 // Instructions are defined as: amo_r_[OP][SIZE].FMT
 // -- 0 = U
@@ -233,46 +253,17 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
               Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
 }
 
-
-// Special Floating Point AMO's
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
-    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
-class ForzaAmoFloatSpc<bits<7> funct7, bits<3> funct3, string opcodestr>
-    : RVInstR<funct7, funct3, OPC_CUSTOM_0, (outs FPR64:$rd),
-              (ins GPR:$rs1, FPR64:$rs2), opcodestr,
-              "$rd, $rs1, $rs2"> {
+    mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
+  def QUIT : ForzaThreadI<0b010, OPC_CUSTOM_1, "quit">;
+  def SENDACK: ForzaThreadI<0b100, OPC_CUSTOM_1, "sendack">;
+  def SPAWN : ForzaThreadR<0b0000000, 0b000, OPC_OP_P, "spawn">;
+  def MCOPY : ForzaThreadS<0b100, "mcopy">;
 }
 
-// Custom I-Type Instructions
-let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
-    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
-class ForzaCustI<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
-    : RVInstI<funct3, opcode, (outs GPR:$rd),
-              (ins GPR:$rs1, simm12:$imm12), opcodestr,
-              "$rd, $rs1, $imm12"> {
+let Predicates = [IsRV64, HasVendorXForza] in {
+  def : InstAlias<"quit_thread", (QUIT  X0, X0, 0)>;
 }
-
-// Custom S-Type Instructions
-let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
-    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
-class ForzaCustS<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
-    : RVInstS<funct3, opcode, (outs GPRMem:$rd),
-              (ins GPR:$rs2, GPRMem:$rs1, simm12:$imm12),
-              opcodestr, "$rs2, ${imm12}(${rs1})"> {
-}
-
-// Custom R-Type Instructions
-let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
-    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in
-class ForzaCustR<bits<7> funct7, RISCVOpcode opcode, string opcodestr>
-    : RVInstR<funct7, 0b000, opcode, (outs GPR:$rd),
-              (ins GPR:$rs1, GPR:$rs2), opcodestr,
-              "$rd, $rs1, $rs2"> {
-}
-
-//OPC_OP_P
-
-
 
 //===----------------------------------------------------------------------===//
 // Codegen patterns
@@ -282,9 +273,10 @@ let Predicates = [HasVendorXForza] in {
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;
-  class PatGprMemFpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
-                ValueType vt2 = XLenVT>
-    : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 FPR64:$rs2))), (Inst GPRMem:$rs1,FPR64:$rs2)>;
+  class PatGprMemFpr<SDPatternOperator OpNode, RVInst Inst,
+                ValueType vt1 = XLenVT>
+                //ValueType vt2 = XLenVT>
+    : Pat<(f64 (OpNode (vt1 GPRMem:$rs1), (f64 FPR64:$rs2))), (Inst GPRMem:$rs1,FPR64:$rs2)>;
 
   multiclass ForzaAmoPatGprMemGpr<string name> {
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8u"),
