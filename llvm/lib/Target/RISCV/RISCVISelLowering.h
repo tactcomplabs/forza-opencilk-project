@@ -1218,6 +1218,8 @@ public:
 
   bool supportKCFIBundles() const override { return true; }
 
+  unsigned getForzaOpc(unsigned IntNo) const;
+
   MachineInstr *EmitKCFICheck(MachineBasicBlock &MBB,
                               MachineBasicBlock::instr_iterator &MBBI,
                               const TargetInstrInfo *TII) const override;
