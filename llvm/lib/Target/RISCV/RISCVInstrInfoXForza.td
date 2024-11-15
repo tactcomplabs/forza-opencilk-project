@@ -56,33 +56,33 @@ multiclass ForzaAmoIntSDNode<string mnemonic> {
 }
 
 multiclass ForzaAmoFloatSDNode<string mnemonic> {
-  def forza_amo_r_ # NAME # 16u : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16U"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 32u : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32U"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 64u : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64U"), SDTIntBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 16u : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16U"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 32u : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32U"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 64u : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64U"), SDTFPBinOp, [SDNPHasChain]>;
 
-  def forza_amo_r_ # NAME # 16migr_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16MIGRNN"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 32migr_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32MIGRNN"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 64migr_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64MIGRNN"), SDTIntBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 16migr_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16MIGRNN"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 32migr_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32MIGRNN"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 64migr_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64MIGRNN"), SDTFPBinOp, [SDNPHasChain]>;
 
-  def forza_amo_r_ # NAME # 16migr_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16MIGRON"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 32migr_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32MIGRON"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 64migr_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64MIGRON"), SDTIntBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 16migr_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16MIGRON"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 32migr_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32MIGRON"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 64migr_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64MIGRON"), SDTFPBinOp, [SDNPHasChain]>;
 
-  def forza_amo_r_ # NAME # 16migr_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16MIGRNO"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 32migr_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32MIGRNO"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 64migr_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64MIGRNO"), SDTIntBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 16migr_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16MIGRNO"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 32migr_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32MIGRNO"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 64migr_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64MIGRNO"), SDTFPBinOp, [SDNPHasChain]>;
 
-  def forza_amo_r_ # NAME # 16rem_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16REMNN"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 32rem_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32REMNN"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 64rem_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64REMNN"), SDTIntBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 16rem_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16REMNN"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 32rem_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32REMNN"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 64rem_nn : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64REMNN"), SDTFPBinOp, [SDNPHasChain]>;
 
-  def forza_amo_r_ # NAME # 16rem_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16REMON"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 32rem_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32REMON"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 64rem_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64REMON"), SDTIntBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 16rem_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16REMON"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 32rem_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32REMON"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 64rem_on : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64REMON"), SDTFPBinOp, [SDNPHasChain]>;
 
-  def forza_amo_r_ # NAME # 16rem_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16REMNO"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 32rem_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32REMNO"), SDTIntBinOp, [SDNPHasChain]>;
-  def forza_amo_r_ # NAME # 64rem_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64REMNO"), SDTIntBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 16rem_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"16REMNO"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 32rem_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"32REMNO"), SDTFPBinOp, [SDNPHasChain]>;
+  def forza_amo_r_ # NAME # 64rem_no : SDNode<!strconcat("RISCVISD::AMO_R_",mnemonic,"64REMNO"), SDTFPBinOp, [SDNPHasChain]>;
 }
 
 defm add : ForzaAmoIntSDNode<"ADD">;
@@ -103,6 +103,10 @@ defm fsubr : ForzaAmoFloatSDNode<"FSUBR">;
 //===----------------------------------------------------------------------===//
 // Forza Instruction Formats
 //===----------------------------------------------------------------------===//
+
+// Forza opcodes
+def OPC_FORZA_RMAC      : RISCVOpcode<"FORZA_RMAC",      0b1111111>;
+def OPC_FORZA_MCPY      : RISCVOpcode<"FORZA_MCPY",      0b1101011>;
 
 class ForzaAmoIntRA<bits<7> funct7, bits<3> funct3, string opcodestr>
     : RVInstR<funct7, funct3, OPC_CUSTOM_0, (outs GPR:$rd),
@@ -135,6 +139,37 @@ class ForzaThreadR<bits<7> funct7, bits<3> funct3, RISCVOpcode opcode, string op
     : RVInstR<funct7, funct3, opcode, (outs GPR:$rd),
               (ins GPR:$rs1, GPR:$rs2), opcodestr,
               "$rd, $rs1, $rs2">, Sched<[WriteCSR]>;
+
+class ForzaRMACBase<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, dag outs,
+                    dag ins, string opcodestr, string argstr>
+    : RVInst<outs, ins, opcodestr, argstr, [], InstFormatOther> {
+  bits<5> rs2;
+  bits<5> rs1;
+  bits<5> rs3;
+
+  let Inst{31-27} = rs3;
+  let Inst{26-25} = rm;
+  let Inst{24-20} = rs2;
+  let Inst{19-15} = rs1;
+  let Inst{14-12} = funct3;
+  let Inst{11-7} = 0b00000;
+  let Inst{6-0} = opcode.Value;
+}
+
+class ForzaMCPY<RISCVOpcode opcode, string opcodestr>
+  : ForzaRMACBase<0b000, 0b00, opcode, (outs GPRMem:$rs1), (ins GPRMem:$rs2, GPR:$rs3),
+                  opcodestr, "$rs3, $rs2, $rs1">;
+
+class ForzaRMAC<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
+  : ForzaRMACBase<funct3, 0b00, opcode, (outs GPR:$rs3), (ins GPRMem:$rs1, GPR:$rs2),
+                  opcodestr, "$rs3, $rs1, $rs2"> {
+}
+
+class ForzaRFMAC<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, string opcodestr>
+  : ForzaRMACBase<funct3, rm, opcode, (outs FPR64:$rs3), (ins GPRMem:$rs1, FPR64:$rs2),
+                  opcodestr, "$rs3, $rs1, $rs2"> {
+}
+
 
 // Multiclass template to define instruction encodings
 // Instructions are defined as: amo_r_[OP][SIZE].FMT
@@ -256,20 +291,32 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
     mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
   def QUIT : ForzaThreadI<0b010, OPC_CUSTOM_1, "quit">;
-  def SENDACK: ForzaThreadI<0b100, OPC_CUSTOM_1, "sendack">;
+  def SENDACK: ForzaThreadR<0b1010000, 0b000, OPC_CUSTOM_0, "sendack">;
   def SPAWN : ForzaThreadR<0b0000000, 0b000, OPC_OP_P, "spawn">;
-  def MCOPY : ForzaThreadS<0b100, "mcopy">;
 }
 
+let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
+    mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
+  def RMACWW : ForzaRMAC<0b000, OPC_FORZA_RMAC, "rmac.ww">;
+  def RMACWD : ForzaRMAC<0b001, OPC_FORZA_RMAC, "rmac.wd">;
+  def RMACDD : ForzaRMAC<0b010, OPC_FORZA_RMAC, "rmac.dd">;
+  def MCOPY : ForzaMCPY<OPC_FORZA_MCPY, "mcopy">;
+}
+
+// Instruction aliases
 let Predicates = [IsRV64, HasVendorXForza] in {
   def : InstAlias<"quit_thread", (QUIT  X0, X0, 0)>;
 }
+
 
 //===----------------------------------------------------------------------===//
 // Codegen patterns
 //===----------------------------------------------------------------------===//
 
 let Predicates = [HasVendorXForza] in {
+  class PatGprMemGpr64<SDPatternOperator OpNode, RVInst Inst>
+    : Pat<(i64 (OpNode (i64 GPRMem:$rs1), (i64 GPR:$rs2))),
+      (Inst GPRMem:$rs1, GPR:$rs2)>;
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;
@@ -294,7 +341,7 @@ let Predicates = [HasVendorXForza] in {
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN")>;
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNN")>;
-    def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_nn"),
+    def : PatGprMemGpr64<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRNN")>;
 
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8migr_on"),
@@ -344,52 +391,52 @@ let Predicates = [HasVendorXForza] in {
   }
 
   multiclass ForzaAmoPatGprMemFpr<string name> {
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16u"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16U")>;
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32u"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32U")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16u"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16U")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32u"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32U")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64u"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64U")>;
 
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_nn"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN")>;
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_nn"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNN")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_nn"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_nn"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNN")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRNN")>;
 
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_on"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRON")>;
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_on"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRON")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_on"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRON")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_on"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRON")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_on"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRON")>;
 
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_no"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNO")>;
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_no"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNO")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_no"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNO")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_no"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNO")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_no"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRNO")>;
 
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_nn"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNN")>;
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_nn"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNN")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_nn"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNN")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_nn"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNN")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64rem_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64REMNN")>;
 
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_on"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMON")>;
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_on"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMON")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_on"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMON")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_on"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMON")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64rem_on"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64REMON")>;
 
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_no"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNO")>;
-    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_no"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNO")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_no"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNO")>;
+    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_no"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNO")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64rem_no"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64REMNO")>;
 
