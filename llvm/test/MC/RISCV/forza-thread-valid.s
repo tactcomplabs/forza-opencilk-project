@@ -28,7 +28,7 @@ sendack a5, a2, a2
 spawn a4, ra, s0
 
 # CHECK-ASM-AND-OBJ: mcopy a0, a1, a2
-# CHECK-ASM: encoding: [0x6b,0x00,0xb6,0x50]
+# CHECK-ASM: encoding: [0x6b,0x00,0xb5,0x60]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
 mcopy a0, a1, a2
 

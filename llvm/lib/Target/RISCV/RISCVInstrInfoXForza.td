@@ -158,7 +158,7 @@ class ForzaRMACBase<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, dag outs,
 
 class ForzaMCPY<RISCVOpcode opcode, string opcodestr>
   : ForzaRMACBase<0b000, 0b00, opcode, (outs GPRMem:$rs1), (ins GPRMem:$rs2, GPR:$rs3),
-                  opcodestr, "$rs3, $rs2, $rs1">;
+                  opcodestr, "$rs1, $rs2, $rs3">;
 
 class ForzaRMAC<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
   : ForzaRMACBase<funct3, 0b00, opcode, (outs GPR:$rs3), (ins GPRMem:$rs1, GPR:$rs2),
