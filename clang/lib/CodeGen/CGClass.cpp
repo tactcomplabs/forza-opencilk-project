@@ -707,6 +707,10 @@ void CodeGenFunction::EmitInitializerForField(FieldDecl *Field, LValue LHS,
   }
   }
 
+  ReducerCallbacks RCB = {0, 0};
+  if (getReducer(Field, RCB))
+    EmitReducerInit(Field, RCB, LHS.getPointer(*this));
+
   // Ensure that we destroy this object if an exception is thrown
   // later in the constructor.
   QualType::DestructionKind dtorKind = FieldType.isDestructedType();
@@ -1639,6 +1643,11 @@ namespace {
       LValue LV = CGF.EmitLValueForField(ThisLV, field);
       assert(LV.isSimple());
 
+      if (field->getType()->isHyperobjectType()) {
+        llvm::Function *F =
+          CGF.CGM.getIntrinsic(llvm::Intrinsic::reducer_unregister);
+        CGF.Builder.CreateCall(F, {LV.getPointer(CGF)});
+      }
       CGF.emitDestroy(LV.getAddress(CGF), field->getType(), destroyer,
                       flags.isForNormalCleanup() && useEHCleanupForArray);
     }
