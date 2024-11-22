@@ -625,10 +625,7 @@ RISCVTargetLowering::RISCVTargetLowering(const TargetMachine &TM,
   }
 
   if (Subtarget.hasVendorXForza()) {
-    setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i8, Custom);
-    setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i16, Custom);
-    setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i32, Custom);
-    setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i64, Custom);
+    setOperationAction(ISD::INTRINSIC_W_CHAIN, {MVT::i8, MVT::i16, MVT::i32, MVT::i64}, Custom);
   }
 
   if (Subtarget.hasStdExtZicbop()) {
