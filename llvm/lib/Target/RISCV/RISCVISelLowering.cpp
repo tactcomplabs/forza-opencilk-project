@@ -356,7 +356,6 @@ RISCVTargetLowering::RISCVTargetLowering(const TargetMachine &TM,
                            ? Promote
                            : Expand);
 
-
   if (Subtarget.hasVendorXCVbitmanip()) {
     setOperationAction(ISD::BITREVERSE, XLenVT, Legal);
   } else {
@@ -625,8 +624,11 @@ RISCVTargetLowering::RISCVTargetLowering(const TargetMachine &TM,
     setOperationAction(ISD::INTRINSIC_WO_CHAIN, MVT::i32, Custom);
   }
 
-  if (Subtarget.hasVendorXForza()){
+  if (Subtarget.hasVendorXForza()) {
+    setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i8, Custom);
+    setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i16, Custom);
     setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i32, Custom);
+    setOperationAction(ISD::INTRINSIC_W_CHAIN, MVT::i64, Custom);
   }
 
   if (Subtarget.hasStdExtZicbop()) {
