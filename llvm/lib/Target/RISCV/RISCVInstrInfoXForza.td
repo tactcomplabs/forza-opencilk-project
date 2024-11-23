@@ -105,7 +105,7 @@ defm fsubr : ForzaAmoFloatSDNode<"FSUBR">;
 //===----------------------------------------------------------------------===//
 
 // Forza opcodes
-def OPC_FORZA_RMAC      : RISCVOpcode<"FORZA_RMAC",      0b1111111>;
+def OPC_FORZA_RMAC      : RISCVOpcode<"FORZA_RMAC",      0b0111111>;
 def OPC_FORZA_MCPY      : RISCVOpcode<"FORZA_MCPY",      0b1101011>;
 
 class ForzaAmoIntRA<bits<7> funct7, bits<3> funct3, string opcodestr>

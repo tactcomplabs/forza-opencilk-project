@@ -33,16 +33,16 @@ spawn a4, ra, s0
 mcopy a0, a1, a2
 
 # CHECK-ASM-AND-OBJ: rmac.ww a0, a1, a3
-# CHECK-ASM: encoding: [0x7f,0x80,0xd5,0x50]
+# CHECK-ASM: encoding: [0x3f,0x80,0xd5,0x50]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
 rmac.ww a0, a1, a3
 
 # CHECK-ASM-AND-OBJ: rmac.wd a0, a1, a3
-# CHECK-ASM: encoding: [0x7f,0x90,0xd5,0x50]
+# CHECK-ASM: encoding: [0x3f,0x90,0xd5,0x50]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
 rmac.wd a0, a1, a3
 
 # CHECK-ASM-AND-OBJ: rmac.dd a0, a1, a3
-# CHECK-ASM: encoding: [0x7f,0xa0,0xd5,0x50]
+# CHECK-ASM: encoding: [0x3f,0xa0,0xd5,0x50]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
 rmac.dd a0, a1, a3
