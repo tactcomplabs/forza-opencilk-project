@@ -47,6 +47,234 @@ namespace llvm::RISCV {
 #include "RISCVGenSearchableTables.inc"
 } // namespace llvm::RISCV
 
+// Utility function for getting the opcode
+unsigned RISCVDAGToDAGISel::getOpcodeForIntrinsic(unsigned IntNo) {
+  switch (IntNo) {
+    case Intrinsic::riscv_forza_amo_r_add64migr_nn:            // llvm.riscv.forza.amo.r.add64migr.nn
+      return RISCV::AMO_R_ADD64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_add64migr_no:            // llvm.riscv.forza.amo.r.add64migr.no
+      return RISCV::AMO_R_ADD64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_add64migr_on:            // llvm.riscv.forza.amo.r.add64migr.on
+      return RISCV::AMO_R_ADD64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_add64rem_nn:             // llvm.riscv.forza.amo.r.add64rem.nn
+      return RISCV::AMO_R_ADD64REMNN;
+    case Intrinsic::riscv_forza_amo_r_add64rem_no:             // llvm.riscv.forza.amo.r.add64rem.no
+      return RISCV::AMO_R_ADD64REMNO;
+    case Intrinsic::riscv_forza_amo_r_add64rem_on:             // llvm.riscv.forza.amo.r.add64rem.on
+      return RISCV::AMO_R_ADD64REMON;
+    case Intrinsic::riscv_forza_amo_r_add64u:                  // llvm.riscv.forza.amo.r.add64u
+      return RISCV::AMO_R_ADD64U;
+    case Intrinsic::riscv_forza_amo_r_and64migr_nn:            // llvm.riscv.forza.amo.r.and64migr.nn
+      return RISCV::AMO_R_AND64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_and64migr_no:            // llvm.riscv.forza.amo.r.and64migr.no
+      return RISCV::AMO_R_AND64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_and64migr_on:            // llvm.riscv.forza.amo.r.and64migr.on
+      return RISCV::AMO_R_AND64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_and64rem_nn:             // llvm.riscv.forza.amo.r.and64rem.nn
+      return RISCV::AMO_R_AND64REMNN;
+    case Intrinsic::riscv_forza_amo_r_and64rem_no:             // llvm.riscv.forza.amo.r.and64rem.no
+      return RISCV::AMO_R_AND64REMNO;
+    case Intrinsic::riscv_forza_amo_r_and64rem_on:             // llvm.riscv.forza.amo.r.and64rem.on
+      return RISCV::AMO_R_AND64REMON;
+    case Intrinsic::riscv_forza_amo_r_and64u:                  // llvm.riscv.forza.amo.r.and64u
+      return RISCV::AMO_R_AND64U;
+    case Intrinsic::riscv_forza_amo_r_fadd64migr_nn:           // llvm.riscv.forza.amo.r.fadd64migr.nn
+      return RISCV::AMO_R_FADD64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_fadd64migr_no:           // llvm.riscv.forza.amo.r.fadd64migr.no
+      return RISCV::AMO_R_FADD64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_fadd64migr_on:           // llvm.riscv.forza.amo.r.fadd64migr.on
+      return RISCV::AMO_R_FADD64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_fadd64rem_nn:            // llvm.riscv.forza.amo.r.fadd64rem.nn
+      return RISCV::AMO_R_FADD64REMNN;
+    case Intrinsic::riscv_forza_amo_r_fadd64rem_no:            // llvm.riscv.forza.amo.r.fadd64rem.no
+      return RISCV::AMO_R_FADD64REMNO;
+    case Intrinsic::riscv_forza_amo_r_fadd64rem_on:            // llvm.riscv.forza.amo.r.fadd64rem.on
+      return RISCV::AMO_R_FADD64REMON;
+    case Intrinsic::riscv_forza_amo_r_fadd64u:                 // llvm.riscv.forza.amo.r.fadd64u
+      return RISCV::AMO_R_FADD64U;
+    case Intrinsic::riscv_forza_amo_r_fsub64migr_nn:           // llvm.riscv.forza.amo.r.fsub64migr.nn
+      return RISCV::AMO_R_FSUB64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_fsub64migr_no:           // llvm.riscv.forza.amo.r.fsub64migr.no
+      return RISCV::AMO_R_FSUB64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_fsub64migr_on:           // llvm.riscv.forza.amo.r.fsub64migr.on
+      return RISCV::AMO_R_FSUB64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_fsub64rem_nn:            // llvm.riscv.forza.amo.r.fsub64rem.nn
+      return RISCV::AMO_R_FSUB64REMNN;
+    case Intrinsic::riscv_forza_amo_r_fsub64rem_no:            // llvm.riscv.forza.amo.r.fsub64rem.no
+      return RISCV::AMO_R_FSUB64REMNO;
+    case Intrinsic::riscv_forza_amo_r_fsub64rem_on:            // llvm.riscv.forza.amo.r.fsub64rem.on
+      return RISCV::AMO_R_FSUB64REMON;
+    case Intrinsic::riscv_forza_amo_r_fsub64u:                 // llvm.riscv.forza.amo.r.fsub64u
+      return RISCV::AMO_R_FSUB64U;
+    case Intrinsic::riscv_forza_amo_r_fsubr64migr_nn:          // llvm.riscv.forza.amo.r.fsubr64migr.nn
+      return RISCV::AMO_R_FSUBR64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_fsubr64migr_no:          // llvm.riscv.forza.amo.r.fsubr64migr.no
+      return RISCV::AMO_R_FSUBR64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_fsubr64migr_on:          // llvm.riscv.forza.amo.r.fsubr64migr.on
+      return RISCV::AMO_R_FSUBR64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_fsubr64rem_nn:           // llvm.riscv.forza.amo.r.fsubr64rem.nn
+      return RISCV::AMO_R_FSUBR64REMNN;
+    case Intrinsic::riscv_forza_amo_r_fsubr64rem_no:           // llvm.riscv.forza.amo.r.fsubr64rem.no
+      return RISCV::AMO_R_FSUBR64REMNO;
+    case Intrinsic::riscv_forza_amo_r_fsubr64rem_on:           // llvm.riscv.forza.amo.r.fsubr64rem.on
+      return RISCV::AMO_R_FSUBR64REMON;
+    case Intrinsic::riscv_forza_amo_r_fsubr64u:                // llvm.riscv.forza.amo.r.fsubr64u
+      return RISCV::AMO_R_FSUBR64U;
+    case Intrinsic::riscv_forza_amo_r_or64u:                  // llvm.riscv.forza.amo.r.or64migr.nn
+      return RISCV::AMO_R_OR64U;
+    case Intrinsic::riscv_forza_amo_r_or64migr_nn:             // llvm.riscv.forza.amo.r.or64migr.nn
+      return RISCV::AMO_R_OR64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_or64migr_no:             // llvm.riscv.forza.amo.r.or64migr.no
+      return RISCV::AMO_R_OR64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_or64migr_on:             // llvm.riscv.forza.amo.r.or64migr.on
+      return RISCV::AMO_R_OR64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_or64rem_nn:              // llvm.riscv.forza.amo.r.or64rem.nn
+      return RISCV::AMO_R_OR64REMNN;
+    case Intrinsic::riscv_forza_amo_r_or64rem_no:              // llvm.riscv.forza.amo.r.or64rem.no
+      return RISCV::AMO_R_OR64REMNO;
+    case Intrinsic::riscv_forza_amo_r_or64rem_on:              // llvm.riscv.forza.amo.r.or64rem.on
+      return RISCV::AMO_R_OR64REMON;
+    case Intrinsic::riscv_forza_amo_r_smax64migr_nn:           // llvm.riscv.forza.amo.r.smax64migr.nn
+      return RISCV::AMO_R_SMAX64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_smax64migr_no:           // llvm.riscv.forza.amo.r.smax64migr.no
+      return RISCV::AMO_R_SMAX64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_smax64migr_on:           // llvm.riscv.forza.amo.r.smax64migr.on
+      return RISCV::AMO_R_SMAX64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_smax64rem_nn:            // llvm.riscv.forza.amo.r.smax64rem.nn
+      return RISCV::AMO_R_SMAX64REMNN;
+    case Intrinsic::riscv_forza_amo_r_smax64rem_no:            // llvm.riscv.forza.amo.r.smax64rem.no
+      return RISCV::AMO_R_SMAX64REMNO;
+    case Intrinsic::riscv_forza_amo_r_smax64rem_on:            // llvm.riscv.forza.amo.r.smax64rem.on
+      return RISCV::AMO_R_SMAX64REMON;
+    case Intrinsic::riscv_forza_amo_r_smax64u:                 // llvm.riscv.forza.amo.r.smax64u
+      return RISCV::AMO_R_SMAX64U;
+    case Intrinsic::riscv_forza_amo_r_smin64migr_nn:           // llvm.riscv.forza.amo.r.smin64migr.nn
+      return RISCV::AMO_R_SMIN64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_smin64migr_no:           // llvm.riscv.forza.amo.r.smin64migr.no
+      return RISCV::AMO_R_SMIN64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_smin64migr_on:           // llvm.riscv.forza.amo.r.smin64migr.on
+      return RISCV::AMO_R_SMIN64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_smin64rem_nn:            // llvm.riscv.forza.amo.r.smin64rem.nn
+      return RISCV::AMO_R_SMIN64REMNN;
+    case Intrinsic::riscv_forza_amo_r_smin64rem_no:            // llvm.riscv.forza.amo.r.smin64rem.no
+      return RISCV::AMO_R_SMIN64REMNO;
+    case Intrinsic::riscv_forza_amo_r_smin64rem_on:            // llvm.riscv.forza.amo.r.smin64rem.on
+      return RISCV::AMO_R_SMIN64REMON;
+    case Intrinsic::riscv_forza_amo_r_smin64u:                 // llvm.riscv.forza.amo.r.smin64u
+      return RISCV::AMO_R_SMIN64U;
+    case Intrinsic::riscv_forza_amo_r_swap64migr_nn:           // llvm.riscv.forza.amo.r.swap64migr.nn
+      return RISCV::AMO_R_SWAP64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_swap64migr_no:           // llvm.riscv.forza.amo.r.swap64migr.no
+      return RISCV::AMO_R_SWAP64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_swap64migr_on:           // llvm.riscv.forza.amo.r.swap64migr.on
+      return RISCV::AMO_R_SWAP64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_swap64rem_nn:            // llvm.riscv.forza.amo.r.swap64rem.nn
+      return RISCV::AMO_R_SWAP64REMNN;
+    case Intrinsic::riscv_forza_amo_r_swap64rem_no:            // llvm.riscv.forza.amo.r.swap64rem.no
+      return RISCV::AMO_R_SWAP64REMNO;
+    case Intrinsic::riscv_forza_amo_r_swap64rem_on:            // llvm.riscv.forza.amo.r.swap64rem.on
+      return RISCV::AMO_R_SWAP64REMON;
+    case Intrinsic::riscv_forza_amo_r_swap64u:                 // llvm.riscv.forza.amo.r.swap64u
+      return RISCV::AMO_R_SWAP64U;
+    case Intrinsic::riscv_forza_amo_r_thrs64migr_nn:           // llvm.riscv.forza.amo.r.thrs64migr.nn
+      return RISCV::AMO_R_THRS64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_thrs64migr_no:           // llvm.riscv.forza.amo.r.thrs64migr.no
+      return RISCV::AMO_R_THRS64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_thrs64migr_on:           // llvm.riscv.forza.amo.r.thrs64migr.on
+      return RISCV::AMO_R_THRS64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_thrs64rem_nn:            // llvm.riscv.forza.amo.r.thrs64rem.nn
+      return RISCV::AMO_R_THRS64REMNN;
+    case Intrinsic::riscv_forza_amo_r_thrs64rem_no:            // llvm.riscv.forza.amo.r.thrs64rem.no
+      return RISCV::AMO_R_THRS64REMNO;
+    case Intrinsic::riscv_forza_amo_r_thrs64rem_on:            // llvm.riscv.forza.amo.r.thrs64rem.on
+      return RISCV::AMO_R_THRS64REMON;
+    case Intrinsic::riscv_forza_amo_r_thrs64u:                 // llvm.riscv.forza.amo.r.thrs64u
+      return RISCV::AMO_R_THRS64U;
+    case Intrinsic::riscv_forza_amo_r_umax64migr_nn:           // llvm.riscv.forza.amo.r.umax64migr.nn
+      return RISCV::AMO_R_UMAX64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_umax64migr_no:           // llvm.riscv.forza.amo.r.umax64migr.no
+      return RISCV::AMO_R_UMAX64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_umax64migr_on:           // llvm.riscv.forza.amo.r.umax64migr.on
+      return RISCV::AMO_R_UMAX64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_umax64rem_nn:            // llvm.riscv.forza.amo.r.umax64rem.nn
+      return RISCV::AMO_R_UMAX64REMNN;
+    case Intrinsic::riscv_forza_amo_r_umax64rem_no:            // llvm.riscv.forza.amo.r.umax64rem.no
+      return RISCV::AMO_R_UMAX64REMNO;
+    case Intrinsic::riscv_forza_amo_r_umax64rem_on:            // llvm.riscv.forza.amo.r.umax64rem.on
+      return RISCV::AMO_R_UMAX64REMON;
+    case Intrinsic::riscv_forza_amo_r_umax64u:                 // llvm.riscv.forza.amo.r.umax64u
+      return RISCV::AMO_R_UMAX64U;
+    case Intrinsic::riscv_forza_amo_r_umin64migr_nn:           // llvm.riscv.forza.amo.r.umin64migr.nn
+      return RISCV::AMO_R_UMIN64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_umin64migr_no:           // llvm.riscv.forza.amo.r.umin64migr.no
+      return RISCV::AMO_R_UMIN64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_umin64migr_on:           // llvm.riscv.forza.amo.r.umin64migr.on
+      return RISCV::AMO_R_UMIN64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_umin64rem_nn:            // llvm.riscv.forza.amo.r.umin64rem.nn
+      return RISCV::AMO_R_UMIN64REMNN;
+    case Intrinsic::riscv_forza_amo_r_umin64rem_no:            // llvm.riscv.forza.amo.r.umin64rem.no
+      return RISCV::AMO_R_UMIN64REMNO;
+    case Intrinsic::riscv_forza_amo_r_umin64rem_on:            // llvm.riscv.forza.amo.r.umin64rem.on
+      return RISCV::AMO_R_UMIN64REMON;
+    case Intrinsic::riscv_forza_amo_r_umin64u:                 // llvm.riscv.forza.amo.r.umin64u
+      return RISCV::AMO_R_UMIN64U;
+    case Intrinsic::riscv_forza_amo_r_xor64migr_nn:            // llvm.riscv.forza.amo.r.xor64migr.nn
+      return RISCV::AMO_R_XOR64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_xor64migr_no:            // llvm.riscv.forza.amo.r.xor64migr.no
+      return RISCV::AMO_R_XOR64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_xor64migr_on:            // llvm.riscv.forza.amo.r.xor64migr.on
+      return RISCV::AMO_R_XOR64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_xor64rem_nn:             // llvm.riscv.forza.amo.r.xor64rem.nn
+      return RISCV::AMO_R_XOR64REMNN;
+    case Intrinsic::riscv_forza_amo_r_xor64rem_no:             // llvm.riscv.forza.amo.r.xor64rem.no
+      return RISCV::AMO_R_XOR64REMNO;
+    case Intrinsic::riscv_forza_amo_r_xor64rem_on:             // llvm.riscv.forza.amo.r.xor64rem.on
+      return RISCV::AMO_R_XOR64REMON;
+  default:
+    llvm_unreachable("Unknown intrinsic");
+  }
+}
+
+void RISCVDAGToDAGISel::selectForzaAMOIntrinsic(SDNode *Node, unsigned Opcode) {
+  SDLoc DL(Node);
+
+  // FIXME: Currently nothing happens with the Chain
+  SDValue Chain = Node->getOperand(0);
+
+  // Get the pointer
+  SDValue PtrLoad = Node->getOperand(2);
+
+  // Get the value
+  SDValue ValLoad = Node->getOperand(3);
+
+  // Extract the value part (result 0) from the load nodes
+  SDValue Ptr = SDValue(PtrLoad.getNode(), 0);
+  SDValue Val = SDValue(ValLoad.getNode(), 0);
+
+  // Create the operands for the assembly instruction
+  SmallVector<SDValue, 2> Ops;
+  Ops.push_back(Ptr);
+  Ops.push_back(Val);
+
+  // Create the machine instruction node
+  // FIXME: This may need to be changed for floating point eventually
+  SDNode *NewNode = CurDAG->getMachineNode(Opcode, DL,
+                                           MVT::i64, MVT::Other, Ops);
+
+  // Update the chain
+  SDValue NewChain = SDValue(NewNode, 1);
+  ReplaceUses(SDValue(Node, 1), NewChain);
+
+  // See if we need to transfer the memory operand
+  if (auto *MemIntNode = dyn_cast<MemIntrinsicSDNode>(Node)) {
+    MachineMemOperand *MMO = MemIntNode->getMemOperand();
+    CurDAG->setNodeMemRefs(cast<MachineSDNode>(NewNode), {MMO});
+  }
+
+  // Replace the node
+  ReplaceNode(Node, NewNode);
+}
+
 void RISCVDAGToDAGISel::PreprocessISelDAG() {
   SelectionDAG::allnodes_iterator Position = CurDAG->allnodes_end();
 
@@ -1603,10 +1831,115 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
   }
   case ISD::INTRINSIC_W_CHAIN: {
     unsigned IntNo = Node->getConstantOperandVal(1);
+
     switch (IntNo) {
       // By default we do not custom select any intrinsic.
     default:
       break;
+    case Intrinsic::riscv_forza_amo_r_add64migr_nn:            // llvm.riscv.forza.amo.r.add64migr.nn
+    case Intrinsic::riscv_forza_amo_r_add64migr_no:            // llvm.riscv.forza.amo.r.add64migr.no
+    case Intrinsic::riscv_forza_amo_r_add64migr_on:            // llvm.riscv.forza.amo.r.add64migr.on
+    case Intrinsic::riscv_forza_amo_r_add64rem_nn:             // llvm.riscv.forza.amo.r.add64rem.nn
+    case Intrinsic::riscv_forza_amo_r_add64rem_no:             // llvm.riscv.forza.amo.r.add64rem.no
+    case Intrinsic::riscv_forza_amo_r_add64rem_on:             // llvm.riscv.forza.amo.r.add64rem.on
+    case Intrinsic::riscv_forza_amo_r_add64u:                  // llvm.riscv.forza.amo.r.add64u
+    case Intrinsic::riscv_forza_amo_r_and64migr_nn:            // llvm.riscv.forza.amo.r.and64migr.nn
+    case Intrinsic::riscv_forza_amo_r_and64migr_no:            // llvm.riscv.forza.amo.r.and64migr.no
+    case Intrinsic::riscv_forza_amo_r_and64migr_on:            // llvm.riscv.forza.amo.r.and64migr.on
+    case Intrinsic::riscv_forza_amo_r_and64rem_nn:             // llvm.riscv.forza.amo.r.and64rem.nn
+    case Intrinsic::riscv_forza_amo_r_and64rem_no:             // llvm.riscv.forza.amo.r.and64rem.no
+    case Intrinsic::riscv_forza_amo_r_and64rem_on:             // llvm.riscv.forza.amo.r.and64rem.on
+    case Intrinsic::riscv_forza_amo_r_and64u:                  // llvm.riscv.forza.amo.r.and64u
+    case Intrinsic::riscv_forza_amo_r_fadd64migr_nn:           // llvm.riscv.forza.amo.r.fadd64migr.nn
+    case Intrinsic::riscv_forza_amo_r_fadd64migr_no:           // llvm.riscv.forza.amo.r.fadd64migr.no
+    case Intrinsic::riscv_forza_amo_r_fadd64migr_on:           // llvm.riscv.forza.amo.r.fadd64migr.on
+    case Intrinsic::riscv_forza_amo_r_fadd64rem_nn:            // llvm.riscv.forza.amo.r.fadd64rem.nn
+    case Intrinsic::riscv_forza_amo_r_fadd64rem_no:            // llvm.riscv.forza.amo.r.fadd64rem.no
+    case Intrinsic::riscv_forza_amo_r_fadd64rem_on:            // llvm.riscv.forza.amo.r.fadd64rem.on
+    case Intrinsic::riscv_forza_amo_r_fadd64u:                 // llvm.riscv.forza.amo.r.fadd64u
+    case Intrinsic::riscv_forza_amo_r_fsub64migr_nn:           // llvm.riscv.forza.amo.r.fsub64migr.nn
+    case Intrinsic::riscv_forza_amo_r_fsub64migr_no:           // llvm.riscv.forza.amo.r.fsub64migr.no
+    case Intrinsic::riscv_forza_amo_r_fsub64migr_on:           // llvm.riscv.forza.amo.r.fsub64migr.on
+    case Intrinsic::riscv_forza_amo_r_fsub64rem_nn:            // llvm.riscv.forza.amo.r.fsub64rem.nn
+    case Intrinsic::riscv_forza_amo_r_fsub64rem_no:            // llvm.riscv.forza.amo.r.fsub64rem.no
+    case Intrinsic::riscv_forza_amo_r_fsub64rem_on:            // llvm.riscv.forza.amo.r.fsub64rem.on
+    case Intrinsic::riscv_forza_amo_r_fsub64u:                 // llvm.riscv.forza.amo.r.fsub64u
+    case Intrinsic::riscv_forza_amo_r_fsubr64migr_nn:          // llvm.riscv.forza.amo.r.fsubr64migr.nn
+    case Intrinsic::riscv_forza_amo_r_fsubr64migr_no:          // llvm.riscv.forza.amo.r.fsubr64migr.no
+    case Intrinsic::riscv_forza_amo_r_fsubr64migr_on:          // llvm.riscv.forza.amo.r.fsubr64migr.on
+    case Intrinsic::riscv_forza_amo_r_fsubr64rem_nn:           // llvm.riscv.forza.amo.r.fsubr64rem.nn
+    case Intrinsic::riscv_forza_amo_r_fsubr64rem_no:           // llvm.riscv.forza.amo.r.fsubr64rem.no
+    case Intrinsic::riscv_forza_amo_r_fsubr64rem_on:           // llvm.riscv.forza.amo.r.fsubr64rem.on
+    case Intrinsic::riscv_forza_amo_r_fsubr64u:                // llvm.riscv.forza.amo.r.fsubr64u
+    case Intrinsic::riscv_forza_amo_r_or64migr_nn:             // llvm.riscv.forza.amo.r.or64migr.nn
+    case Intrinsic::riscv_forza_amo_r_or64migr_no:             // llvm.riscv.forza.amo.r.or64migr.no
+    case Intrinsic::riscv_forza_amo_r_or64migr_on:             // llvm.riscv.forza.amo.r.or64migr.on
+    case Intrinsic::riscv_forza_amo_r_or64rem_nn:              // llvm.riscv.forza.amo.r.or64rem.nn
+    case Intrinsic::riscv_forza_amo_r_or64rem_no:              // llvm.riscv.forza.amo.r.or64rem.no
+    case Intrinsic::riscv_forza_amo_r_or64rem_on:              // llvm.riscv.forza.amo.r.or64rem.on
+    case Intrinsic::riscv_forza_amo_r_or64u:                   // llvm.riscv.forza.amo.r.or64u
+    case Intrinsic::riscv_forza_amo_r_smax64migr_nn:           // llvm.riscv.forza.amo.r.smax64migr.nn
+    case Intrinsic::riscv_forza_amo_r_smax64migr_no:           // llvm.riscv.forza.amo.r.smax64migr.no
+    case Intrinsic::riscv_forza_amo_r_smax64migr_on:           // llvm.riscv.forza.amo.r.smax64migr.on
+    case Intrinsic::riscv_forza_amo_r_smax64rem_nn:            // llvm.riscv.forza.amo.r.smax64rem.nn
+    case Intrinsic::riscv_forza_amo_r_smax64rem_no:            // llvm.riscv.forza.amo.r.smax64rem.no
+    case Intrinsic::riscv_forza_amo_r_smax64rem_on:            // llvm.riscv.forza.amo.r.smax64rem.on
+    case Intrinsic::riscv_forza_amo_r_smax64u:                 // llvm.riscv.forza.amo.r.smax64u
+    case Intrinsic::riscv_forza_amo_r_smin64migr_nn:           // llvm.riscv.forza.amo.r.smin64migr.nn
+    case Intrinsic::riscv_forza_amo_r_smin64migr_no:           // llvm.riscv.forza.amo.r.smin64migr.no
+    case Intrinsic::riscv_forza_amo_r_smin64migr_on:           // llvm.riscv.forza.amo.r.smin64migr.on
+    case Intrinsic::riscv_forza_amo_r_smin64rem_nn:            // llvm.riscv.forza.amo.r.smin64rem.nn
+    case Intrinsic::riscv_forza_amo_r_smin64rem_no:            // llvm.riscv.forza.amo.r.smin64rem.no
+    case Intrinsic::riscv_forza_amo_r_smin64rem_on:            // llvm.riscv.forza.amo.r.smin64rem.on
+    case Intrinsic::riscv_forza_amo_r_smin64u:                 // llvm.riscv.forza.amo.r.smin64u
+    case Intrinsic::riscv_forza_amo_r_swap64migr_nn:           // llvm.riscv.forza.amo.r.swap64migr.nn
+    case Intrinsic::riscv_forza_amo_r_swap64migr_no:           // llvm.riscv.forza.amo.r.swap64migr.no
+    case Intrinsic::riscv_forza_amo_r_swap64migr_on:           // llvm.riscv.forza.amo.r.swap64migr.on
+    case Intrinsic::riscv_forza_amo_r_swap64rem_nn:            // llvm.riscv.forza.amo.r.swap64rem.nn
+    case Intrinsic::riscv_forza_amo_r_swap64rem_no:            // llvm.riscv.forza.amo.r.swap64rem.no
+    case Intrinsic::riscv_forza_amo_r_swap64rem_on:            // llvm.riscv.forza.amo.r.swap64rem.on
+    case Intrinsic::riscv_forza_amo_r_swap64u:                 // llvm.riscv.forza.amo.r.swap64u
+    case Intrinsic::riscv_forza_amo_r_thrs64migr_nn:           // llvm.riscv.forza.amo.r.thrs64migr.nn
+    case Intrinsic::riscv_forza_amo_r_thrs64migr_no:           // llvm.riscv.forza.amo.r.thrs64migr.no
+    case Intrinsic::riscv_forza_amo_r_thrs64migr_on:           // llvm.riscv.forza.amo.r.thrs64migr.on
+    case Intrinsic::riscv_forza_amo_r_thrs64rem_nn:            // llvm.riscv.forza.amo.r.thrs64rem.nn
+    case Intrinsic::riscv_forza_amo_r_thrs64rem_no:            // llvm.riscv.forza.amo.r.thrs64rem.no
+    case Intrinsic::riscv_forza_amo_r_thrs64rem_on:            // llvm.riscv.forza.amo.r.thrs64rem.on
+    case Intrinsic::riscv_forza_amo_r_thrs64u:                 // llvm.riscv.forza.amo.r.thrs64u
+    case Intrinsic::riscv_forza_amo_r_umax64migr_nn:           // llvm.riscv.forza.amo.r.umax64migr.nn
+    case Intrinsic::riscv_forza_amo_r_umax64migr_no:           // llvm.riscv.forza.amo.r.umax64migr.no
+    case Intrinsic::riscv_forza_amo_r_umax64migr_on:           // llvm.riscv.forza.amo.r.umax64migr.on
+    case Intrinsic::riscv_forza_amo_r_umax64rem_nn:            // llvm.riscv.forza.amo.r.umax64rem.nn
+    case Intrinsic::riscv_forza_amo_r_umax64rem_no:            // llvm.riscv.forza.amo.r.umax64rem.no
+    case Intrinsic::riscv_forza_amo_r_umax64rem_on:            // llvm.riscv.forza.amo.r.umax64rem.on
+    case Intrinsic::riscv_forza_amo_r_umax64u:                 // llvm.riscv.forza.amo.r.umax64u
+    case Intrinsic::riscv_forza_amo_r_umin64migr_nn:           // llvm.riscv.forza.amo.r.umin64migr.nn
+    case Intrinsic::riscv_forza_amo_r_umin64migr_no:           // llvm.riscv.forza.amo.r.umin64migr.no
+    case Intrinsic::riscv_forza_amo_r_umin64migr_on:           // llvm.riscv.forza.amo.r.umin64migr.on
+    case Intrinsic::riscv_forza_amo_r_umin64rem_nn:            // llvm.riscv.forza.amo.r.umin64rem.nn
+    case Intrinsic::riscv_forza_amo_r_umin64rem_no:            // llvm.riscv.forza.amo.r.umin64rem.no
+    case Intrinsic::riscv_forza_amo_r_umin64rem_on:            // llvm.riscv.forza.amo.r.umin64rem.on
+    case Intrinsic::riscv_forza_amo_r_umin64u:                 // llvm.riscv.forza.amo.r.umin64u
+    case Intrinsic::riscv_forza_amo_r_xor64migr_nn:            // llvm.riscv.forza.amo.r.xor64migr.nn
+    case Intrinsic::riscv_forza_amo_r_xor64migr_no:            // llvm.riscv.forza.amo.r.xor64migr.no
+    case Intrinsic::riscv_forza_amo_r_xor64migr_on:            // llvm.riscv.forza.amo.r.xor64migr.on
+    case Intrinsic::riscv_forza_amo_r_xor64rem_nn:             // llvm.riscv.forza.amo.r.xor64rem.nn
+    case Intrinsic::riscv_forza_amo_r_xor64rem_no:             // llvm.riscv.forza.amo.r.xor64rem.no
+    case Intrinsic::riscv_forza_amo_r_xor64rem_on:             // llvm.riscv.forza.amo.r.xor64rem.on
+    case Intrinsic::riscv_forza_amo_r_xor64u:                  // llvm.riscv.forza.amo.r.xor64u
+      {
+      LLVM_DEBUG({
+        dbgs() << "Intrinsic Node Opcode: " << Node->getOpcode() << "\n";
+        dbgs() << "Node Operands:\n";
+        for (unsigned i = 0; i < Node->getNumOperands(); ++i) {
+          dbgs() << "Operand " << i << ": ";
+          Node->getOperand(i)->dump(CurDAG);
+        }
+      });
+      unsigned Opcode = getOpcodeForIntrinsic(IntNo);
+      selectForzaAMOIntrinsic(Node, Opcode);
+      return;
+      }
     case Intrinsic::riscv_vlseg2:
     case Intrinsic::riscv_vlseg3:
     case Intrinsic::riscv_vlseg4:
@@ -2185,10 +2518,12 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
         MMO->setFlags(MONontemporalBit1);
     }
     break;
+
   }
 
   // Select the default instruction.
   SelectCode(Node);
+
 }
 
 bool RISCVDAGToDAGISel::SelectInlineAsmMemoryOperand(
