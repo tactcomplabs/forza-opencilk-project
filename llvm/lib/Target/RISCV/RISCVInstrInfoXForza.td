@@ -140,7 +140,7 @@ class ForzaThreadR<bits<7> funct7, bits<3> funct3, RISCVOpcode opcode, string op
               (ins GPR:$rs1, GPR:$rs2), opcodestr,
               "$rd, $rs1, $rs2">, Sched<[WriteCSR]>;
 
-class ForzaRMACBase<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, dag outs,
+class ForzaRMACBase<bits<3> funct3, bits<2> rm, bits<5> rd, RISCVOpcode opcode, dag outs,
                     dag ins, string opcodestr, string argstr>
     : RVInst<outs, ins, opcodestr, argstr, [], InstFormatOther> {
   bits<5> rs2;
@@ -152,24 +152,47 @@ class ForzaRMACBase<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, dag outs,
   let Inst{24-20} = rs2;
   let Inst{19-15} = rs1;
   let Inst{14-12} = funct3;
-  let Inst{11-7} = 0b00000;
+  let Inst{11-7} = rd;
   let Inst{6-0} = opcode.Value;
 }
 
+class ForzaPZOPBase<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, dag outs,
+                    dag ins, string opcodestr, string argstr>
+    : RVInst<outs, ins, opcodestr, argstr, [], InstFormatOther> {
+  bits<5> rs2;
+  bits<5> rs1;
+  bits<5> rs3;
+  bits<5> uimm5;
+
+  let Inst{31-27} = rs3;
+  let Inst{26-25} = rm;
+  let Inst{24-20} = rs2;
+  let Inst{19-15} = rs1;
+  let Inst{14-12} = funct3;
+  let Inst{11-7} = uimm5;
+  let Inst{6-0} = opcode.Value;
+}
+
+
 class ForzaMCPY<RISCVOpcode opcode, string opcodestr>
-  : ForzaRMACBase<0b000, 0b00, opcode, (outs GPRMem:$rs1), (ins GPRMem:$rs2, GPR:$rs3),
+  : ForzaRMACBase<0b000, 0b00, 0b00000, opcode, (outs GPRMem:$rs1), (ins GPRMem:$rs2, GPR:$rs3),
                   opcodestr, "$rs1, $rs2, $rs3">;
 
 class ForzaRMAC<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
-  : ForzaRMACBase<funct3, 0b00, opcode, (outs GPR:$rs3), (ins GPRMem:$rs1, GPR:$rs2),
+  : ForzaRMACBase<funct3, 0b00, 0b00000, opcode, (outs GPR:$rs3), (ins GPRMem:$rs1, GPR:$rs2),
                   opcodestr, "$rs3, $rs1, $rs2"> {
+}
+
+class ForzaPZOPII<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
+  : ForzaPZOPBase<funct3, 0b00, opcode, (outs GPR:$rs3),
+                  (ins GPR:$rs1, GPR:$rs2, uimm5:$uimm5),
+                  opcodestr, "$rs1, $rs2, $rs3, ${uimm5}"> {
 }
 
 class ForzaRFMAC<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, string opcodestr>
-  : ForzaRMACBase<funct3, rm, opcode, (outs FPR64:$rs3), (ins GPRMem:$rs1, FPR64:$rs2),
+  : ForzaRMACBase<funct3, rm, 0b00000, opcode, (outs FPR64:$rs3), (ins GPRMem:$rs1, FPR64:$rs2),
                   opcodestr, "$rs3, $rs1, $rs2"> {
 }
-
 
 // Multiclass template to define instruction encodings
 // Instructions are defined as: amo_r_[OP][SIZE].FMT
@@ -300,6 +323,7 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
   def RMACWW : ForzaRMAC<0b000, OPC_FORZA_RMAC, "rmac.ww">;
   def RMACWD : ForzaRMAC<0b001, OPC_FORZA_RMAC, "rmac.wd">;
   def RMACDD : ForzaRMAC<0b010, OPC_FORZA_RMAC, "rmac.dd">;
+  def PZOPII : ForzaPZOPII<0b001, OPC_FORZA_MCPY, "pzop.ii">;
   def MCOPY : ForzaMCPY<OPC_FORZA_MCPY, "mcopy">;
 }
 
