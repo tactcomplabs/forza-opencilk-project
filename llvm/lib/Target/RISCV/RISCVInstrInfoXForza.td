@@ -338,9 +338,9 @@ let Predicates = [IsRV64, HasVendorXForza] in {
 //===----------------------------------------------------------------------===//
 
 let Predicates = [HasVendorXForza] in {
-  class PatGprMemGpr64<SDPatternOperator OpNode, RVInst Inst>
-    : Pat<(i64 (OpNode (i64 GPRMem:$rs1), (i64 GPR:$rs2))),
-      (Inst GPRMem:$rs1, GPR:$rs2)>;
+  //class PatGprMemGpr64<SDPatternOperator OpNode, RVInst Inst>
+  //  : Pat<(i64 (OpNode (i64 GPRMem:$rs1), (i64 GPR:$rs2))),
+  //    (Inst GPRMem:$rs1, GPR:$rs2)>;
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;
@@ -365,7 +365,7 @@ let Predicates = [HasVendorXForza] in {
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN")>;
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNN")>;
-    def : PatGprMemGpr64<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_nn"),
+    def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRNN")>;
 
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8migr_on"),
