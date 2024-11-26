@@ -156,7 +156,7 @@ class ForzaRMACBase<bits<3> funct3, bits<2> rm, bits<5> rd, RISCVOpcode opcode, 
   let Inst{6-0} = opcode.Value;
 }
 
-class ForzaPZOPBase<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, dag outs,
+class ForzaPZOPBase<bits<3> funct3, bits<2> nb, RISCVOpcode opcode, dag outs,
                     dag ins, string opcodestr, string argstr>
     : RVInst<outs, ins, opcodestr, argstr, [], InstFormatOther> {
   bits<5> rs2;
@@ -165,7 +165,7 @@ class ForzaPZOPBase<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, dag outs,
   bits<5> uimm5;
 
   let Inst{31-27} = rs3;
-  let Inst{26-25} = rm;
+  let Inst{26-25} = nb;
   let Inst{24-20} = rs2;
   let Inst{19-15} = rs1;
   let Inst{14-12} = funct3;
@@ -179,19 +179,19 @@ class ForzaMCPY<RISCVOpcode opcode, string opcodestr>
                   opcodestr, "$rs1, $rs2, $rs3">;
 
 class ForzaRMAC<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
-  : ForzaRMACBase<funct3, 0b00, 0b00000, opcode, (outs GPR:$rs3), (ins GPRMem:$rs1, GPR:$rs2),
-                  opcodestr, "$rs3, $rs1, $rs2"> {
+  : ForzaRMACBase<funct3, 0b00, 0b00000, opcode, (outs GPRMem:$rs3), (ins GPR:$rs1, GPR:$rs2),
+                  opcodestr, "$rs1, $rs2, $rs3"> {
+}
+
+class ForzaRFMAC<bits<3> funct3, bits<5> rm, RISCVOpcode opcode, string opcodestr>
+  : ForzaRMACBase<funct3, 0b00, rm, opcode, (outs GPRMem:$rs3), (ins FPR64:$rs1, FPR64:$rs2),
+                  opcodestr, "$rs1, $rs2, $rs3"> {
 }
 
 class ForzaPZOPII<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
   : ForzaPZOPBase<funct3, 0b00, opcode, (outs GPR:$rs3),
                   (ins GPR:$rs1, GPR:$rs2, uimm5:$uimm5),
                   opcodestr, "$rs1, $rs2, $rs3, ${uimm5}"> {
-}
-
-class ForzaRFMAC<bits<3> funct3, bits<2> rm, RISCVOpcode opcode, string opcodestr>
-  : ForzaRMACBase<funct3, rm, 0b00000, opcode, (outs FPR64:$rs3), (ins GPRMem:$rs1, FPR64:$rs2),
-                  opcodestr, "$rs3, $rs1, $rs2"> {
 }
 
 // Multiclass template to define instruction encodings
@@ -271,6 +271,20 @@ multiclass ForzaAmoFloatRAClass<bits<4> opfunc, string mnemonic> {
   def AMO_R_ # NAME # 64REMNO: ForzaAmoFloatRA<{opfunc,0b111},0b001,!strconcat(mnemonic, "64.rem_no")>;
 }
 
+multiclass ForzaRFMACClass<bits<3> funct3, string mnemonic> {
+  def RFMAC_ # NAME # _RNE: ForzaRFMAC<funct3,0b00000,OPC_FORZA_RMAC,
+                                    !strconcat(mnemonic, ".rne")>;
+  def RFMAC_ # NAME # _RTZ: ForzaRFMAC<funct3,0b00001,OPC_FORZA_RMAC,
+                                    !strconcat(mnemonic, ".rtz")>;
+  def RFMAC_ # NAME # _RDN: ForzaRFMAC<funct3,0b00010,OPC_FORZA_RMAC,
+                                    !strconcat(mnemonic, ".rdn")>;
+  def RFMAC_ # NAME # _RUP: ForzaRFMAC<funct3,0b00011,OPC_FORZA_RMAC,
+                                    !strconcat(mnemonic, ".rup")>;
+  def RFMAC_ # NAME # _RMM: ForzaRFMAC<funct3,0b00100,OPC_FORZA_RMAC,
+                                    !strconcat(mnemonic, ".rmm")>;
+}
+
+
 //===----------------------------------------------------------------------===//
 // Forza Instructions
 //===----------------------------------------------------------------------===//
@@ -314,6 +328,7 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
     mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
   def QUIT : ForzaThreadI<0b010, OPC_CUSTOM_1, "quit">;
+  def RESCHED : ForzaThreadI<0b011, OPC_CUSTOM_1, "resched">;
   def SENDACK: ForzaThreadR<0b1010000, 0b000, OPC_CUSTOM_0, "sendack">;
   def SPAWN : ForzaThreadR<0b0000000, 0b000, OPC_OP_P, "spawn">;
 }
@@ -325,11 +340,18 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
   def RMACDD : ForzaRMAC<0b010, OPC_FORZA_RMAC, "rmac.dd">;
   def PZOPII : ForzaPZOPII<0b001, OPC_FORZA_MCPY, "pzop.ii">;
   def MCOPY : ForzaMCPY<OPC_FORZA_MCPY, "mcopy">;
+
+  defm BF : ForzaRFMACClass<0b011, "rfmac_bf">;
+  defm BD : ForzaRFMACClass<0b100, "rfmac_bd">;
+  defm FF : ForzaRFMACClass<0b101, "rfmac_ff">;
+  defm FD : ForzaRFMACClass<0b110, "rfmac_fd">;
+  defm DD : ForzaRFMACClass<0b111, "rfmac_dd">;
 }
 
 // Instruction aliases
 let Predicates = [IsRV64, HasVendorXForza] in {
   def : InstAlias<"quit_thread", (QUIT  X0, X0, 0)>;
+  def : InstAlias<"resched_thread", (RESCHED  X0, X0, 0)>;
 }
 
 
@@ -338,9 +360,6 @@ let Predicates = [IsRV64, HasVendorXForza] in {
 //===----------------------------------------------------------------------===//
 
 let Predicates = [HasVendorXForza] in {
-  //class PatGprMemGpr64<SDPatternOperator OpNode, RVInst Inst>
-  //  : Pat<(i64 (OpNode (i64 GPRMem:$rs1), (i64 GPR:$rs2))),
-  //    (Inst GPRMem:$rs1, GPR:$rs2)>;
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;

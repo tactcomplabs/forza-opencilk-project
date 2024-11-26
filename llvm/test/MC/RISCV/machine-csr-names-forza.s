@@ -8,89 +8,103 @@
 # FORZA Extension
 #########################################
 
-# ustatus
+# tcb
 # name
-# CHECK-INST: csrrs t1, ustatus, zero
-# CHECK-ENC: encoding: [0x73,0x23,0x00,0x88]
-# CHECK-INST-ALIAS: csrr t1, ustatus
+# CHECK-INST: csrrs t1, tcb, zero
+# CHECK-ENC: encoding: [0x73,0x23,0x00,0x80]
+# CHECK-INST-ALIAS: csrr t1, tcb
 # uimm12
-# CHECK-INST: csrrs t2, ustatus, zero
-# CHECK-ENC: encoding: [0xf3,0x23,0x00,0x88]
-# CHECK-INST-ALIAS: csrr t2, ustatus
+# CHECK-INST: csrrs t2, tcb, zero
+# CHECK-ENC: encoding: [0xf3,0x23,0x00,0x80]
+# CHECK-INST-ALIAS: csrr t2, tcb
 # name
-csrrs t1, ustatus, zero
+csrrs t1, tcb, zero
 # uimm12
-csrrs t2, 0x880, zero
+csrrs t2, 0x800, zero
 
 # urac
 # name
 # CHECK-INST: csrrs t1, urac, zero
-# CHECK-ENC: encoding: [0x73,0x23,0x00,0x80]
+# CHECK-ENC: encoding: [0x73,0x23,0x10,0x80]
 # CHECK-INST-ALIAS: csrr t1, urac
 # uimm12
 # CHECK-INST: csrrs t2, urac, zero
-# CHECK-ENC: encoding: [0xf3,0x23,0x00,0x80]
+# CHECK-ENC: encoding: [0xf3,0x23,0x10,0x80]
 # CHECK-INST-ALIAS: csrr t2, urac
 # name
 csrrs t1, urac, zero
 # uimm12
-csrrs t2, 0x800, zero
+csrrs t2, 0x801, zero
 
 # upsched
 # name
 # CHECK-INST: csrrs t1, upsched, zero
-# CHECK-ENC: encoding: [0x73,0x23,0x10,0x80]
+# CHECK-ENC: encoding: [0x73,0x23,0x20,0x80]
 # CHECK-INST-ALIAS: csrr t1, upsched
 # uimm12
 # CHECK-INST: csrrs t2, upsched, zero
-# CHECK-ENC: encoding: [0xf3,0x23,0x10,0x80]
+# CHECK-ENC: encoding: [0xf3,0x23,0x20,0x80]
 # CHECK-INST-ALIAS: csrr t2, upsched
 # name
 csrrs t1, upsched, zero
 # uimm12
-csrrs t2, 0x801, zero
+csrrs t2, 0x802, zero
+
+# memerr
+# name
+# CHECK-INST: csrrs t1, memerr, zero
+# CHECK-ENC: encoding: [0x73,0x23,0x30,0x80]
+# CHECK-INST-ALIAS: csrr t1, memerr
+# uimm12
+# CHECK-INST: csrrs t2, memerr, zero
+# CHECK-ENC: encoding: [0xf3,0x23,0x30,0x80]
+# CHECK-INST-ALIAS: csrr t2, memerr
+# name
+csrrs t1, memerr, zero
+# uimm12
+csrrs t2, 0x803, zero
 
 # zenstat
 # name
 # CHECK-INST: csrrs t1, zenstat, zero
-# CHECK-ENC: encoding: [0x73,0x23,0x20,0x80]
+# CHECK-ENC: encoding: [0x73,0x23,0x40,0x80]
 # CHECK-INST-ALIAS: csrr t1, zenstat
 # uimm12
 # CHECK-INST: csrrs t2, zenstat, zero
-# CHECK-ENC: encoding: [0xf3,0x23,0x20,0x80]
+# CHECK-ENC: encoding: [0xf3,0x23,0x40,0x80]
 # CHECK-INST-ALIAS: csrr t2, zenstat
 # name
 csrrs t1, zenstat, zero
 # uimm12
-csrrs t2, 0x802, zero
+csrrs t2, 0x804, zero
 
 # zqmstat
 # name
 # CHECK-INST: csrrs t1, zqmstat, zero
-# CHECK-ENC: encoding: [0x73,0x23,0x30,0x80]
+# CHECK-ENC: encoding: [0x73,0x23,0x50,0x80]
 # CHECK-INST-ALIAS: csrr t1, zqmstat
 # uimm12
 # CHECK-INST: csrrs t2, zqmstat, zero
-# CHECK-ENC: encoding: [0xf3,0x23,0x30,0x80]
+# CHECK-ENC: encoding: [0xf3,0x23,0x50,0x80]
 # CHECK-INST-ALIAS: csrr t2, zqmstat
 # name
 csrrs t1, zqmstat, zero
 # uimm12
-csrrs t2, 0x803, zero
+csrrs t2, 0x805, zero
 
 # zqmmboxreg
 # name
 # CHECK-INST: csrrs t1, zqmmboxreg, zero
-# CHECK-ENC: encoding: [0x73,0x23,0x40,0x80]
+# CHECK-ENC: encoding: [0x73,0x23,0x60,0x80]
 # CHECK-INST-ALIAS: csrr t1, zqmmboxreg
 # uimm12
 # CHECK-INST: csrrs t2, zqmmboxreg, zero
-# CHECK-ENC: encoding: [0xf3,0x23,0x40,0x80]
+# CHECK-ENC: encoding: [0xf3,0x23,0x60,0x80]
 # CHECK-INST-ALIAS: csrr t2, zqmmboxreg
 # name
 csrrs t1, zqmmboxreg, zero
 # uimm12
-csrrs t2, 0x804, zero
+csrrs t2, 0x806, zero
 
 # zqmdq0
 # name
@@ -693,6 +707,48 @@ csrrs t2, 0x841, zero
 csrrs t1, zeneqs, zero
 # uimm12
 csrrs t2, 0x842, zero
+
+# zeneqp
+# name
+# CHECK-INST: csrrs t1, zeneqp, zero
+# CHECK-ENC: encoding: [0x73,0x23,0x30,0x84]
+# CHECK-INST-ALIAS: csrr t1, zeneqp
+# uimm12
+# CHECK-INST: csrrs t2, zeneqp, zero
+# CHECK-ENC: encoding: [0xf3,0x23,0x30,0x84]
+# CHECK-INST-ALIAS: csrr t2, zeneqp
+# name
+csrrs t1, zeneqp, zero
+# uimm12
+csrrs t2, 0x843, zero
+
+# fencestat
+# name
+# CHECK-INST: csrrs t1, fencestat, zero
+# CHECK-ENC: encoding: [0x73,0x23,0x00,0x86]
+# CHECK-INST-ALIAS: csrr t1, fencestat
+# uimm12
+# CHECK-INST: csrrs t2, fencestat, zero
+# CHECK-ENC: encoding: [0xf3,0x23,0x00,0x86]
+# CHECK-INST-ALIAS: csrr t2, fencestat
+# name
+csrrs t1, fencestat, zero
+# uimm12
+csrrs t2, 0x860, zero
+
+# ustatus
+# name
+# CHECK-INST: csrrs t1, ustatus, zero
+# CHECK-ENC: encoding: [0x73,0x23,0x00,0x88]
+# CHECK-INST-ALIAS: csrr t1, ustatus
+# uimm12
+# CHECK-INST: csrrs t2, ustatus, zero
+# CHECK-ENC: encoding: [0xf3,0x23,0x00,0x88]
+# CHECK-INST-ALIAS: csrr t2, ustatus
+# name
+csrrs t1, ustatus, zero
+# uimm12
+csrrs t2, 0x880, zero
 
 # srac
 # name

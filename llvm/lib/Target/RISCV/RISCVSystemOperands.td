@@ -416,12 +416,13 @@ def : SysReg<"jvt", 0x017>;
 //===-----------------------------------------------
 // FORZA Specific CSRs
 //===-----------------------------------------------
-def : SysReg<"ustatus", 0x880>;
-def : SysReg<"urac", 0x800>;
-def : SysReg<"upsched", 0x801>;
-def : SysReg<"zenstat", 0x802>;
-def : SysReg<"zqmstat", 0x803>;
-def : SysReg<"zqmmboxreg", 0x804>;
+def : SysReg<"tcb", 0x800>;
+def : SysReg<"urac", 0x801>;
+def : SysReg<"upsched", 0x802>;
+def : SysReg<"memerr", 0x803>;
+def : SysReg<"zenstat", 0x804>;
+def : SysReg<"zqmstat", 0x805>;
+def : SysReg<"zqmmboxreg", 0x806>;
 
 // zqmdq0-zqmdq7 @ 0x808-0x80F
 foreach i = 0...7 in
@@ -434,6 +435,9 @@ foreach i = 0...31 in
 def : SysReg<"zeneqc", 0x840>;
 def : SysReg<"zeneqd", 0x841>;
 def : SysReg<"zeneqs", 0x842>;
+def : SysReg<"zeneqp", 0x843>;
+def : SysReg<"fencestat", 0x860>;
+def : SysReg<"ustatus", 0x880>;
 def : SysReg<"srac", 0x900>;
 def : SysReg<"spsched", 0x901>;
 def : SysReg<"pzop_base", 0x902>;
