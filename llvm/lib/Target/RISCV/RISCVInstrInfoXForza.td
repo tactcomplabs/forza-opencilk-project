@@ -363,10 +363,8 @@ let Predicates = [HasVendorXForza] in {
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;
-  class PatGprMemFpr<SDPatternOperator OpNode, RVInst Inst,
-                ValueType vt1 = XLenVT>
-                //ValueType vt2 = XLenVT>
-    : Pat<(f64 (OpNode (vt1 GPRMem:$rs1), (f64 FPR64:$rs2))), (Inst GPRMem:$rs1,FPR64:$rs2)>;
+  class PatGprMemFpr<SDPatternOperator OpNode, RVInst Inst>
+    : Pat<(OpNode GPRMem:$rs1, FPR64:$rs2), (Inst GPRMem:$rs1, FPR64:$rs2)>;
 
   multiclass ForzaAmoPatGprMemGpr<string name> {
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8u"),
@@ -434,55 +432,54 @@ let Predicates = [HasVendorXForza] in {
   }
 
   multiclass ForzaAmoPatGprMemFpr<string name> {
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16u"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16U")>;
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32u"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32U")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16u"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16U")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32u"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32U")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64u"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64U")>;
 
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_nn"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN")>;
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_nn"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNN")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_nn"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_nn"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNN")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRNN")>;
 
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_on"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRON")>;
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_on"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRON")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_on"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRON")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_on"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRON")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_on"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRON")>;
 
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_no"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNO")>;
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_no"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNO")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16migr_no"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNO")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32migr_no"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNO")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64migr_no"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRNO")>;
 
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_nn"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNN")>;
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_nn"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNN")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_nn"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNN")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_nn"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNN")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64rem_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64REMNN")>;
 
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_on"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMON")>;
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_on"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMON")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_on"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMON")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_on"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMON")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64rem_on"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64REMON")>;
 
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_no"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNO")>;
-    //def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_no"),
-    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNO")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16rem_no"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNO")>;
+    def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32rem_no"),
+                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNO")>;
     def : PatGprMemFpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64rem_no"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64REMNO")>;
-
   }
 
   defm "" : ForzaAmoPatGprMemGpr<"add">;
@@ -496,7 +493,7 @@ let Predicates = [HasVendorXForza] in {
   defm "" : ForzaAmoPatGprMemGpr<"swap">;
   defm "" : ForzaAmoPatGprMemGpr<"thrs">;
 
-  //defm "" : ForzaAmoPatGprMemFpr<"fadd">;
-  //defm "" : ForzaAmoPatGprMemFpr<"fsub">;
-  //defm "" : ForzaAmoPatGprMemFpr<"fsubr">;
+  defm "" : ForzaAmoPatGprMemFpr<"fadd">;
+  defm "" : ForzaAmoPatGprMemFpr<"fsub">;
+  defm "" : ForzaAmoPatGprMemFpr<"fsubr">;
 }
