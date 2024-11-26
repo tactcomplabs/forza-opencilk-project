@@ -25,7 +25,12 @@ int amo_r_add32u(int *a, int b){
   return __forza_amo_r_add32u(a,b);
 }
 
-// -- amo_r_add64u
+// RV64XFORZA-LABEL: @amo_r_add64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.add64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_add64u(long int *a, long int b){
+  return __forza_amo_r_add64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_and8u(
 // RV64XFORZA-NEXT:  entry:
@@ -48,7 +53,12 @@ int amo_r_and32u(int *a, int b){
   return __forza_amo_r_and32u(a,b);
 }
 
-// -- amo_r_and64u
+// RV64XFORZA-LABEL: @amo_r_and64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.and64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_and64u(long int *a, long int b){
+  return __forza_amo_r_and64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_or8u(
 // RV64XFORZA-NEXT:  entry:
@@ -71,7 +81,12 @@ int amo_r_or32u(int *a, int b){
   return __forza_amo_r_or32u(a,b);
 }
 
-// -- amo_r_or64u
+// RV64XFORZA-LABEL: @amo_r_or64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.or64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_or64u(long int *a, long int b){
+  return __forza_amo_r_or64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_xor8u(
 // RV64XFORZA-NEXT:  entry:
@@ -94,7 +109,12 @@ int amo_r_xor32u(int *a, int b){
   return __forza_amo_r_xor32u(a,b);
 }
 
-// -- amo_r_xor64u
+// RV64XFORZA-LABEL: @amo_r_xor64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.xor64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_xor64u(long int *a, long int b){
+  return __forza_amo_r_xor64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smax8u(
 // RV64XFORZA-NEXT:  entry:
@@ -117,7 +137,12 @@ int amo_r_smax32u(int *a, int b){
   return __forza_amo_r_smax32u(a,b);
 }
 
-// -- amo_r_smax64u
+// RV64XFORZA-LABEL: @amo_r_smax64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smax64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smax64u(long int *a, long int b){
+  return __forza_amo_r_smax64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umax8u(
 // RV64XFORZA-NEXT:  entry:
@@ -140,7 +165,12 @@ int amo_r_umax32u(int *a, int b){
   return __forza_amo_r_umax32u(a,b);
 }
 
-// -- amo_r_umax64u
+// RV64XFORZA-LABEL: @amo_r_umax64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umax64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umax64u(long int *a, long int b){
+  return __forza_amo_r_umax64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smin8u(
 // RV64XFORZA-NEXT:  entry:
@@ -163,7 +193,12 @@ int amo_r_smin32u(int *a, int b){
   return __forza_amo_r_smin32u(a,b);
 }
 
-// -- amo_r_smin64u
+// RV64XFORZA-LABEL: @amo_r_smin64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smin64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smin64u(long int *a, long int b){
+  return __forza_amo_r_smin64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umin8u(
 // RV64XFORZA-NEXT:  entry:
@@ -186,7 +221,12 @@ int amo_r_umin32u(int *a, int b){
   return __forza_amo_r_umin32u(a,b);
 }
 
-// -- amo_r_umin64u
+// RV64XFORZA-LABEL: @amo_r_umin64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umin64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umin64u(long int *a, long int b){
+  return __forza_amo_r_umin64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_thrs8u(
 // RV64XFORZA-NEXT:  entry:
@@ -209,7 +249,12 @@ int amo_r_thrs32u(int *a, int b){
   return __forza_amo_r_thrs32u(a,b);
 }
 
-// -- amo_r_thrs64u
+// RV64XFORZA-LABEL: @amo_r_thrs64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.thrs64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_thrs64u(long int *a, long int b){
+  return __forza_amo_r_thrs64u(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_add8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -233,6 +278,12 @@ int amo_r_add32migr_nn(int *a, int b){
 }
 
 // -- amo_r_add64migr_nn
+// RV64XFORZA-LABEL: @amo_r_add64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.add64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_add64migr_nn(long int *a, long int b){
+  return __forza_amo_r_add64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_and8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -256,6 +307,12 @@ int amo_r_and32migr_nn(int *a, int b){
 }
 
 // -- amo_r_and64migr_nn
+// RV64XFORZA-LABEL: @amo_r_and64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.and64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_and64migr_nn(long int *a, long int b){
+  return __forza_amo_r_and64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_or8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -279,6 +336,12 @@ int amo_r_or32migr_nn(int *a, int b){
 }
 
 // -- amo_r_or64migr_nn
+// RV64XFORZA-LABEL: @amo_r_or64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.or64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_or64migr_nn(long int *a, long int b){
+  return __forza_amo_r_or64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_xor8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -302,6 +365,12 @@ int amo_r_xor32migr_nn(int *a, int b){
 }
 
 // -- amo_r_xor64migr_nn
+// RV64XFORZA-LABEL: @amo_r_xor64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.xor64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_xor64migr_nn(long int *a, long int b){
+  return __forza_amo_r_xor64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smax8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -324,7 +393,12 @@ int amo_r_smax32migr_nn(int *a, int b){
   return __forza_amo_r_smax32migr_nn(a,b);
 }
 
-// -- amo_r_smax64migr_nn
+// RV64XFORZA-LABEL: @amo_r_smax64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smax64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smax64migr_nn(long int *a, long int b){
+  return __forza_amo_r_smax64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umax8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -347,7 +421,12 @@ int amo_r_umax32migr_nn(int *a, int b){
   return __forza_amo_r_umax32migr_nn(a,b);
 }
 
-// -- amo_r_umax64migr_nn
+// RV64XFORZA-LABEL: @amo_r_umax64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umax64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umax64migr_nn(long int *a, long int b){
+  return __forza_amo_r_umax64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smin8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -370,7 +449,12 @@ int amo_r_smin32migr_nn(int *a, int b){
   return __forza_amo_r_smin32migr_nn(a,b);
 }
 
-// -- amo_r_smin64migr_nn
+// RV64XFORZA-LABEL: @amo_r_smin64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smin64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smin64migr_nn(long int *a, long int b){
+  return __forza_amo_r_smin64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umin8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -393,7 +477,12 @@ int amo_r_umin32migr_nn(int *a, int b){
   return __forza_amo_r_umin32migr_nn(a,b);
 }
 
-// -- amo_r_umin64migr_nn
+// RV64XFORZA-LABEL: @amo_r_umin64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umin64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umin64migr_nn(long int *a, long int b){
+  return __forza_amo_r_umin64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_thrs8migr_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -416,7 +505,12 @@ int amo_r_thrs32migr_nn(int *a, int b){
   return __forza_amo_r_thrs32migr_nn(a,b);
 }
 
-// -- amo_r_thrs64migr_nn
+// RV64XFORZA-LABEL: @amo_r_thrs64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.thrs64migr.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_thrs64migr_nn(long int *a, long int b){
+  return __forza_amo_r_thrs64migr_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_add8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -439,7 +533,12 @@ int amo_r_add32migr_on(int *a, int b){
   return __forza_amo_r_add32migr_on(a,b);
 }
 
-// -- amo_r_add64migr_on
+// RV64XFORZA-LABEL: @amo_r_add64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.add64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_add64migr_on(long int *a, long int b){
+  return __forza_amo_r_add64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_and8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -462,7 +561,12 @@ int amo_r_and32migr_on(int *a, int b){
   return __forza_amo_r_and32migr_on(a,b);
 }
 
-// -- amo_r_and64migr_on
+// RV64XFORZA-LABEL: @amo_r_and64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.and64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_and64migr_on(long int *a, long int b){
+  return __forza_amo_r_and64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_or8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -485,7 +589,12 @@ int amo_r_or32migr_on(int *a, int b){
   return __forza_amo_r_or32migr_on(a,b);
 }
 
-// -- amo_r_or64migr_on
+// RV64XFORZA-LABEL: @amo_r_or64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.or64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_or64migr_on(long int *a, long int b){
+  return __forza_amo_r_or64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_xor8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -508,7 +617,12 @@ int amo_r_xor32migr_on(int *a, int b){
   return __forza_amo_r_xor32migr_on(a,b);
 }
 
-// -- amo_r_xor64migr_on
+// RV64XFORZA-LABEL: @amo_r_xor64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.xor64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_xor64migr_on(long int *a, long int b){
+  return __forza_amo_r_xor64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smax8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -531,7 +645,12 @@ int amo_r_smax32migr_on(int *a, int b){
   return __forza_amo_r_smax32migr_on(a,b);
 }
 
-// -- amo_r_smax64migr_on
+// RV64XFORZA-LABEL: @amo_r_smax64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smax64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smax64migr_on(long int *a, long int b){
+  return __forza_amo_r_smax64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umax8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -554,7 +673,12 @@ int amo_r_umax32migr_on(int *a, int b){
   return __forza_amo_r_umax32migr_on(a,b);
 }
 
-// -- amo_r_umax64migr_on
+// RV64XFORZA-LABEL: @amo_r_umax64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umax64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umax64migr_on(long int *a, long int b){
+  return __forza_amo_r_umax64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smin8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -577,7 +701,12 @@ int amo_r_smin32migr_on(int *a, int b){
   return __forza_amo_r_smin32migr_on(a,b);
 }
 
-// -- amo_r_smin64migr_on
+// RV64XFORZA-LABEL: @amo_r_smin64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smin64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smin64migr_on(long int *a, long int b){
+  return __forza_amo_r_smin64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umin8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -600,7 +729,12 @@ int amo_r_umin32migr_on(int *a, int b){
   return __forza_amo_r_umin32migr_on(a,b);
 }
 
-// -- amo_r_umin64migr_on
+// RV64XFORZA-LABEL: @amo_r_umin64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umin64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umin64migr_on(long int *a, long int b){
+  return __forza_amo_r_umin64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_thrs8migr_on(
 // RV64XFORZA-NEXT:  entry:
@@ -623,7 +757,12 @@ int amo_r_thrs32migr_on(int *a, int b){
   return __forza_amo_r_thrs32migr_on(a,b);
 }
 
-// -- amo_r_thrs64migr_on
+// RV64XFORZA-LABEL: @amo_r_thrs64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.thrs64migr.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_thrs64migr_on(long int *a, long int b){
+  return __forza_amo_r_thrs64migr_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_add8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -646,7 +785,12 @@ int amo_r_add32migr_no(int *a, int b){
   return __forza_amo_r_add32migr_no(a,b);
 }
 
-// -- amo_r_add64migr_no
+// RV64XFORZA-LABEL: @amo_r_add64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.add64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_add64migr_no(long int *a, long int b){
+  return __forza_amo_r_add64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_and8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -669,7 +813,12 @@ int amo_r_and32migr_no(int *a, int b){
   return __forza_amo_r_and32migr_no(a,b);
 }
 
-// -- amo_r_and64migr_no
+// RV64XFORZA-LABEL: @amo_r_and64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.and64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_and64migr_no(long int *a, long int b){
+  return __forza_amo_r_and64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_or8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -692,7 +841,12 @@ int amo_r_or32migr_no(int *a, int b){
   return __forza_amo_r_or32migr_no(a,b);
 }
 
-// -- amo_r_or64migr_no
+// RV64XFORZA-LABEL: @amo_r_or64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.or64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_or64migr_no(long int *a, long int b){
+  return __forza_amo_r_or64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_xor8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -715,7 +869,12 @@ int amo_r_xor32migr_no(int *a, int b){
   return __forza_amo_r_xor32migr_no(a,b);
 }
 
-// -- amo_r_xor64migr_no
+// RV64XFORZA-LABEL: @amo_r_xor64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.xor64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_xor64migr_no(long int *a, long int b){
+  return __forza_amo_r_xor64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smax8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -738,7 +897,12 @@ int amo_r_smax32migr_no(int *a, int b){
   return __forza_amo_r_smax32migr_no(a,b);
 }
 
-// -- amo_r_smax64migr_no
+// RV64XFORZA-LABEL: @amo_r_smax64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smax64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smax64migr_no(long int *a, long int b){
+  return __forza_amo_r_smax64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umax8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -761,7 +925,12 @@ int amo_r_umax32migr_no(int *a, int b){
   return __forza_amo_r_umax32migr_no(a,b);
 }
 
-// -- amo_r_umax64migr_no
+// RV64XFORZA-LABEL: @amo_r_umax64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umax64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umax64migr_no(long int *a, long int b){
+  return __forza_amo_r_umax64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smin8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -784,7 +953,12 @@ int amo_r_smin32migr_no(int *a, int b){
   return __forza_amo_r_smin32migr_no(a,b);
 }
 
-// -- amo_r_smin64migr_no
+// RV64XFORZA-LABEL: @amo_r_smin64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smin64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smin64migr_no(long int *a, long int b){
+  return __forza_amo_r_smin64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umin8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -807,7 +981,12 @@ int amo_r_umin32migr_no(int *a, int b){
   return __forza_amo_r_umin32migr_no(a,b);
 }
 
-// -- amo_r_umin64migr_no
+// RV64XFORZA-LABEL: @amo_r_umin64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umin64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umin64migr_no(long int *a, long int b){
+  return __forza_amo_r_umin64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_thrs8migr_no(
 // RV64XFORZA-NEXT:  entry:
@@ -830,7 +1009,12 @@ int amo_r_thrs32migr_no(int *a, int b){
   return __forza_amo_r_thrs32migr_no(a,b);
 }
 
-// -- amo_r_thrs64migr_no
+// RV64XFORZA-LABEL: @amo_r_thrs64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.thrs64migr.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_thrs64migr_no(long int *a, long int b){
+  return __forza_amo_r_thrs64migr_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_add8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -853,7 +1037,12 @@ int amo_r_add32rem_nn(int *a, int b){
   return __forza_amo_r_add32rem_nn(a,b);
 }
 
-// -- amo_r_add64rem_nn
+// RV64XFORZA-LABEL: @amo_r_add64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.add64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_add64rem_nn(long int *a, long int b){
+  return __forza_amo_r_add64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_and8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -876,7 +1065,12 @@ int amo_r_and32rem_nn(int *a, int b){
   return __forza_amo_r_and32rem_nn(a,b);
 }
 
-// -- amo_r_and64rem_nn
+// RV64XFORZA-LABEL: @amo_r_and64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.and64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_and64rem_nn(long int *a, long int b){
+  return __forza_amo_r_and64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_or8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -899,7 +1093,12 @@ int amo_r_or32rem_nn(int *a, int b){
   return __forza_amo_r_or32rem_nn(a,b);
 }
 
-// -- amo_r_or64rem_nn
+// RV64XFORZA-LABEL: @amo_r_or64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.or64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_or64rem_nn(long int *a, long int b){
+  return __forza_amo_r_or64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_xor8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -922,7 +1121,12 @@ int amo_r_xor32rem_nn(int *a, int b){
   return __forza_amo_r_xor32rem_nn(a,b);
 }
 
-// -- amo_r_xor64rem_nn
+// RV64XFORZA-LABEL: @amo_r_xor64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.xor64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_xor64rem_nn(long int *a, long int b){
+  return __forza_amo_r_xor64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smax8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -945,7 +1149,12 @@ int amo_r_smax32rem_nn(int *a, int b){
   return __forza_amo_r_smax32rem_nn(a,b);
 }
 
-// -- amo_r_smax64rem_nn
+// RV64XFORZA-LABEL: @amo_r_smax64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smax64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smax64rem_nn(long int *a, long int b){
+  return __forza_amo_r_smax64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umax8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -968,7 +1177,12 @@ int amo_r_umax32rem_nn(int *a, int b){
   return __forza_amo_r_umax32rem_nn(a,b);
 }
 
-// -- amo_r_umax64rem_nn
+// RV64XFORZA-LABEL: @amo_r_umax64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umax64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umax64rem_nn(long int *a, long int b){
+  return __forza_amo_r_umax64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smin8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -991,7 +1205,12 @@ int amo_r_smin32rem_nn(int *a, int b){
   return __forza_amo_r_smin32rem_nn(a,b);
 }
 
-// -- amo_r_smin64rem_nn
+// RV64XFORZA-LABEL: @amo_r_smin64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smin64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smin64rem_nn(long int *a, long int b){
+  return __forza_amo_r_smin64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umin8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -1014,7 +1233,12 @@ int amo_r_umin32rem_nn(int *a, int b){
   return __forza_amo_r_umin32rem_nn(a,b);
 }
 
-// -- amo_r_umin64rem_nn
+// RV64XFORZA-LABEL: @amo_r_umin64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umin64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umin64rem_nn(long int *a, long int b){
+  return __forza_amo_r_umin64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_thrs8rem_nn(
 // RV64XFORZA-NEXT:  entry:
@@ -1037,7 +1261,12 @@ int amo_r_thrs32rem_nn(int *a, int b){
   return __forza_amo_r_thrs32rem_nn(a,b);
 }
 
-// -- amo_r_thrs64rem_nn
+// RV64XFORZA-LABEL: @amo_r_thrs64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.thrs64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_thrs64rem_nn(long int *a, long int b){
+  return __forza_amo_r_thrs64rem_nn(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_add8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1060,7 +1289,12 @@ int amo_r_add32rem_on(int *a, int b){
   return __forza_amo_r_add32rem_on(a,b);
 }
 
-// -- amo_r_add64rem_on
+// RV64XFORZA-LABEL: @amo_r_add64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.add64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_add64rem_on(long int *a, long int b){
+  return __forza_amo_r_add64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_and8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1083,7 +1317,12 @@ int amo_r_and32rem_on(int *a, int b){
   return __forza_amo_r_and32rem_on(a,b);
 }
 
-// -- amo_r_and64rem_on
+// RV64XFORZA-LABEL: @amo_r_and64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.and64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_and64rem_on(long int *a, long int b){
+  return __forza_amo_r_and64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_or8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1106,7 +1345,12 @@ int amo_r_or32rem_on(int *a, int b){
   return __forza_amo_r_or32rem_on(a,b);
 }
 
-// -- amo_r_or64rem_on
+// RV64XFORZA-LABEL: @amo_r_or64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.or64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_or64rem_on(long int *a, long int b){
+  return __forza_amo_r_or64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_xor8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1129,7 +1373,12 @@ int amo_r_xor32rem_on(int *a, int b){
   return __forza_amo_r_xor32rem_on(a,b);
 }
 
-// -- amo_r_xor64rem_on
+// RV64XFORZA-LABEL: @amo_r_xor64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.xor64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_xor64rem_on(long int *a, long int b){
+  return __forza_amo_r_xor64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smax8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1152,7 +1401,12 @@ int amo_r_smax32rem_on(int *a, int b){
   return __forza_amo_r_smax32rem_on(a,b);
 }
 
-// -- amo_r_smax64rem_on
+// RV64XFORZA-LABEL: @amo_r_smax64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smax64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smax64rem_on(long int *a, long int b){
+  return __forza_amo_r_smax64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umax8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1175,7 +1429,12 @@ int amo_r_umax32rem_on(int *a, int b){
   return __forza_amo_r_umax32rem_on(a,b);
 }
 
-// -- amo_r_umax64rem_on
+// RV64XFORZA-LABEL: @amo_r_umax64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umax64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umax64rem_on(long int *a, long int b){
+  return __forza_amo_r_umax64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smin8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1198,7 +1457,12 @@ int amo_r_smin32rem_on(int *a, int b){
   return __forza_amo_r_smin32rem_on(a,b);
 }
 
-// -- amo_r_smin64rem_on
+// RV64XFORZA-LABEL: @amo_r_smin64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smin64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smin64rem_on(long int *a, long int b){
+  return __forza_amo_r_smin64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umin8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1221,7 +1485,12 @@ int amo_r_umin32rem_on(int *a, int b){
   return __forza_amo_r_umin32rem_on(a,b);
 }
 
-// -- amo_r_umin64rem_on
+// RV64XFORZA-LABEL: @amo_r_umin64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umin64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umin64rem_on(long int *a, long int b){
+  return __forza_amo_r_umin64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_thrs8rem_on(
 // RV64XFORZA-NEXT:  entry:
@@ -1244,7 +1513,12 @@ int amo_r_thrs32rem_on(int *a, int b){
   return __forza_amo_r_thrs32rem_on(a,b);
 }
 
-// -- amo_r_thrs64rem_on
+// RV64XFORZA-LABEL: @amo_r_thrs64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.thrs64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_thrs64rem_on(long int *a, long int b){
+  return __forza_amo_r_thrs64rem_on(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_add8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1267,7 +1541,12 @@ int amo_r_add32rem_no(int *a, int b){
   return __forza_amo_r_add32rem_no(a,b);
 }
 
-// -- amo_r_add64rem_no
+// RV64XFORZA-LABEL: @amo_r_add64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.add64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_add64rem_no(long int *a, long int b){
+  return __forza_amo_r_add64rem_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_and8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1290,7 +1569,12 @@ int amo_r_and32rem_no(int *a, int b){
   return __forza_amo_r_and32rem_no(a,b);
 }
 
-// -- amo_r_and64rem_no
+// RV64XFORZA-LABEL: @amo_r_and64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.and64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_and64rem_no(long int *a, long int b){
+  return __forza_amo_r_and64rem_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_or8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1313,7 +1597,12 @@ int amo_r_or32rem_no(int *a, int b){
   return __forza_amo_r_or32rem_no(a,b);
 }
 
-// -- amo_r_or64rem_no
+// RV64XFORZA-LABEL: @amo_r_or64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.or64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_or64rem_no(long int *a, long int b){
+  return __forza_amo_r_or64rem_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_xor8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1336,7 +1625,12 @@ int amo_r_xor32rem_no(int *a, int b){
   return __forza_amo_r_xor32rem_no(a,b);
 }
 
-// -- amo_r_xor64rem_no
+// RV64XFORZA-LABEL: @amo_r_xor64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.xor64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_xor64rem_no(long int *a, long int b){
+  return __forza_amo_r_xor64rem_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smax8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1359,7 +1653,12 @@ int amo_r_smax32rem_no(int *a, int b){
   return __forza_amo_r_smax32rem_no(a,b);
 }
 
-// -- amo_r_smax64rem_no
+// RV64XFORZA-LABEL: @amo_r_smax64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smax64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smax64rem_no(long int *a, long int b){
+  return __forza_amo_r_smax64rem_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umax8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1382,7 +1681,12 @@ int amo_r_umax32rem_no(int *a, int b){
   return __forza_amo_r_umax32rem_no(a,b);
 }
 
-// -- amo_r_umax64rem_no
+// RV64XFORZA-LABEL: @amo_r_umax64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umax64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umax64rem_no(long int *a, long int b){
+  return __forza_amo_r_umax64rem_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_smin8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1405,7 +1709,12 @@ int amo_r_smin32rem_no(int *a, int b){
   return __forza_amo_r_smin32rem_no(a,b);
 }
 
-// -- amo_r_smin64rem_no
+// RV64XFORZA-LABEL: @amo_r_smin64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.smin64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_smin64rem_no(long int *a, long int b){
+  return __forza_amo_r_smin64rem_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_umin8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1428,7 +1737,12 @@ int amo_r_umin32rem_no(int *a, int b){
   return __forza_amo_r_umin32rem_no(a,b);
 }
 
-// -- amo_r_umin64rem_no
+// RV64XFORZA-LABEL: @amo_r_umin64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.umin64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_umin64rem_no(long int *a, long int b){
+  return __forza_amo_r_umin64rem_no(a,b);
+}
 
 // RV64XFORZA-LABEL: @amo_r_thrs8rem_no(
 // RV64XFORZA-NEXT:  entry:
@@ -1451,5 +1765,9 @@ int amo_r_thrs32rem_no(int *a, int b){
   return __forza_amo_r_thrs32rem_no(a,b);
 }
 
-// -- amo_r_thrs64rem_no
-
+// RV64XFORZA-LABEL: @amo_r_thrs64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.thrs64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_thrs64rem_no(long int *a, long int b){
+  return __forza_amo_r_thrs64rem_no(a,b);
+}
