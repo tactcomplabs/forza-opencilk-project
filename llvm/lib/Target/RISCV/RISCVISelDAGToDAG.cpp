@@ -257,7 +257,16 @@ void RISCVDAGToDAGISel::selectForzaAMOIntrinsic(SDNode *Node, unsigned Opcode) {
   EVT VT = Node->getValueType(0);
 
   // Create the machine instruction node with the appropriate types
-  SDNode *NewNode = CurDAG->getMachineNode(Opcode, DL, {VT, MVT::Other}, Ops);
+  SDNode *NewNode;
+  if( VT.isFloatingPoint() && (VT.getScalarStoreSize() != 64) ){
+    // found a bfloat16 or float, mutate it
+    NewNode = CurDAG->getMachineNode(Opcode, DL,
+                                     MVT::getFloatingPointVT(64),
+                                     Ops);
+  }else{
+    // create it with the current type system
+    NewNode = CurDAG->getMachineNode(Opcode, DL, {VT, MVT::Other}, Ops);
+  }
 
   // Replace the chain result
   ReplaceUses(SDValue(Node, 1), SDValue(NewNode, 1));
