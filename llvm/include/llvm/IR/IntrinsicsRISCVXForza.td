@@ -34,6 +34,15 @@ let TargetPrefix = "riscv" in {
   class ForzaAMOFloat64Intrinsic
       : DefaultAttrsIntrinsic<[llvm_double_ty], [llvm_ptr_ty, llvm_double_ty],
                               [IntrWillReturn, IntrSpeculatable]>;
+  class ForzaThreadIIntrinsic
+      : DefaultAttrsIntrinsic<[], [],
+                              [IntrHasSideEffects]>;
+  class ForzaSpawnIntrinsic
+      : DefaultAttrsIntrinsic<[llvm_i64_ty], [llvm_ptr_ty, llvm_ptr_ty],
+                              [IntrWillReturn, IntrHasSideEffects]>;
+  class ForzaMCopyIntrinsic
+      : DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_ptr_ty, llvm_i64_ty],
+                              [IntrHasSideEffects]>;
 
   def int_riscv_forza_amo_r_add8u : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_and8u : ForzaAMOInt8Intrinsic;
@@ -412,4 +421,9 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_fadd64rem_no : ForzaAMOFloat64Intrinsic;
   def int_riscv_forza_amo_r_fsub64rem_no : ForzaAMOFloat64Intrinsic;
   def int_riscv_forza_amo_r_fsubr64rem_no : ForzaAMOFloat64Intrinsic;
+
+  def int_riscv_forza_quit : ForzaThreadIIntrinsic;
+  def int_riscv_forza_resched : ForzaThreadIIntrinsic;
+  def int_riscv_forza_spawn : ForzaSpawnIntrinsic;
+  def int_riscv_forza_mcopy : ForzaMCopyIntrinsic;
 } // TargetPrefix = "riscv"

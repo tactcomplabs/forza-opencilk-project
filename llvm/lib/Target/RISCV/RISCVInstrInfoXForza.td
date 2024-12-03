@@ -100,6 +100,12 @@ defm fadd : ForzaAmoFloatSDNode<"FADD">;
 defm fsub : ForzaAmoFloatSDNode<"FSUB">;
 defm fsubr : ForzaAmoFloatSDNode<"FSUBR">;
 
+def forza_quit : SDNode<"RISCVISD::QUIT", SDTNone, [SDNPSideEffect]>;
+def forza_resched : SDNode<"RISCVISD::RESCHED", SDTNone, [SDNPSideEffect]>;
+def forza_spawn : SDNode<"RISCVISD::SPAWN", SDTNone, [SDNPHasChain]>;
+def forza_mcopy : SDNode<"RISCVISD::MCOPY", SDTNone, [SDNPHasChain]>;
+
+
 //===----------------------------------------------------------------------===//
 // Forza Instruction Formats
 //===----------------------------------------------------------------------===//
@@ -358,7 +364,6 @@ let Predicates = [IsRV64, HasVendorXForza] in {
 //===----------------------------------------------------------------------===//
 // Codegen patterns
 //===----------------------------------------------------------------------===//
-
 let Predicates = [HasVendorXForza] in {
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>

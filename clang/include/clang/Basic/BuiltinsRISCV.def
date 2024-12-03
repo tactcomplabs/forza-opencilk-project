@@ -482,6 +482,10 @@ TARGET_BUILTIN(__forza_amo_r_fadd64rem_no, "dd*d", "T", "xforza")
 TARGET_BUILTIN(__forza_amo_r_fsub64rem_no, "dd*d", "T", "xforza")
 TARGET_BUILTIN(__forza_amo_r_fsubr64rem_no, "dd*d", "T", "xforza")
 
+TARGET_BUILTIN(__forza_quit, "v", "nr", "xforza")
+TARGET_BUILTIN(__forza_resched, "v", "nr", "xforza")
+TARGET_BUILTIN(__forza_spawn, "ULiULi*ULi*", "T", "xforza")
+TARGET_BUILTIN(__forza_mcopy, "vULi*ULi*ULi", "nrT", "xforza")
 
 #undef BUILTIN
 #undef TARGET_BUILTIN
