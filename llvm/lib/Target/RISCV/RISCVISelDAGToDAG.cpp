@@ -230,6 +230,8 @@ unsigned RISCVDAGToDAGISel::getOpcodeForIntrinsic(unsigned IntNo) {
       return RISCV::AMO_R_XOR64REMNO;
     case Intrinsic::riscv_forza_amo_r_xor64rem_on:             // llvm.riscv.forza.amo.r.xor64rem.on
       return RISCV::AMO_R_XOR64REMON;
+    case Intrinsic::riscv_forza_amo_r_fadd32u:             // llvm.riscv.forza.amo.r.xor64rem.on
+      return RISCV::AMO_R_FADD32U;
   default:
     llvm_unreachable("Unknown intrinsic");
   }
