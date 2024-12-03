@@ -234,38 +234,31 @@ unsigned RISCVDAGToDAGISel::getOpcodeForIntrinsic(unsigned IntNo) {
     llvm_unreachable("Unknown intrinsic");
   }
 }
-
 void RISCVDAGToDAGISel::selectForzaAMOIntrinsic(SDNode *Node, unsigned Opcode) {
   SDLoc DL(Node);
 
-  // FIXME: Currently nothing happens with the Chain
+  // Get the chain
   SDValue Chain = Node->getOperand(0);
 
-  // Get the pointer
-  SDValue PtrLoad = Node->getOperand(2);
+  // Get the operands
+  SDValue Ptr = Node->getOperand(2); // Pointer (should be integer type)
+  SDValue Val = Node->getOperand(3); // Value (could be integer or floating-point type)
 
-  // Get the value
-  SDValue ValLoad = Node->getOperand(3);
-
-  // Extract the value part (result 0) from the load nodes
-  SDValue Ptr = SDValue(PtrLoad.getNode(), 0);
-  SDValue Val = SDValue(ValLoad.getNode(), 0);
-
-  // Create the operands for the assembly instruction
+  // Create the operands
   SmallVector<SDValue, 2> Ops;
   Ops.push_back(Ptr);
   Ops.push_back(Val);
 
-  // Create the machine instruction node
-  // FIXME: This may need to be changed for floating point eventually
-  SDNode *NewNode = CurDAG->getMachineNode(Opcode, DL,
-                                           MVT::i64, MVT::Other, Ops);
+  // Get the result type from the Node (e.g., i32, i64, f16, f32, f64)
+  EVT VT = Node->getValueType(0);
 
-  // Update the chain
-  SDValue NewChain = SDValue(NewNode, 1);
-  ReplaceUses(SDValue(Node, 1), NewChain);
+  // Create the machine instruction node with the appropriate types
+  SDNode *NewNode = CurDAG->getMachineNode(Opcode, DL, {VT, MVT::Other}, Ops);
 
-  // See if we need to transfer the memory operand
+  // Replace the chain result
+  ReplaceUses(SDValue(Node, 1), SDValue(NewNode, 1));
+
+  // Transfer memory operands if needed
   if (auto *MemIntNode = dyn_cast<MemIntrinsicSDNode>(Node)) {
     MachineMemOperand *MMO = MemIntNode->getMemOperand();
     CurDAG->setNodeMemRefs(cast<MachineSDNode>(NewNode), {MMO});
@@ -1927,6 +1920,7 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
     case Intrinsic::riscv_forza_amo_r_xor64rem_no:             // llvm.riscv.forza.amo.r.xor64rem.no
     case Intrinsic::riscv_forza_amo_r_xor64rem_on:             // llvm.riscv.forza.amo.r.xor64rem.on
     case Intrinsic::riscv_forza_amo_r_xor64u:                  // llvm.riscv.forza.amo.r.xor64u
+    case Intrinsic::riscv_forza_amo_r_fadd32u:                  // llvm.riscv.forza.amo.r.xor64u
       {
       LLVM_DEBUG({
         dbgs() << "Intrinsic Node Opcode: " << Node->getOpcode() << "\n";

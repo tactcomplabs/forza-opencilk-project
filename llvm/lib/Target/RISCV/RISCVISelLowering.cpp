@@ -625,7 +625,7 @@ RISCVTargetLowering::RISCVTargetLowering(const TargetMachine &TM,
   }
 
   if (Subtarget.hasVendorXForza()) {
-    setOperationAction(ISD::INTRINSIC_W_CHAIN, {MVT::i8, MVT::i16, MVT::i32, MVT::i64}, Custom);
+    setOperationAction(ISD::INTRINSIC_W_CHAIN, {MVT::i8, MVT::i16, MVT::i32, MVT::i64, MVT::f16, MVT::f32, MVT::f64}, Custom);
   }
 
   if (Subtarget.hasStdExtZicbop()) {
@@ -9929,7 +9929,11 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_umin64rem_no:
   case Intrinsic::riscv_forza_amo_r_swap64rem_no:
   case Intrinsic::riscv_forza_amo_r_thrs64rem_no:
+  case Intrinsic::riscv_forza_amo_r_fadd32u:
   {
+    LLVM_DEBUG({
+      dbgs() << __PRETTY_FUNCTION__ << "Lowering Intrinsics ";
+    });
     SDLoc DL(Op);
     MVT XLenVT = Subtarget.getXLenVT();
     unsigned Opc = getForzaOpc(IntNo);
