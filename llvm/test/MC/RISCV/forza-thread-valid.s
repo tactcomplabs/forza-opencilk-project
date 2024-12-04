@@ -7,25 +7,15 @@
 # RUN: not llvm-mc -triple riscv32 -mattr=+xforza < %s 2>&1 \
 # RUN:     | FileCheck -check-prefix=CHECK-RV32 %s
 
-# CHECK-ASM-AND-OBJ: quit zero, zero, 0
+# CHECK-ASM-AND-OBJ: quit
 # CHECK-ASM: encoding: [0x2b,0x20,0x00,0x00]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-quit zero, zero, 0
+quit
 
-# CHECK-ASM-AND-OBJ: quit zero, zero, 0
-# CHECK-ASM: encoding: [0x2b,0x20,0x00,0x00]
-# CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-quit_thread
-
-# CHECK-ASM-AND-OBJ: resched zero, zero, 0
+# CHECK-ASM-AND-OBJ: resched
 # CHECK-ASM: encoding: [0x2b,0x30,0x00,0x00]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-resched zero, zero, 0
-
-# CHECK-ASM-AND-OBJ: resched zero, zero, 0
-# CHECK-ASM: encoding: [0x2b,0x30,0x00,0x00]
-# CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-resched_thread
+resched
 
 # CHECK-ASM-AND-OBJ: sendack a5, a2, a2
 # CHECK-ASM: encoding: [0x8b,0x07,0xc6,0xa0]

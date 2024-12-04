@@ -102,8 +102,8 @@ defm fsubr : ForzaAmoFloatSDNode<"FSUBR">;
 
 def forza_quit : SDNode<"RISCVISD::QUIT", SDTNone, [SDNPSideEffect]>;
 def forza_resched : SDNode<"RISCVISD::RESCHED", SDTNone, [SDNPSideEffect]>;
-def forza_spawn : SDNode<"RISCVISD::SPAWN", SDTNone, [SDNPHasChain]>;
-def forza_mcopy : SDNode<"RISCVISD::MCOPY", SDTNone, [SDNPHasChain]>;
+def forza_spawn : SDNode<"RISCVISD::SPAWN", SDTNone, [SDNPSideEffect]>;
+def forza_mcopy : SDNode<"RISCVISD::MCOPY", SDTNone, [SDNPSideEffect]>;
 
 
 //===----------------------------------------------------------------------===//
@@ -139,8 +139,18 @@ class ForzaThreadI<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
     : RVInstI<funct3, opcode, (outs GPR:$rd), (ins GPR:$rs1, simm12:$imm12),
               opcodestr, "$rd, $rs1, $imm12">, Sched<[WriteCSR]>;
 
-let hasNoSchedulingInfo = 1,
-    hasSideEffects = 1, mayLoad = 0, mayStore = 0 in
+let hasNoSchedulingInfo = 1 in
+class ForzaThreadISpc<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
+    : RVInstI<funct3, opcode, (outs), (ins),
+              opcodestr, "">, Sched<[WriteCSR]>{
+  let Inst{11-7} = 0b00000;
+  let Inst{19-15} = 0b00000;
+  let Inst{31-20} = 0b000000000000;
+}
+
+//let hasNoSchedulingInfo = 1,
+//    hasSideEffects = 1, mayLoad = 0, mayStore = 0 in
+let hasNoSchedulingInfo = 1 in
 class ForzaThreadR<bits<7> funct7, bits<3> funct3, RISCVOpcode opcode, string opcodestr>
     : RVInstR<funct7, funct3, opcode, (outs GPR:$rd),
               (ins GPR:$rs1, GPR:$rs2), opcodestr,
@@ -332,10 +342,9 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
 }
 
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
-    mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
-  def QUIT : ForzaThreadI<0b010, OPC_CUSTOM_1, "quit">;
-  def RESCHED : ForzaThreadI<0b011, OPC_CUSTOM_1, "resched">;
-  def SENDACK: ForzaThreadR<0b1010000, 0b000, OPC_CUSTOM_0, "sendack">;
+    isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
+  def QUIT : ForzaThreadISpc<0b010, OPC_CUSTOM_1, "quit">;
+  def RESCHED : ForzaThreadISpc<0b011, OPC_CUSTOM_1, "resched">;
   def SPAWN : ForzaThreadR<0b0000000, 0b000, OPC_OP_P, "spawn">;
 }
 
@@ -346,6 +355,7 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
   def RMACDD : ForzaRMAC<0b010, OPC_FORZA_RMAC, "rmac.dd">;
   def PZOPII : ForzaPZOPII<0b001, OPC_FORZA_MCPY, "pzop.ii">;
   def MCOPY : ForzaMCPY<OPC_FORZA_MCPY, "mcopy">;
+  def SENDACK: ForzaThreadR<0b1010000, 0b000, OPC_CUSTOM_0, "sendack">;
 
   defm BF : ForzaRFMACClass<0b011, "rfmac_bf">;
   defm BD : ForzaRFMACClass<0b100, "rfmac_bd">;
@@ -354,17 +364,13 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
   defm DD : ForzaRFMACClass<0b111, "rfmac_dd">;
 }
 
-// Instruction aliases
-let Predicates = [IsRV64, HasVendorXForza] in {
-  def : InstAlias<"quit_thread", (QUIT  X0, X0, 0)>;
-  def : InstAlias<"resched_thread", (RESCHED  X0, X0, 0)>;
-}
-
-
 //===----------------------------------------------------------------------===//
 // Codegen patterns
 //===----------------------------------------------------------------------===//
 let Predicates = [HasVendorXForza] in {
+  class PatGpGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
+                ValueType vt2 = XLenVT>
+    : Pat<(vt1 (OpNode (vt1 GPR:$rs1), (vt2 GPR:$rs2))), (Inst GPR:$rs1, GPR:$rs2)>;
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;
@@ -501,4 +507,9 @@ let Predicates = [HasVendorXForza] in {
   defm "" : ForzaAmoPatGprMemFpr<"fadd">;
   defm "" : ForzaAmoPatGprMemFpr<"fsub">;
   defm "" : ForzaAmoPatGprMemFpr<"fsubr">;
+
+  def : Pat<(int_riscv_forza_quit), (QUIT)>;
+  def : Pat<(int_riscv_forza_resched), (RESCHED)>;
+  def : Pat<(int_riscv_forza_spawn GPR:$rs1, GPR:$rs2),
+            (SPAWN GPR:$rs1, GPR:$rs2)>;
 }
