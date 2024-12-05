@@ -451,50 +451,50 @@ let Predicates = [HasVendorXForza] in {
   }
 
   multiclass ForzaAmoPatGprMemFpr<string name> {
-    //def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16u") GPRMem:$rs1, FPR16:$rs2)),
-    //               (!cast<RVInst>("AMO_R_" # !toupper(name) # "16U") GPRMem:$rs1, FPR16:$rs2)>;
+    def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16u") GPRMem:$rs1, FPR16:$rs2)),
+                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "16U") GPRMem:$rs1, FPR16:$rs2)>;
     def : Pat<(f32 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32u") GPRMem:$rs1, FPR32:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "32U") GPRMem:$rs1, FPR32:$rs2)>;
     def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64u") GPRMem:$rs1, FPR64:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "64U") GPRMem:$rs1, FPR64:$rs2)>;
 
-    //def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16migr_nn") GPRMem:$rs1, FPR16:$rs2)),
-    //               (!cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN") GPRMem:$rs1, FPR16:$rs2)>;
+    def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16migr_nn") GPRMem:$rs1, FPR16:$rs2)),
+                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN") GPRMem:$rs1, FPR16:$rs2)>;
     def : Pat<(f32 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32migr_nn") GPRMem:$rs1, FPR32:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNN") GPRMem:$rs1, FPR32:$rs2)>;
     def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64migr_nn") GPRMem:$rs1, FPR64:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRNN") GPRMem:$rs1, FPR64:$rs2)>;
 
-    //def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16migr_on") GPRMem:$rs1, FPR16:$rs2)),
-    //               (!cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRON") GPRMem:$rs1, FPR16:$rs2)>;
+    def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16migr_on") GPRMem:$rs1, FPR16:$rs2)),
+                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRON") GPRMem:$rs1, FPR16:$rs2)>;
     def : Pat<(f32 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32migr_on") GPRMem:$rs1, FPR32:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRON") GPRMem:$rs1, FPR32:$rs2)>;
     def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64migr_on") GPRMem:$rs1, FPR64:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRON") GPRMem:$rs1, FPR64:$rs2)>;
 
-    //def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16migr_no") GPRMem:$rs1, FPR16:$rs2)),
-    //               (!cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNO") GPRMem:$rs1, FPR16:$rs2)>;
+    def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16migr_no") GPRMem:$rs1, FPR16:$rs2)),
+                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNO") GPRMem:$rs1, FPR16:$rs2)>;
     def : Pat<(f32 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32migr_no") GPRMem:$rs1, FPR32:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "32MIGRNO") GPRMem:$rs1, FPR32:$rs2)>;
     def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64migr_no") GPRMem:$rs1, FPR64:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "64MIGRNO") GPRMem:$rs1, FPR64:$rs2)>;
 
-    //def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16rem_nn") GPRMem:$rs1, FPR16:$rs2)),
-    //               (!cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNN") GPRMem:$rs1, FPR16:$rs2)>;
+    def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16rem_nn") GPRMem:$rs1, FPR16:$rs2)),
+                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNN") GPRMem:$rs1, FPR16:$rs2)>;
     def : Pat<(f32 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32rem_nn") GPRMem:$rs1, FPR32:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNN") GPRMem:$rs1, FPR32:$rs2)>;
     def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64rem_nn") GPRMem:$rs1, FPR64:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "64REMNN") GPRMem:$rs1, FPR64:$rs2)>;
 
-    //def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16rem_on") GPRMem:$rs1, FPR16:$rs2)),
-    //               (!cast<RVInst>("AMO_R_" # !toupper(name) # "16REMON") GPRMem:$rs1, FPR16:$rs2)>;
+    def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16rem_on") GPRMem:$rs1, FPR16:$rs2)),
+                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "16REMON") GPRMem:$rs1, FPR16:$rs2)>;
     def : Pat<(f32 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32rem_on") GPRMem:$rs1, FPR32:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "32REMON") GPRMem:$rs1, FPR32:$rs2)>;
     def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64rem_on") GPRMem:$rs1, FPR64:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "64REMON") GPRMem:$rs1, FPR64:$rs2)>;
 
-    //def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16rem_no") GPRMem:$rs1, FPR16:$rs2)),
-    //               (!cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNO") GPRMem:$rs1, FPR16:$rs2)>;
+    def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16rem_no") GPRMem:$rs1, FPR16:$rs2)),
+                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "16REMNO") GPRMem:$rs1, FPR16:$rs2)>;
     def : Pat<(f32 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32rem_no") GPRMem:$rs1, FPR32:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNO") GPRMem:$rs1, FPR32:$rs2)>;
     def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64rem_no") GPRMem:$rs1, FPR64:$rs2)),
