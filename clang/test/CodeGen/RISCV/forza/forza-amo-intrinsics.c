@@ -1771,3 +1771,298 @@ int amo_r_thrs32rem_no(int *a, int b){
 long int amo_r_thrs64rem_no(long int *a, long int b){
   return __forza_amo_r_thrs64rem_no(a,b);
 }
+
+// RV64XFORZA-LABEL: @amo_r_fadd32u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fadd32u(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fadd32u(float *a, float b){
+  return __forza_amo_r_fadd32u(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fadd64u(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fadd64u(double *a, double b){
+  return __forza_amo_r_fadd64u(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd32migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fadd32migr.nn(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fadd32migr_nn(float *a, float b){
+  return __forza_amo_r_fadd32migr_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fadd64migr.nn(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fadd64migr_nn(double *a, double b){
+  return __forza_amo_r_fadd64migr_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd32migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fadd32migr.on(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fadd32migr_on(float *a, float b){
+  return __forza_amo_r_fadd32migr_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fadd64migr.on(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fadd64migr_on(double *a, double b){
+  return __forza_amo_r_fadd64migr_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd32migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fadd32migr.no(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fadd32migr_no(float *a, float b){
+  return __forza_amo_r_fadd32migr_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fadd64migr.no(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fadd64migr_no(double *a, double b){
+  return __forza_amo_r_fadd64migr_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd32rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fadd32rem.nn(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fadd32rem_nn(float *a, float b){
+  return __forza_amo_r_fadd32rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fadd64rem.nn(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fadd64rem_nn(double *a, double b){
+  return __forza_amo_r_fadd64rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd32rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fadd32rem.on(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fadd32rem_on(float *a, float b){
+  return __forza_amo_r_fadd32rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fadd64rem.on(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fadd64rem_on(double *a, double b){
+  return __forza_amo_r_fadd64rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd32rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fadd32rem.no(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fadd32rem_no(float *a, float b){
+  return __forza_amo_r_fadd32rem_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fadd64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fadd64rem.no(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fadd64rem_no(double *a, double b){
+  return __forza_amo_r_fadd64rem_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub32u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsub32u(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsub32u(float *a, float b){
+  return __forza_amo_r_fsub32u(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsub64u(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsub64u(double *a, double b){
+  return __forza_amo_r_fsub64u(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub32migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsub32migr.nn(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsub32migr_nn(float *a, float b){
+  return __forza_amo_r_fsub32migr_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsub64migr.nn(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsub64migr_nn(double *a, double b){
+  return __forza_amo_r_fsub64migr_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub32migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsub32migr.on(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsub32migr_on(float *a, float b){
+  return __forza_amo_r_fsub32migr_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsub64migr.on(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsub64migr_on(double *a, double b){
+  return __forza_amo_r_fsub64migr_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub32migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsub32migr.no(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsub32migr_no(float *a, float b){
+  return __forza_amo_r_fsub32migr_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsub64migr.no(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsub64migr_no(double *a, double b){
+  return __forza_amo_r_fsub64migr_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub32rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsub32rem.nn(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsub32rem_nn(float *a, float b){
+  return __forza_amo_r_fsub32rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsub64rem.nn(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsub64rem_nn(double *a, double b){
+  return __forza_amo_r_fsub64rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub32rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsub32rem.on(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsub32rem_on(float *a, float b){
+  return __forza_amo_r_fsub32rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsub64rem.on(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsub64rem_on(double *a, double b){
+  return __forza_amo_r_fsub64rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub32rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsub32rem.no(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsub32rem_no(float *a, float b){
+  return __forza_amo_r_fsub32rem_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsub64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsub64rem.no(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsub64rem_no(double *a, double b){
+  return __forza_amo_r_fsub64rem_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr32u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsubr32u(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsubr32u(float *a, float b){
+  return __forza_amo_r_fsubr32u(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsubr64u(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsubr64u(double *a, double b){
+  return __forza_amo_r_fsubr64u(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr32migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsubr32migr.nn(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsubr32migr_nn(float *a, float b){
+  return __forza_amo_r_fsubr32migr_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr64migr_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsubr64migr.nn(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsubr64migr_nn(double *a, double b){
+  return __forza_amo_r_fsubr64migr_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr32migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsubr32migr.on(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsubr32migr_on(float *a, float b){
+  return __forza_amo_r_fsubr32migr_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr64migr_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsubr64migr.on(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsubr64migr_on(double *a, double b){
+  return __forza_amo_r_fsubr64migr_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr32migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsubr32migr.no(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsubr32migr_no(float *a, float b){
+  return __forza_amo_r_fsubr32migr_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr64migr_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsubr64migr.no(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsubr64migr_no(double *a, double b){
+  return __forza_amo_r_fsubr64migr_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr32rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsubr32rem.nn(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsubr32rem_nn(float *a, float b){
+  return __forza_amo_r_fsubr32rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsubr64rem.nn(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsubr64rem_nn(double *a, double b){
+  return __forza_amo_r_fsubr64rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr32rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsubr32rem.on(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsubr32rem_on(float *a, float b){
+  return __forza_amo_r_fsubr32rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsubr64rem.on(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsubr64rem_on(double *a, double b){
+  return __forza_amo_r_fsubr64rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr32rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call float @llvm.riscv.forza.amo.r.fsubr32rem.no(ptr [[RS1:%.*]], float [[RS2:%.*]])
+float amo_r_fsubr32rem_no(float *a, float b){
+  return __forza_amo_r_fsubr32rem_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_fsubr64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call double @llvm.riscv.forza.amo.r.fsubr64rem.no(ptr [[RS1:%.*]], double [[RS2:%.*]])
+double amo_r_fsubr64rem_no(double *a, double b){
+  return __forza_amo_r_fsubr64rem_no(a,b);
+}
+

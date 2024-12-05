@@ -24,16 +24,15 @@ let TargetPrefix = "riscv" in {
       : DefaultAttrsIntrinsic<[llvm_i64_ty], [llvm_ptr_ty, llvm_i64_ty],
                               [IntrWillReturn, IntrHasSideEffects]>;
 
-  // TODO: Pretty sure none of these should be IntrSpeculatable
   class ForzaAMOFloat16Intrinsic
       : DefaultAttrsIntrinsic<[llvm_bfloat_ty], [llvm_ptr_ty, llvm_bfloat_ty],
-                              [IntrWillReturn, IntrSpeculatable]>;
+                              [IntrWillReturn, IntrHasSideEffects]>;
   class ForzaAMOFloat32Intrinsic
       : DefaultAttrsIntrinsic<[llvm_float_ty], [llvm_ptr_ty, llvm_float_ty],
-                              [IntrWillReturn, IntrSpeculatable]>;
+                              [IntrWillReturn, IntrHasSideEffects]>;
   class ForzaAMOFloat64Intrinsic
       : DefaultAttrsIntrinsic<[llvm_double_ty], [llvm_ptr_ty, llvm_double_ty],
-                              [IntrWillReturn, IntrSpeculatable]>;
+                              [IntrWillReturn, IntrHasSideEffects]>;
   class ForzaThreadIIntrinsic
       : DefaultAttrsIntrinsic<[], [],
                               [IntrHasSideEffects]>;
