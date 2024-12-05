@@ -486,6 +486,7 @@ TARGET_BUILTIN(__forza_quit, "v", "nr", "xforza")
 TARGET_BUILTIN(__forza_resched, "v", "nr", "xforza")
 TARGET_BUILTIN(__forza_spawn, "ULiULi*ULi*", "T", "xforza")
 TARGET_BUILTIN(__forza_mcopy, "vULi*ULi*ULi", "nrT", "xforza")
+TARGET_BUILTIN(__forza_fence, "v", "nr", "xforza")
 
 #undef BUILTIN
 #undef TARGET_BUILTIN

@@ -104,6 +104,7 @@ def forza_quit : SDNode<"RISCVISD::QUIT", SDTNone, [SDNPSideEffect]>;
 def forza_resched : SDNode<"RISCVISD::RESCHED", SDTNone, [SDNPSideEffect]>;
 def forza_spawn : SDNode<"RISCVISD::SPAWN", SDTNone, [SDNPSideEffect]>;
 def forza_mcopy : SDNode<"RISCVISD::MCOPY", SDTNone, [SDNPSideEffect]>;
+def forza_fence : SDNode<"RISCVISD::FORZA_FENCE", SDTNone, [SDNPSideEffect]>;
 
 
 //===----------------------------------------------------------------------===//
@@ -196,7 +197,6 @@ class ForzaPZOPBase<bits<3> funct3, bits<2> nb, RISCVOpcode opcode, dag outs,
   let Inst{11-7} = uimm5;
   let Inst{6-0} = opcode.Value;
 }
-
 
 class ForzaMCPY<RISCVOpcode opcode, string opcodestr>
   : ForzaRMACBase<0b000, 0b00, 0b00000, opcode, (outs), (ins GPRMem:$rs1, GPRMem:$rs2, GPR:$rs3),
@@ -358,6 +358,17 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
 }
 
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
+    isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
+def FORZA_FENCE : RVInstI<0b000, OPC_MISC_MEM, (outs),
+                    (ins),
+                    "forzafence", "">, Sched<[]> {
+  let rs1 = 0b00000;
+  let rd = 0b00000;
+  let imm12 = 0b000000000000;
+}
+    }
+
+let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
     mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
   def RMACWW : ForzaRMAC<0b000, OPC_FORZA_RMAC, "rmac.ww">;
   def RMACWD : ForzaRMAC<0b001, OPC_FORZA_RMAC, "rmac.wd">;
@@ -384,6 +395,7 @@ let Predicates = [HasVendorXForza] in {
     : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;
   class PatGprMemFpr<SDPatternOperator OpNode, RVInst Inst>
     : Pat<(OpNode GPRMem:$rs1, FPR64:$rs2), (Inst GPRMem:$rs1, FPR64:$rs2)>;
+
 
   multiclass ForzaAmoPatGprMemGpr<string name> {
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8u"),
@@ -499,6 +511,7 @@ let Predicates = [HasVendorXForza] in {
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "32REMNO") GPRMem:$rs1, FPR32:$rs2)>;
     def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64rem_no") GPRMem:$rs1, FPR64:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "64REMNO") GPRMem:$rs1, FPR64:$rs2)>;
+
   }
 
   defm "" : ForzaAmoPatGprMemGpr<"add">;
@@ -522,4 +535,5 @@ let Predicates = [HasVendorXForza] in {
             (SPAWN GPR:$rs1, GPR:$rs2)>;
   def : Pat<(int_riscv_forza_mcopy GPRMem:$rs1, GPRMem:$rs2, GPR:$rs3),
             (MCOPY GPRMem:$rs1, GPRMem:$rs2, GPR:$rs3)>;
+  def : Pat<(int_riscv_forza_fence), (FORZA_FENCE)>;
 }

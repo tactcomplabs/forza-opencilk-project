@@ -42,6 +42,10 @@ let TargetPrefix = "riscv" in {
   class ForzaMCopyIntrinsic
       : DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_ptr_ty, llvm_i64_ty],
                               [IntrHasSideEffects]>;
+  // TODO: Potentially add more
+  class ForzaFenceIntrinsic
+      : DefaultAttrsIntrinsic<[], [],
+                              [IntrNoMem]>;
 
   def int_riscv_forza_amo_r_add8u : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_and8u : ForzaAMOInt8Intrinsic;
@@ -425,4 +429,5 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_resched : ForzaThreadIIntrinsic;
   def int_riscv_forza_spawn : ForzaSpawnIntrinsic;
   def int_riscv_forza_mcopy : ForzaMCopyIntrinsic;
+  def int_riscv_forza_fence : ForzaFenceIntrinsic;
 } // TargetPrefix = "riscv"
