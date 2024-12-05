@@ -23,3 +23,10 @@ void resched(){
 unsigned long int spawn(unsigned long *pc, unsigned long *stack){
   return __forza_spawn(pc,stack);
 }
+
+// RV64XFORZA-LABEL: @mcopy(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.mcopy(ptr %dest, ptr %src, i64 %sz)
+void mcopy(unsigned long *dest, unsigned long *src, unsigned long sz){
+  __forza_mcopy(dest, src, sz);
+}

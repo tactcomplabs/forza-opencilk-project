@@ -199,7 +199,7 @@ class ForzaPZOPBase<bits<3> funct3, bits<2> nb, RISCVOpcode opcode, dag outs,
 
 
 class ForzaMCPY<RISCVOpcode opcode, string opcodestr>
-  : ForzaRMACBase<0b000, 0b00, 0b00000, opcode, (outs GPRMem:$rs1), (ins GPRMem:$rs2, GPR:$rs3),
+  : ForzaRMACBase<0b000, 0b00, 0b00000, opcode, (outs), (ins GPRMem:$rs1, GPRMem:$rs2, GPR:$rs3),
                   opcodestr, "$rs1, $rs2, $rs3">;
 
 class ForzaRMAC<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
@@ -354,6 +354,7 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
   def QUIT : ForzaThreadISpc<0b010, OPC_CUSTOM_1, "quit">;
   def RESCHED : ForzaThreadISpc<0b011, OPC_CUSTOM_1, "resched">;
   def SPAWN : ForzaThreadR<0b0000000, 0b000, OPC_OP_P, "spawn">;
+  def MCOPY : ForzaMCPY<OPC_FORZA_MCPY, "mcopy">;
 }
 
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
@@ -362,7 +363,6 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
   def RMACWD : ForzaRMAC<0b001, OPC_FORZA_RMAC, "rmac.wd">;
   def RMACDD : ForzaRMAC<0b010, OPC_FORZA_RMAC, "rmac.dd">;
   def PZOPII : ForzaPZOPII<0b001, OPC_FORZA_MCPY, "pzop.ii">;
-  def MCOPY : ForzaMCPY<OPC_FORZA_MCPY, "mcopy">;
   def SENDACK: ForzaThreadR<0b1010000, 0b000, OPC_CUSTOM_0, "sendack">;
 
   defm BF : ForzaRFMACClass<0b011, "rfmac_bf">;
@@ -520,4 +520,6 @@ let Predicates = [HasVendorXForza] in {
   def : Pat<(int_riscv_forza_resched), (RESCHED)>;
   def : Pat<(int_riscv_forza_spawn GPR:$rs1, GPR:$rs2),
             (SPAWN GPR:$rs1, GPR:$rs2)>;
+  def : Pat<(int_riscv_forza_mcopy GPRMem:$rs1, GPRMem:$rs2, GPR:$rs3),
+            (MCOPY GPRMem:$rs1, GPRMem:$rs2, GPR:$rs3)>;
 }
