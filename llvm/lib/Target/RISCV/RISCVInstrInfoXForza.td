@@ -104,8 +104,8 @@ def forza_quit : SDNode<"RISCVISD::QUIT", SDTNone, [SDNPSideEffect]>;
 def forza_resched : SDNode<"RISCVISD::RESCHED", SDTNone, [SDNPSideEffect]>;
 def forza_spawn : SDNode<"RISCVISD::SPAWN", SDTNone, [SDNPSideEffect]>;
 def forza_mcopy : SDNode<"RISCVISD::MCOPY", SDTNone, [SDNPSideEffect]>;
-def forza_fence : SDNode<"RISCVISD::FORZA_FENCE", SDTNone, [SDNPSideEffect]>;
 
+def forza_fence : SDNode<"RISCVISD::FORZA_FENCE", SDTNone, [SDNPSideEffect]>;
 
 //===----------------------------------------------------------------------===//
 // Forza Instruction Formats
@@ -358,17 +358,6 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
 }
 
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
-    isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
-def FORZA_FENCE : RVInstI<0b000, OPC_MISC_MEM, (outs),
-                    (ins),
-                    "forzafence", "">, Sched<[]> {
-  let rs1 = 0b00000;
-  let rd = 0b00000;
-  let imm12 = 0b000000000000;
-}
-    }
-
-let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
     mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
   def RMACWW : ForzaRMAC<0b000, OPC_FORZA_RMAC, "rmac.ww">;
   def RMACWD : ForzaRMAC<0b001, OPC_FORZA_RMAC, "rmac.wd">;
@@ -535,5 +524,5 @@ let Predicates = [HasVendorXForza] in {
             (SPAWN GPR:$rs1, GPR:$rs2)>;
   def : Pat<(int_riscv_forza_mcopy GPRMem:$rs1, GPRMem:$rs2, GPR:$rs3),
             (MCOPY GPRMem:$rs1, GPRMem:$rs2, GPR:$rs3)>;
-  def : Pat<(int_riscv_forza_fence), (FORZA_FENCE)>;
+  def : Pat<(int_riscv_forza_fence), (FENCE 0xF, 0xF)>;
 }

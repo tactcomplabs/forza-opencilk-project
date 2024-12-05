@@ -22553,6 +22553,9 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
   case RISCV::BI__forza_mcopy:
     ID = Intrinsic::riscv_forza_mcopy;
     break;
+  case RISCV::BI__forza_fence:
+    ID = Intrinsic::riscv_forza_fence;
+    break;
 
 
   // Vector builtins are handled from here.
