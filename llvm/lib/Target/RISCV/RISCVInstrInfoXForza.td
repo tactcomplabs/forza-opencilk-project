@@ -137,12 +137,41 @@ class ForzaAmoFloatRA16<bits<7> funct7, bits<3> funct3, string opcodestr>
               "$rd, $rs1, $rs2"> {
 }
 
-let hasNoSchedulingInfo = 1,
-    hasSideEffects = 1, mayLoad = 0, mayStore = 1 in
-class ForzaThreadS<bits<3> funct3, string opcodestr>
-    : RVInstS<funct3, OPC_STORE, (outs),
-              (ins GPR:$rs2, GPRMem:$rs1, simm12:$imm12),
-              opcodestr, "$rs2, ${imm12}(${rs1})">;
+// special variations of the U atomics that do not return anything except VOID
+class ForzaAmoIntRAU<bits<7> funct7, bits<3> funct3, string opcodestr>
+    : RVInstR<funct7, funct3, OPC_CUSTOM_0, (outs),
+              (ins GPRMem:$rs1, GPR:$rs2), opcodestr,
+              "$rs1, $rs2"> {
+  let Inst{11-7} = 0b00000;
+}
+
+class ForzaAmoFloatRA64U<bits<7> funct7, bits<3> funct3, string opcodestr>
+    : RVInstR<funct7, funct3, OPC_CUSTOM_0, (outs),
+              (ins GPRMem:$rs1, FPR64:$rs2), opcodestr,
+              "$rs1, $rs2"> {
+  let Inst{11-7} = 0b00000;
+}
+
+class ForzaAmoFloatRA32U<bits<7> funct7, bits<3> funct3, string opcodestr>
+    : RVInstR<funct7, funct3, OPC_CUSTOM_0, (outs),
+              (ins GPRMem:$rs1, FPR32:$rs2), opcodestr,
+              "$rs1, $rs2"> {
+  let Inst{11-7} = 0b00000;
+}
+
+class ForzaAmoFloatRA16U<bits<7> funct7, bits<3> funct3, string opcodestr>
+    : RVInstR<funct7, funct3, OPC_CUSTOM_0, (outs),
+              (ins GPRMem:$rs1, FPR16:$rs2), opcodestr,
+              "$rs1, $rs2"> {
+  let Inst{11-7} = 0b00000;
+}
+
+//let hasNoSchedulingInfo = 1,
+//    hasSideEffects = 1, mayLoad = 0, mayStore = 1 in
+//class ForzaThreadS<bits<3> funct3, string opcodestr>
+//    : RVInstS<funct3, OPC_STORE, (outs),
+//              (ins GPR:$rs2, GPRMem:$rs1, simm12:$imm12),
+ //             opcodestr, "$rs2, ${imm12}(${rs1})">;
 
 let hasNoSchedulingInfo = 1,
     hasSideEffects = 1, mayLoad = 0, mayStore = 0 in
@@ -266,9 +295,9 @@ multiclass ForzaAmoIntRAClass<bits<4> opfunc, string mnemonic> {
 }
 
 multiclass ForzaAmoFloatRAClass<bits<4> opfunc, string mnemonic> {
-  def AMO_R_ # NAME # 16U: ForzaAmoFloatRA16<{opfunc,0b000},0b010,!strconcat(mnemonic, "16.u")>;
-  def AMO_R_ # NAME # 32U: ForzaAmoFloatRA32<{opfunc,0b000},0b000,!strconcat(mnemonic, "32.u")>;
-  def AMO_R_ # NAME # 64U: ForzaAmoFloatRA64<{opfunc,0b000},0b001,!strconcat(mnemonic, "64.u")>;
+  def AMO_R_ # NAME # 16U: ForzaAmoFloatRA16U<{opfunc,0b000},0b010,!strconcat(mnemonic, "16.u")>;
+  def AMO_R_ # NAME # 32U: ForzaAmoFloatRA32U<{opfunc,0b000},0b000,!strconcat(mnemonic, "32.u")>;
+  def AMO_R_ # NAME # 64U: ForzaAmoFloatRA64U<{opfunc,0b000},0b001,!strconcat(mnemonic, "64.u")>;
 
   def AMO_R_ # NAME # 16MIGRNN: ForzaAmoFloatRA16<{opfunc,0b001},0b010,!strconcat(mnemonic, "16.migr_nn")>;
   def AMO_R_ # NAME # 32MIGRNN: ForzaAmoFloatRA32<{opfunc,0b001},0b000,!strconcat(mnemonic, "32.migr_nn")>;
@@ -452,12 +481,12 @@ let Predicates = [HasVendorXForza] in {
   }
 
   multiclass ForzaAmoPatGprMemFpr<string name> {
-    def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16u") GPRMem:$rs1, FPR16:$rs2)),
-                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "16U") GPRMem:$rs1, FPR16:$rs2)>;
-    def : Pat<(f32 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32u") GPRMem:$rs1, FPR32:$rs2)),
-                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "32U") GPRMem:$rs1, FPR32:$rs2)>;
-    def : Pat<(f64 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64u") GPRMem:$rs1, FPR64:$rs2)),
-                   (!cast<RVInst>("AMO_R_" # !toupper(name) # "64U") GPRMem:$rs1, FPR64:$rs2)>;
+    def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16u") GPRMem:$rs1, FPR16:$rs2),
+               (!cast<RVInst>("AMO_R_" # !toupper(name) # "16U") GPRMem:$rs1, FPR16:$rs2)>;
+    def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32u") GPRMem:$rs1, FPR32:$rs2),
+               (!cast<RVInst>("AMO_R_" # !toupper(name) # "32U") GPRMem:$rs1, FPR32:$rs2)>;
+    def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64u") GPRMem:$rs1, FPR64:$rs2),
+               (!cast<RVInst>("AMO_R_" # !toupper(name) # "64U") GPRMem:$rs1, FPR64:$rs2)>;
 
     def : Pat<(f16 (!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16migr_nn") GPRMem:$rs1, FPR16:$rs2)),
                    (!cast<RVInst>("AMO_R_" # !toupper(name) # "16MIGRNN") GPRMem:$rs1, FPR16:$rs2)>;

@@ -24,6 +24,19 @@ let TargetPrefix = "riscv" in {
       : DefaultAttrsIntrinsic<[llvm_i64_ty], [llvm_ptr_ty, llvm_i64_ty],
                               [IntrWillReturn, IntrHasSideEffects]>;
 
+  class ForzaAMOInt8UIntrinsic
+      :  DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_i8_ty],
+                               [IntrHasSideEffects]>;
+  class ForzaAMOInt16UIntrinsic
+      :  DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_i16_ty],
+                               [IntrHasSideEffects]>;
+  class ForzaAMOInt32UIntrinsic
+      :  DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_i32_ty],
+                               [IntrHasSideEffects]>;
+  class ForzaAMOInt64UIntrinsic
+      : DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_i64_ty],
+                              [IntrHasSideEffects]>;
+
   class ForzaAMOFloat16Intrinsic
       : DefaultAttrsIntrinsic<[llvm_half_ty], [llvm_ptr_ty, llvm_half_ty],
                               [IntrWillReturn, IntrHasSideEffects]>;
@@ -33,6 +46,17 @@ let TargetPrefix = "riscv" in {
   class ForzaAMOFloat64Intrinsic
       : DefaultAttrsIntrinsic<[llvm_double_ty], [llvm_ptr_ty, llvm_double_ty],
                               [IntrWillReturn, IntrHasSideEffects]>;
+
+  class ForzaAMOFloat16UIntrinsic
+      : DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_half_ty],
+                              [IntrHasSideEffects]>;
+  class ForzaAMOFloat32UIntrinsic
+      : DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_float_ty],
+                              [IntrHasSideEffects]>;
+  class ForzaAMOFloat64UIntrinsic
+      : DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_double_ty],
+                              [IntrHasSideEffects]>;
+
   class ForzaThreadIIntrinsic
       : DefaultAttrsIntrinsic<[], [],
                               [IntrHasSideEffects]>;
@@ -354,15 +378,15 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_swap64rem_no : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_thrs64rem_no : ForzaAMOInt64Intrinsic;
 
-  def int_riscv_forza_amo_r_fadd16u : ForzaAMOFloat16Intrinsic;
-  def int_riscv_forza_amo_r_fsub16u : ForzaAMOFloat16Intrinsic;
-  def int_riscv_forza_amo_r_fsubr16u : ForzaAMOFloat16Intrinsic;
-  def int_riscv_forza_amo_r_fadd32u : ForzaAMOFloat32Intrinsic;
-  def int_riscv_forza_amo_r_fsub32u : ForzaAMOFloat32Intrinsic;
-  def int_riscv_forza_amo_r_fsubr32u : ForzaAMOFloat32Intrinsic;
-  def int_riscv_forza_amo_r_fadd64u : ForzaAMOFloat64Intrinsic;
-  def int_riscv_forza_amo_r_fsub64u : ForzaAMOFloat64Intrinsic;
-  def int_riscv_forza_amo_r_fsubr64u : ForzaAMOFloat64Intrinsic;
+  def int_riscv_forza_amo_r_fadd16u : ForzaAMOFloat16UIntrinsic;
+  def int_riscv_forza_amo_r_fsub16u : ForzaAMOFloat16UIntrinsic;
+  def int_riscv_forza_amo_r_fsubr16u : ForzaAMOFloat16UIntrinsic;
+  def int_riscv_forza_amo_r_fadd32u : ForzaAMOFloat32UIntrinsic;
+  def int_riscv_forza_amo_r_fsub32u : ForzaAMOFloat32UIntrinsic;
+  def int_riscv_forza_amo_r_fsubr32u : ForzaAMOFloat32UIntrinsic;
+  def int_riscv_forza_amo_r_fadd64u : ForzaAMOFloat64UIntrinsic;
+  def int_riscv_forza_amo_r_fsub64u : ForzaAMOFloat64UIntrinsic;
+  def int_riscv_forza_amo_r_fsubr64u : ForzaAMOFloat64UIntrinsic;
 
   def int_riscv_forza_amo_r_fadd16migr_nn : ForzaAMOFloat16Intrinsic;
   def int_riscv_forza_amo_r_fsub16migr_nn : ForzaAMOFloat16Intrinsic;

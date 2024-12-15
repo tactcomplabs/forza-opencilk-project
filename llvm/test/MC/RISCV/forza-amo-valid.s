@@ -1407,20 +1407,20 @@ amo_r_thrs32.rem_no a4, ra, s0
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
 amo_r_thrs64.rem_no a4, ra, s0
 
-# CHECK-ASM-AND-OBJ: amo_r_fadd16.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0xa2,0x50,0xb0]
+# CHECK-ASM-AND-OBJ: amo_r_fadd16.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0xa0,0x50,0xb0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fadd16.u ft4, ra, ft5
+amo_r_fadd16.u ra, ft5
 
-# CHECK-ASM-AND-OBJ: amo_r_fadd32.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0x82,0x50,0xb0]
+# CHECK-ASM-AND-OBJ: amo_r_fadd32.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0x80,0x50,0xb0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fadd32.u ft4, ra, ft5
+amo_r_fadd32.u ra, ft5
 
-# CHECK-ASM-AND-OBJ: amo_r_fadd64.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0x92,0x50,0xb0]
+# CHECK-ASM-AND-OBJ: amo_r_fadd64.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0x90,0x50,0xb0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fadd64.u ft4, ra, ft5
+amo_r_fadd64.u ra, ft5
 
 # CHECK-ASM-AND-OBJ: amo_r_fadd16.migr_nn ft4, ra, ft5
 # CHECK-ASM: encoding: [0x0b,0xa2,0x50,0xb2]
@@ -1467,20 +1467,20 @@ amo_r_fadd32.migr_no ft4, ra, ft5
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
 amo_r_fadd64.migr_no ft4, ra, ft5
 
-# CHECK-ASM-AND-OBJ: amo_r_fsub16.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0xa2,0x50,0xc0]
+# CHECK-ASM-AND-OBJ: amo_r_fsub16.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0xa0,0x50,0xc0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fsub16.u ft4, ra, ft5
+amo_r_fsub16.u ra, ft5
 
-# CHECK-ASM-AND-OBJ: amo_r_fsub32.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0x82,0x50,0xc0]
+# CHECK-ASM-AND-OBJ: amo_r_fsub32.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0x80,0x50,0xc0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fsub32.u ft4, ra, ft5
+amo_r_fsub32.u ra, ft5
 
-# CHECK-ASM-AND-OBJ: amo_r_fsub64.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0x92,0x50,0xc0]
+# CHECK-ASM-AND-OBJ: amo_r_fsub64.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0x90,0x50,0xc0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fsub64.u ft4, ra, ft5
+amo_r_fsub64.u ra, ft5
 
 # CHECK-ASM-AND-OBJ: amo_r_fsub16.migr_nn ft4, ra, ft5
 # CHECK-ASM: encoding: [0x0b,0xa2,0x50,0xc2]
@@ -1527,20 +1527,20 @@ amo_r_fsub32.migr_no ft4, ra, ft5
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
 amo_r_fsub64.migr_no ft4, ra, ft5
 
-# CHECK-ASM-AND-OBJ: amo_r_fsubr16.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0xa2,0x50,0xd0]
+# CHECK-ASM-AND-OBJ: amo_r_fsubr16.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0xa0,0x50,0xd0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fsubr16.u ft4, ra, ft5
+amo_r_fsubr16.u ra, ft5
 
-# CHECK-ASM-AND-OBJ: amo_r_fsubr32.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0x82,0x50,0xd0]
+# CHECK-ASM-AND-OBJ: amo_r_fsubr32.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0x80,0x50,0xd0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fsubr32.u ft4, ra, ft5
+amo_r_fsubr32.u ra, ft5
 
-# CHECK-ASM-AND-OBJ: amo_r_fsubr64.u ft4, ra, ft5
-# CHECK-ASM: encoding: [0x0b,0x92,0x50,0xd0]
+# CHECK-ASM-AND-OBJ: amo_r_fsubr64.u ra, ft5
+# CHECK-ASM: encoding: [0x0b,0x90,0x50,0xd0]
 # CHECK-RV32: :[[@LINE+1]]:1: error: instruction requires the following: RV64I Base Instruction Set
-amo_r_fsubr64.u ft4, ra, ft5
+amo_r_fsubr64.u ra, ft5
 
 # CHECK-ASM-AND-OBJ: amo_r_fsubr16.migr_nn ft4, ra, ft5
 # CHECK-ASM: encoding: [0x0b,0xa2,0x50,0xd2]
