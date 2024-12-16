@@ -166,13 +166,6 @@ class ForzaAmoFloatRA16U<bits<7> funct7, bits<3> funct3, string opcodestr>
   let Inst{11-7} = 0b00000;
 }
 
-//let hasNoSchedulingInfo = 1,
-//    hasSideEffects = 1, mayLoad = 0, mayStore = 1 in
-//class ForzaThreadS<bits<3> funct3, string opcodestr>
-//    : RVInstS<funct3, OPC_STORE, (outs),
-//              (ins GPR:$rs2, GPRMem:$rs1, simm12:$imm12),
- //             opcodestr, "$rs2, ${imm12}(${rs1})">;
-
 let hasNoSchedulingInfo = 1,
     hasSideEffects = 1, mayLoad = 0, mayStore = 0 in
 class ForzaThreadI<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
@@ -258,10 +251,10 @@ class ForzaPZOPII<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
 // -- 6 = rem_on
 // -- 7 = rem_no
 multiclass ForzaAmoIntRAClass<bits<4> opfunc, string mnemonic> {
-  def AMO_R_ # NAME # 8U:  ForzaAmoIntRA<{opfunc,0b000},0b011,!strconcat(mnemonic, "8.u")>;
-  def AMO_R_ # NAME # 16U: ForzaAmoIntRA<{opfunc,0b000},0b010,!strconcat(mnemonic, "16.u")>;
-  def AMO_R_ # NAME # 32U: ForzaAmoIntRA<{opfunc,0b000},0b000,!strconcat(mnemonic, "32.u")>;
-  def AMO_R_ # NAME # 64U: ForzaAmoIntRA<{opfunc,0b000},0b001,!strconcat(mnemonic, "64.u")>;
+  def AMO_R_ # NAME # 8U:  ForzaAmoIntRAU<{opfunc,0b000},0b011,!strconcat(mnemonic, "8.u")>;
+  def AMO_R_ # NAME # 16U: ForzaAmoIntRAU<{opfunc,0b000},0b010,!strconcat(mnemonic, "16.u")>;
+  def AMO_R_ # NAME # 32U: ForzaAmoIntRAU<{opfunc,0b000},0b000,!strconcat(mnemonic, "32.u")>;
+  def AMO_R_ # NAME # 64U: ForzaAmoIntRAU<{opfunc,0b000},0b001,!strconcat(mnemonic, "64.u")>;
 
   def AMO_R_ # NAME # 8MIGRNN:  ForzaAmoIntRA<{opfunc,0b001},0b011,!strconcat(mnemonic, "8.migr_nn")>;
   def AMO_R_ # NAME # 16MIGRNN: ForzaAmoIntRA<{opfunc,0b001},0b010,!strconcat(mnemonic, "16.migr_nn")>;
@@ -405,24 +398,21 @@ let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
 // Codegen patterns
 //===----------------------------------------------------------------------===//
 let Predicates = [HasVendorXForza] in {
-  class PatGpGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
-                ValueType vt2 = XLenVT>
-    : Pat<(vt1 (OpNode (vt1 GPR:$rs1), (vt2 GPR:$rs2))), (Inst GPR:$rs1, GPR:$rs2)>;
   class PatGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
                 ValueType vt2 = XLenVT>
     : Pat<(vt1 (OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2))), (Inst GPRMem:$rs1, GPR:$rs2)>;
-  class PatGprMemFpr<SDPatternOperator OpNode, RVInst Inst>
-    : Pat<(OpNode GPRMem:$rs1, FPR64:$rs2), (Inst GPRMem:$rs1, FPR64:$rs2)>;
-
+  class PatVoidGprMemGpr<SDPatternOperator OpNode, RVInst Inst, ValueType vt1 = XLenVT,
+                ValueType vt2 = XLenVT>
+    : Pat<(OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2)), (Inst GPRMem:$rs1, GPR:$rs2)>;
 
   multiclass ForzaAmoPatGprMemGpr<string name> {
-    def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8u"),
+    def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8u"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "8U")>;
-    def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16u"),
+    def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16u"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "16U")>;
-    def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32u"),
+    def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32u"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "32U")>;
-    def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64u"),
+    def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64u"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64U")>;
 
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8migr_nn"),

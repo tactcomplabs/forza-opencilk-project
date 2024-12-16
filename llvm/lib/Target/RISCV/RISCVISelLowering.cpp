@@ -9435,50 +9435,6 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_WO_CHAIN(SDValue Op,
 
     return NewNode;
   }
-  case Intrinsic::riscv_forza_amo_r_add32u:
-  case Intrinsic::riscv_forza_amo_r_and32u:
-  case Intrinsic::riscv_forza_amo_r_or32u:
-  case Intrinsic::riscv_forza_amo_r_xor32u:
-  case Intrinsic::riscv_forza_amo_r_smax32u:
-  case Intrinsic::riscv_forza_amo_r_umax32u:
-  case Intrinsic::riscv_forza_amo_r_smin32u:
-  case Intrinsic::riscv_forza_amo_r_umin32u:
-  case Intrinsic::riscv_forza_amo_r_swap32u:
-  case Intrinsic::riscv_forza_amo_r_thrs32u: {
-    unsigned Opc = getForzaOpc(IntNo);
-
-    if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType() == MVT::i32) {
-      SDValue NewOp0 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(1));
-      SDValue NewOp1 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(2));
-      SDValue Res =
-          DAG.getNode(Opc, DL, MVT::i64, NewOp0, NewOp1, Op.getOperand(3));
-      return DAG.getNode(ISD::TRUNCATE, DL, MVT::i32, Res);
-    }
-    return DAG.getNode(Opc, DL, XLenVT, Op.getOperand(1), Op.getOperand(2),
-                       Op.getOperand(3));
-    break;
-  }
-  case Intrinsic::riscv_forza_amo_r_fadd32u:
-  case Intrinsic::riscv_forza_amo_r_fsub32u:
-  case Intrinsic::riscv_forza_amo_r_fsubr32u: {
-    unsigned Opc = getForzaOpc(IntNo);
-
-    if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType().isFloatingPoint() ) {
-      SDValue NewOp0 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::f64, Op.getOperand(1));
-      SDValue NewOp1 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(2));
-      SDValue Res =
-          DAG.getNode(Opc, DL, MVT::f64, NewOp0, NewOp1, Op.getOperand(3));
-      return DAG.getNode(ISD::TRUNCATE, DL, MVT::i32, Res);
-    }
-
-    return DAG.getNode(Opc, DL, XLenVT, Op.getOperand(1), Op.getOperand(2),
-                       Op.getOperand(3));
-    break;
-  }
   }
 
   return lowerVectorIntrinsicScalars(Op, DAG, Subtarget);
@@ -9929,10 +9885,9 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_umin64rem_no:
   case Intrinsic::riscv_forza_amo_r_swap64rem_no:
   case Intrinsic::riscv_forza_amo_r_thrs64rem_no:
-  case Intrinsic::riscv_forza_amo_r_fadd32u:
   {
     LLVM_DEBUG({
-      dbgs() << __PRETTY_FUNCTION__ << "Lowering Intrinsics ";
+      dbgs() << __PRETTY_FUNCTION__ << "Lowering Forza Intrinsics ";
     });
     SDLoc DL(Op);
     MVT XLenVT = Subtarget.getXLenVT();
