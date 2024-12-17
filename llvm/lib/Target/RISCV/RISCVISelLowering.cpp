@@ -10134,23 +10134,44 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap64u:
   case Intrinsic::riscv_forza_amo_r_thrs64u:
   {
-      dbgs() << __PRETTY_FUNCTION__ << "Lowering Forza Intrinsics ";
+    dbgs() << __PRETTY_FUNCTION__ << "Lowering Forza Intrinsics ";
 
     SDLoc DL(Op);
     MVT XLenVT = Subtarget.getXLenVT();
     unsigned Opc = getForzaOpc(IntNo);
 
-  dbgs() << "Lowering Forza Intrinsic: Opc = " << Opc
+    dbgs() << "Lowering Forza Intrinsic: Opc = " << Opc
          << ", ValueType = " << Op.getValueType() << "\n";
-  dbgs() << "Operand(1): ";
-  Op.getOperand(1)->print(llvm::dbgs());
-  dbgs() << "\n";
-  dbgs() << "Operand(2): ";
-  Op.getOperand(2)->print(llvm::dbgs());
-  dbgs() << "\n";
-  dbgs() << "Operand(3): ";
-  Op.getOperand(3)->print(llvm::dbgs());
-  dbgs() << "\n";
+      for( unsigned i=0; i<Op.getNumOperands(); i++ ){
+        dbgs() << "Operand(" << i << "): ";
+        Op.getOperand(i)->print(llvm::dbgs());
+        dbgs() << "\n";
+      }
+
+    switch(Opc){
+    default:
+      llvm_unreachable("Unknown Forza U-type intrinsic");
+      break;
+    case RISCVISD::AMO_R_AND32U:
+      dbgs() << "Found a RISCVISD::AMO_R_AND32U\n";
+      SDValue NewOp0 = Op.getOperand(0);
+      SDValue NewOp1 = Op.getOperand(1);
+      SDValue NewOp2 = Op.getOperand(2);
+      SDValue NewOp3 =
+          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(3));
+      SDValue Res = DAG.getNode(ISD::INTRINSIC_VOID, DL, MVT::isVoid,
+                                NewOp0, NewOp1, NewOp2, NewOp3);
+
+      dbgs() << "Lowered Forza Intrinsic: Opc = " << Opc
+          << ", ValueType = " << Res.getValueType() << "\n";
+      for( unsigned i=0; i<Res.getNumOperands(); i++ ){
+        dbgs() << "Operand(" << i << "): ";
+        Res.getOperand(i)->print(llvm::dbgs());
+        dbgs() << "\n";
+      }
+      return Res;
+    }
+#if 0
     if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType() == MVT::i32) {
       SDValue NewOp0 =
           DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(1));
@@ -10180,6 +10201,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
     }
     return DAG.getNode(Opc, DL, XLenVT, Op.getOperand(1), Op.getOperand(2),
                        Op.getOperand(3));
+#endif
     break;
   }
   }

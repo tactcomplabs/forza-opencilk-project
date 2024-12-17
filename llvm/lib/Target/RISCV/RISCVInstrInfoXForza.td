@@ -251,11 +251,17 @@ class ForzaPZOPII<bits<3> funct3, RISCVOpcode opcode, string opcodestr>
 // -- 5 = rem_nn
 // -- 6 = rem_on
 // -- 7 = rem_no
-multiclass ForzaAmoIntRAClass<bits<4> opfunc, string mnemonic> {
+multiclass ForzaTestClass<bits<4> opfunc, string mnemonic> {
   def AMO_R_ # NAME # 8U:  ForzaAmoIntRAU<{opfunc,0b000},0b011,!strconcat(mnemonic, "8.u")>;
   def AMO_R_ # NAME # 16U: ForzaAmoIntRAU<{opfunc,0b000},0b010,!strconcat(mnemonic, "16.u")>;
   def AMO_R_ # NAME # 32U: ForzaAmoIntRAU<{opfunc,0b000},0b000,!strconcat(mnemonic, "32.u")>;
   def AMO_R_ # NAME # 64U: ForzaAmoIntRAU<{opfunc,0b000},0b001,!strconcat(mnemonic, "64.u")>;
+}
+multiclass ForzaAmoIntRAClass<bits<4> opfunc, string mnemonic> {
+  //def AMO_R_ # NAME # 8U:  ForzaAmoIntRAU<{opfunc,0b000},0b011,!strconcat(mnemonic, "8.u")>;
+  //def AMO_R_ # NAME # 16U: ForzaAmoIntRAU<{opfunc,0b000},0b010,!strconcat(mnemonic, "16.u")>;
+  //def AMO_R_ # NAME # 32U: ForzaAmoIntRAU<{opfunc,0b000},0b000,!strconcat(mnemonic, "32.u")>;
+  //def AMO_R_ # NAME # 64U: ForzaAmoIntRAU<{opfunc,0b000},0b001,!strconcat(mnemonic, "64.u")>;
 
   def AMO_R_ # NAME # 8MIGRNN:  ForzaAmoIntRA<{opfunc,0b001},0b011,!strconcat(mnemonic, "8.migr_nn")>;
   def AMO_R_ # NAME # 16MIGRNN: ForzaAmoIntRA<{opfunc,0b001},0b010,!strconcat(mnemonic, "16.migr_nn")>;
@@ -337,6 +343,31 @@ multiclass ForzaRFMACClass<bits<3> funct3, string mnemonic> {
 //===----------------------------------------------------------------------===//
 
 let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
+    mayLoad = 1, mayStore = 1, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
+  defm ADD : ForzaTestClass<0b0000, "amo_r_add">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm SUB : ForzaTestClass<0b0001, "amo_r_sub">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm AND : ForzaTestClass<0b0010, "amo_r_and">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm OR : ForzaTestClass<0b0011, "amo_r_or">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm XOR : ForzaTestClass<0b0100, "amo_r_xor">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm SMAX : ForzaTestClass<0b0101, "amo_r_smax">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm UMAX : ForzaTestClass<0b0110, "amo_r_umax">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm SMIN : ForzaTestClass<0b0111, "amo_r_smin">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm UMIN : ForzaTestClass<0b1000, "amo_r_umin">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm SWAP : ForzaTestClass<0b1001, "amo_r_swap">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+  defm THRS : ForzaTestClass<0b1110, "amo_r_thrs">,
+              Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
+}
+let Predicates = [IsRV64, HasVendorXForza], hasSideEffects = 1,
     mayLoad = 0, mayStore = 0, isCodeGenOnly = 0, DecoderNamespace = "XForza" in {
   defm ADD : ForzaAmoIntRAClass<0b0000, "amo_r_add">,
               Sched<[WriteAtomicD, ReadAtomicDA, ReadAtomicDD]>;
@@ -407,14 +438,14 @@ let Predicates = [HasVendorXForza] in {
     : Pat<(OpNode (vt1 GPRMem:$rs1), (vt2 GPR:$rs2)), (Inst GPRMem:$rs1, GPR:$rs2)>;
 
   multiclass ForzaAmoPatGprMemGpr<string name> {
-    def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8u"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "8U")>;
-    def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16u"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "16U")>;
-    def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32u"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "32U")>;
-    def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64u"),
-                       !cast<RVInst>("AMO_R_" # !toupper(name) # "64U")>;
+    //def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8u"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "8U")>;
+    //def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "16u"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "16U")>;
+    //def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "32u"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "32U"),i64,i64>;
+    //def : PatVoidGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "64u"),
+    //                   !cast<RVInst>("AMO_R_" # !toupper(name) # "64U")>;
 
     def : PatGprMemGpr<!cast<SDPatternOperator>("forza_amo_r_" # name # "8migr_nn"),
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "8MIGRNN")>;
@@ -471,6 +502,17 @@ let Predicates = [HasVendorXForza] in {
                        !cast<RVInst>("AMO_R_" # !toupper(name) # "64REMNO")>;
   }
 
+  multiclass ForzaAmoVoidIntrin<string name> {
+    //def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "8u") GPRMem:$rs1, GPR:$rs2),
+    //          (!cast<RVInst>("AMO_R_" # !toupper(name) # "8U") GPRMem:$rs1, GPR:$rs2)>;
+    //def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16u") GPRMem:$rs1, GPR:$rs2),
+    //          (!cast<RVInst>("AMO_R_" # !toupper(name) # "16U") GPRMem:$rs1, GPR:$rs2)>;
+    def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32u") GPRMem:$rs1, GPR:$rs2),
+              (!cast<RVInst>("AMO_R_" # !toupper(name) # "32U") GPRMem:$rs1, GPR:$rs2)>;
+    def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64u") GPRMem:$rs1, GPR:$rs2),
+              (!cast<RVInst>("AMO_R_" # !toupper(name) # "64U") GPRMem:$rs1, GPR:$rs2)>;
+  }
+
   multiclass ForzaAmoPatGprMemFpr<string name> {
     def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16u") GPRMem:$rs1, FPR16:$rs2),
                (!cast<RVInst>("AMO_R_" # !toupper(name) # "16U") GPRMem:$rs1, FPR16:$rs2)>;
@@ -523,6 +565,7 @@ let Predicates = [HasVendorXForza] in {
 
   }
 
+
   defm "" : ForzaAmoPatGprMemGpr<"add">;
   defm "" : ForzaAmoPatGprMemGpr<"and">;
   defm "" : ForzaAmoPatGprMemGpr<"or">;
@@ -538,8 +581,9 @@ let Predicates = [HasVendorXForza] in {
   defm "" : ForzaAmoPatGprMemFpr<"fsub">;
   defm "" : ForzaAmoPatGprMemFpr<"fsubr">;
 
-  //def : Pat<(int_riscv_forza_amo_r_and32u i64:$rs1, i32:$rs2),
-  //          (AMO_R_AND32U i64:$rs1, i32:$rs2)>;
+  //def : Pat<(int_riscv_forza_amo_r_and16u (i64 GPRMem:$rs1), (i64 GPR:$rs2)),
+  //           (AMO_R_AND16U (i64 GPRMem:$rs1), (i64 GPR:$rs2))>;
+  defm "" : ForzaAmoVoidIntrin<"and">;
 
   def : Pat<(int_riscv_forza_quit), (QUIT)>;
   def : Pat<(int_riscv_forza_resched), (RESCHED)>;
