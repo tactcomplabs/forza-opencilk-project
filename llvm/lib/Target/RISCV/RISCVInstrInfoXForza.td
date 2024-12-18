@@ -581,8 +581,9 @@ let Predicates = [HasVendorXForza] in {
   defm "" : ForzaAmoPatGprMemFpr<"fsub">;
   defm "" : ForzaAmoPatGprMemFpr<"fsubr">;
 
-  //def : Pat<(int_riscv_forza_amo_r_and16u (i64 GPRMem:$rs1), (i64 GPR:$rs2)),
-  //           (AMO_R_AND16U (i64 GPRMem:$rs1), (i64 GPR:$rs2))>;
+  def : Pat<(int_riscv_forza_amo_r_and16u (i64 GPRMem:$rs1), (i64 GPR:$rs2)),
+             (AMO_R_AND16U (i64 GPRMem:$rs1), (i64 GPR:$rs2))>;
+
   defm "" : ForzaAmoVoidIntrin<"and">;
 
   def : Pat<(int_riscv_forza_quit), (QUIT)>;

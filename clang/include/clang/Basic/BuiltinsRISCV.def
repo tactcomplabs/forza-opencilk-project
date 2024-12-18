@@ -102,7 +102,7 @@ TARGET_BUILTIN(__forza_amo_r_swap8u, "vc*c", "nrT", "xforza")
 TARGET_BUILTIN(__forza_amo_r_thrs8u, "vc*c", "nrT", "xforza")
 
 TARGET_BUILTIN(__forza_amo_r_add16u, "vs*s", "nrT", "xforza")
-TARGET_BUILTIN(__forza_amo_r_and16u, "vs*s", "nrT", "xforza")
+TARGET_BUILTIN(__forza_amo_r_and16u, "vLi*Li", "nrT", "xforza")
 TARGET_BUILTIN(__forza_amo_r_or16u, "vs*s", "nrT", "xforza")
 TARGET_BUILTIN(__forza_amo_r_xor16u, "vs*s", "nrT", "xforza")
 TARGET_BUILTIN(__forza_amo_r_smax16u, "vs*s", "nrT", "xforza")
