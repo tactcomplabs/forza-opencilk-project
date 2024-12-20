@@ -86,7 +86,7 @@ multiclass ForzaAmoFloatSDNode<string mnemonic> {
 }
 
 defm add : ForzaAmoIntSDNode<"ADD">;
-//defm add : ForzaAmoIntSDNode<"SUB">;
+defm sub : ForzaAmoIntSDNode<"SUB">;
 defm and : ForzaAmoIntSDNode<"AND">;
 defm or : ForzaAmoIntSDNode<"OR">;
 defm xor : ForzaAmoIntSDNode<"XOR">;
@@ -567,6 +567,7 @@ let Predicates = [HasVendorXForza] in {
 
 
   defm "" : ForzaAmoPatGprMemGpr<"add">;
+  defm "" : ForzaAmoPatGprMemGpr<"sub">;
   defm "" : ForzaAmoPatGprMemGpr<"and">;
   defm "" : ForzaAmoPatGprMemGpr<"or">;
   defm "" : ForzaAmoPatGprMemGpr<"xor">;
@@ -582,6 +583,7 @@ let Predicates = [HasVendorXForza] in {
   defm "" : ForzaAmoPatGprMemFpr<"fsubr">;
 
   defm "" : ForzaAmoVoidIntrin<"add">;
+  defm "" : ForzaAmoVoidIntrin<"sub">;
   defm "" : ForzaAmoVoidIntrin<"and">;
   defm "" : ForzaAmoVoidIntrin<"or">;
   defm "" : ForzaAmoVoidIntrin<"xor">;

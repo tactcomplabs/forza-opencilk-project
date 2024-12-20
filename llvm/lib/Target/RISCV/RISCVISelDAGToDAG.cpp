@@ -64,6 +64,20 @@ unsigned RISCVDAGToDAGISel::getOpcodeForIntrinsic(unsigned IntNo) {
       return RISCV::AMO_R_ADD64REMON;
     case Intrinsic::riscv_forza_amo_r_add64u:                  // llvm.riscv.forza.amo.r.add64u
       return RISCV::AMO_R_ADD64U;
+    case Intrinsic::riscv_forza_amo_r_sub64migr_nn:            // llvm.riscv.forza.amo.r.sub64migr.nn
+      return RISCV::AMO_R_SUB64MIGRNN;
+    case Intrinsic::riscv_forza_amo_r_sub64migr_no:            // llvm.riscv.forza.amo.r.sub64migr.no
+      return RISCV::AMO_R_SUB64MIGRNO;
+    case Intrinsic::riscv_forza_amo_r_sub64migr_on:            // llvm.riscv.forza.amo.r.sub64migr.on
+      return RISCV::AMO_R_SUB64MIGRON;
+    case Intrinsic::riscv_forza_amo_r_sub64rem_nn:             // llvm.riscv.forza.amo.r.sub64rem.nn
+      return RISCV::AMO_R_SUB64REMNN;
+    case Intrinsic::riscv_forza_amo_r_sub64rem_no:             // llvm.riscv.forza.amo.r.sub64rem.no
+      return RISCV::AMO_R_SUB64REMNO;
+    case Intrinsic::riscv_forza_amo_r_sub64rem_on:             // llvm.riscv.forza.amo.r.sub64rem.on
+      return RISCV::AMO_R_SUB64REMON;
+    case Intrinsic::riscv_forza_amo_r_sub64u:                  // llvm.riscv.forza.amo.r.sub64u
+      return RISCV::AMO_R_SUB64U;
     case Intrinsic::riscv_forza_amo_r_and64migr_nn:            // llvm.riscv.forza.amo.r.and64migr.nn
       return RISCV::AMO_R_AND64MIGRNN;
     case Intrinsic::riscv_forza_amo_r_and64migr_no:            // llvm.riscv.forza.amo.r.and64migr.no
@@ -1844,6 +1858,13 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
     case Intrinsic::riscv_forza_amo_r_add64rem_no:             // llvm.riscv.forza.amo.r.add64rem.no
     case Intrinsic::riscv_forza_amo_r_add64rem_on:             // llvm.riscv.forza.amo.r.add64rem.on
     case Intrinsic::riscv_forza_amo_r_add64u:                  // llvm.riscv.forza.amo.r.add64u
+    case Intrinsic::riscv_forza_amo_r_sub64migr_nn:            // llvm.riscv.forza.amo.r.sub64migr.nn
+    case Intrinsic::riscv_forza_amo_r_sub64migr_no:            // llvm.riscv.forza.amo.r.sub64migr.no
+    case Intrinsic::riscv_forza_amo_r_sub64migr_on:            // llvm.riscv.forza.amo.r.sub64migr.on
+    case Intrinsic::riscv_forza_amo_r_sub64rem_nn:             // llvm.riscv.forza.amo.r.sub64rem.nn
+    case Intrinsic::riscv_forza_amo_r_sub64rem_no:             // llvm.riscv.forza.amo.r.sub64rem.no
+    case Intrinsic::riscv_forza_amo_r_sub64rem_on:             // llvm.riscv.forza.amo.r.sub64rem.on
+    case Intrinsic::riscv_forza_amo_r_sub64u:                  // llvm.riscv.forza.amo.r.sub64u
     case Intrinsic::riscv_forza_amo_r_and64migr_nn:            // llvm.riscv.forza.amo.r.and64migr.nn
     case Intrinsic::riscv_forza_amo_r_and64migr_no:            // llvm.riscv.forza.amo.r.and64migr.no
     case Intrinsic::riscv_forza_amo_r_and64migr_on:            // llvm.riscv.forza.amo.r.and64migr.on

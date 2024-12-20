@@ -626,8 +626,14 @@ RISCVTargetLowering::RISCVTargetLowering(const TargetMachine &TM,
   }
 
   if (Subtarget.hasVendorXForza()) {
-    setOperationAction(ISD::INTRINSIC_W_CHAIN, {MVT::i8, MVT::i16, MVT::i32, MVT::i64, MVT::f16, MVT::f32, MVT::f64}, Custom);
-    setOperationAction(ISD::INTRINSIC_VOID, {MVT::i8, MVT::i16, MVT::i32, MVT::i64, MVT::f16, MVT::f32, MVT::f64}, Custom);
+    setOperationAction(
+        ISD::INTRINSIC_W_CHAIN,
+        {MVT::i8, MVT::i16, MVT::i32, MVT::i64, MVT::f16, MVT::f32, MVT::f64},
+        Custom);
+    setOperationAction(
+        ISD::INTRINSIC_VOID,
+        {MVT::i8, MVT::i16, MVT::i32, MVT::i64, MVT::f16, MVT::f32, MVT::f64},
+        Custom);
   }
 
   if (Subtarget.hasStdExtZicbop()) {
@@ -8516,6 +8522,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS8U;
   case Intrinsic::riscv_forza_amo_r_add16u:
     return RISCVISD::AMO_R_ADD16U;
+  case Intrinsic::riscv_forza_amo_r_sub16u:
+    return RISCVISD::AMO_R_SUB16U;
   case Intrinsic::riscv_forza_amo_r_and16u:
     return RISCVISD::AMO_R_AND16U;
   case Intrinsic::riscv_forza_amo_r_or16u:
@@ -8536,13 +8544,9 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS16U;
   case Intrinsic::riscv_forza_amo_r_add32u:
     return RISCVISD::AMO_R_ADD32U;
+  case Intrinsic::riscv_forza_amo_r_sub32u:
+    return RISCVISD::AMO_R_SUB32U;
   case Intrinsic::riscv_forza_amo_r_and32u:
-    llvm::dbgs() << "AMO_R_AND32U\n";
-      if(RISCVISD::AMO_R_AND32U == 890){
-        llvm::dbgs() << "AMO_R_AND32U == 890\n";
-      } else {
-        llvm::dbgs() << "AMO_R_AND32U != 890\n";
-      }
     return RISCVISD::AMO_R_AND32U;
   case Intrinsic::riscv_forza_amo_r_or32u:
     return RISCVISD::AMO_R_OR32U;
@@ -8583,6 +8587,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
 
   case Intrinsic::riscv_forza_amo_r_add8migr_nn:
     return RISCVISD::AMO_R_ADD8MIGRNN;
+  case Intrinsic::riscv_forza_amo_r_sub8migr_nn:
+    return RISCVISD::AMO_R_SUB8MIGRNN;
   case Intrinsic::riscv_forza_amo_r_and8migr_nn:
     return RISCVISD::AMO_R_AND8MIGRNN;
   case Intrinsic::riscv_forza_amo_r_or8migr_nn:
@@ -8603,6 +8609,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS8MIGRNN;
   case Intrinsic::riscv_forza_amo_r_add16migr_nn:
     return RISCVISD::AMO_R_ADD16MIGRNN;
+  case Intrinsic::riscv_forza_amo_r_sub16migr_nn:
+    return RISCVISD::AMO_R_SUB16MIGRNN;
   case Intrinsic::riscv_forza_amo_r_and16migr_nn:
     return RISCVISD::AMO_R_AND16MIGRNN;
   case Intrinsic::riscv_forza_amo_r_or16migr_nn:
@@ -8623,6 +8631,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS16MIGRNN;
   case Intrinsic::riscv_forza_amo_r_add32migr_nn:
     return RISCVISD::AMO_R_ADD32MIGRNN;
+  case Intrinsic::riscv_forza_amo_r_sub32migr_nn:
+    return RISCVISD::AMO_R_SUB32MIGRNN;
   case Intrinsic::riscv_forza_amo_r_and32migr_nn:
     return RISCVISD::AMO_R_AND32MIGRNN;
   case Intrinsic::riscv_forza_amo_r_or32migr_nn:
@@ -8643,6 +8653,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS32MIGRNN;
   case Intrinsic::riscv_forza_amo_r_add64migr_nn:
     return RISCVISD::AMO_R_ADD64MIGRNN;
+  case Intrinsic::riscv_forza_amo_r_sub64migr_nn:
+    return RISCVISD::AMO_R_SUB64MIGRNN;
   case Intrinsic::riscv_forza_amo_r_and64migr_nn:
     return RISCVISD::AMO_R_AND64MIGRNN;
   case Intrinsic::riscv_forza_amo_r_or64migr_nn:
@@ -8664,6 +8676,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
 
   case Intrinsic::riscv_forza_amo_r_add8migr_on:
     return RISCVISD::AMO_R_ADD8MIGRON;
+  case Intrinsic::riscv_forza_amo_r_sub8migr_on:
+    return RISCVISD::AMO_R_SUB8MIGRON;
   case Intrinsic::riscv_forza_amo_r_and8migr_on:
     return RISCVISD::AMO_R_AND8MIGRON;
   case Intrinsic::riscv_forza_amo_r_or8migr_on:
@@ -8684,6 +8698,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS8MIGRON;
   case Intrinsic::riscv_forza_amo_r_add16migr_on:
     return RISCVISD::AMO_R_ADD16MIGRON;
+  case Intrinsic::riscv_forza_amo_r_sub16migr_on:
+    return RISCVISD::AMO_R_SUB16MIGRON;
   case Intrinsic::riscv_forza_amo_r_and16migr_on:
     return RISCVISD::AMO_R_AND16MIGRON;
   case Intrinsic::riscv_forza_amo_r_or16migr_on:
@@ -8704,6 +8720,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS16MIGRON;
   case Intrinsic::riscv_forza_amo_r_add32migr_on:
     return RISCVISD::AMO_R_ADD32MIGRON;
+  case Intrinsic::riscv_forza_amo_r_sub32migr_on:
+    return RISCVISD::AMO_R_SUB32MIGRON;
   case Intrinsic::riscv_forza_amo_r_and32migr_on:
     return RISCVISD::AMO_R_AND32MIGRON;
   case Intrinsic::riscv_forza_amo_r_or32migr_on:
@@ -8724,6 +8742,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS32MIGRON;
   case Intrinsic::riscv_forza_amo_r_add64migr_on:
     return RISCVISD::AMO_R_ADD64MIGRON;
+  case Intrinsic::riscv_forza_amo_r_sub64migr_on:
+    return RISCVISD::AMO_R_SUB64MIGRON;
   case Intrinsic::riscv_forza_amo_r_and64migr_on:
     return RISCVISD::AMO_R_AND64MIGRON;
   case Intrinsic::riscv_forza_amo_r_or64migr_on:
@@ -8745,6 +8765,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
 
   case Intrinsic::riscv_forza_amo_r_add8migr_no:
     return RISCVISD::AMO_R_ADD8MIGRNO;
+  case Intrinsic::riscv_forza_amo_r_sub8migr_no:
+    return RISCVISD::AMO_R_SUB8MIGRNO;
   case Intrinsic::riscv_forza_amo_r_and8migr_no:
     return RISCVISD::AMO_R_AND8MIGRNO;
   case Intrinsic::riscv_forza_amo_r_or8migr_no:
@@ -8765,6 +8787,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS8MIGRNO;
   case Intrinsic::riscv_forza_amo_r_add16migr_no:
     return RISCVISD::AMO_R_ADD16MIGRNO;
+  case Intrinsic::riscv_forza_amo_r_sub16migr_no:
+    return RISCVISD::AMO_R_SUB16MIGRNO;
   case Intrinsic::riscv_forza_amo_r_and16migr_no:
     return RISCVISD::AMO_R_AND16MIGRNO;
   case Intrinsic::riscv_forza_amo_r_or16migr_no:
@@ -8785,6 +8809,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS16MIGRNO;
   case Intrinsic::riscv_forza_amo_r_add32migr_no:
     return RISCVISD::AMO_R_ADD32MIGRNO;
+  case Intrinsic::riscv_forza_amo_r_sub32migr_no:
+    return RISCVISD::AMO_R_SUB32MIGRNO;
   case Intrinsic::riscv_forza_amo_r_and32migr_no:
     return RISCVISD::AMO_R_AND32MIGRNO;
   case Intrinsic::riscv_forza_amo_r_or32migr_no:
@@ -8805,6 +8831,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS32MIGRNO;
   case Intrinsic::riscv_forza_amo_r_add64migr_no:
     return RISCVISD::AMO_R_ADD64MIGRNO;
+  case Intrinsic::riscv_forza_amo_r_sub64migr_no:
+    return RISCVISD::AMO_R_SUB64MIGRNO;
   case Intrinsic::riscv_forza_amo_r_and64migr_no:
     return RISCVISD::AMO_R_AND64MIGRNO;
   case Intrinsic::riscv_forza_amo_r_or64migr_no:
@@ -8826,6 +8854,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
 
   case Intrinsic::riscv_forza_amo_r_add8rem_nn:
     return RISCVISD::AMO_R_ADD8REMNN;
+  case Intrinsic::riscv_forza_amo_r_sub8rem_nn:
+    return RISCVISD::AMO_R_SUB8REMNN;
   case Intrinsic::riscv_forza_amo_r_and8rem_nn:
     return RISCVISD::AMO_R_AND8REMNN;
   case Intrinsic::riscv_forza_amo_r_or8rem_nn:
@@ -8846,6 +8876,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS8REMNN;
   case Intrinsic::riscv_forza_amo_r_add16rem_nn:
     return RISCVISD::AMO_R_ADD16REMNN;
+  case Intrinsic::riscv_forza_amo_r_sub16rem_nn:
+    return RISCVISD::AMO_R_SUB16REMNN;
   case Intrinsic::riscv_forza_amo_r_and16rem_nn:
     return RISCVISD::AMO_R_AND16REMNN;
   case Intrinsic::riscv_forza_amo_r_or16rem_nn:
@@ -8866,6 +8898,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS16REMNN;
   case Intrinsic::riscv_forza_amo_r_add32rem_nn:
     return RISCVISD::AMO_R_ADD32REMNN;
+  case Intrinsic::riscv_forza_amo_r_sub32rem_nn:
+    return RISCVISD::AMO_R_SUB32REMNN;
   case Intrinsic::riscv_forza_amo_r_and32rem_nn:
     return RISCVISD::AMO_R_AND32REMNN;
   case Intrinsic::riscv_forza_amo_r_or32rem_nn:
@@ -8886,6 +8920,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS32REMNN;
   case Intrinsic::riscv_forza_amo_r_add64rem_nn:
     return RISCVISD::AMO_R_ADD64REMNN;
+  case Intrinsic::riscv_forza_amo_r_sub64rem_nn:
+    return RISCVISD::AMO_R_SUB64REMNN;
   case Intrinsic::riscv_forza_amo_r_and64rem_nn:
     return RISCVISD::AMO_R_AND64REMNN;
   case Intrinsic::riscv_forza_amo_r_or64rem_nn:
@@ -8907,6 +8943,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
 
   case Intrinsic::riscv_forza_amo_r_add8rem_on:
     return RISCVISD::AMO_R_ADD8REMON;
+  case Intrinsic::riscv_forza_amo_r_sub8rem_on:
+    return RISCVISD::AMO_R_SUB8REMON;
   case Intrinsic::riscv_forza_amo_r_and8rem_on:
     return RISCVISD::AMO_R_AND8REMON;
   case Intrinsic::riscv_forza_amo_r_or8rem_on:
@@ -8927,6 +8965,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS8REMON;
   case Intrinsic::riscv_forza_amo_r_add16rem_on:
     return RISCVISD::AMO_R_ADD16REMON;
+  case Intrinsic::riscv_forza_amo_r_sub16rem_on:
+    return RISCVISD::AMO_R_SUB16REMON;
   case Intrinsic::riscv_forza_amo_r_and16rem_on:
     return RISCVISD::AMO_R_AND16REMON;
   case Intrinsic::riscv_forza_amo_r_or16rem_on:
@@ -8947,6 +8987,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS16REMON;
   case Intrinsic::riscv_forza_amo_r_add32rem_on:
     return RISCVISD::AMO_R_ADD32REMON;
+  case Intrinsic::riscv_forza_amo_r_sub32rem_on:
+    return RISCVISD::AMO_R_SUB32REMON;
   case Intrinsic::riscv_forza_amo_r_and32rem_on:
     return RISCVISD::AMO_R_AND32REMON;
   case Intrinsic::riscv_forza_amo_r_or32rem_on:
@@ -8967,6 +9009,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS32REMON;
   case Intrinsic::riscv_forza_amo_r_add64rem_on:
     return RISCVISD::AMO_R_ADD64REMON;
+  case Intrinsic::riscv_forza_amo_r_sub64rem_on:
+    return RISCVISD::AMO_R_SUB64REMON;
   case Intrinsic::riscv_forza_amo_r_and64rem_on:
     return RISCVISD::AMO_R_AND64REMON;
   case Intrinsic::riscv_forza_amo_r_or64rem_on:
@@ -8988,6 +9032,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
 
   case Intrinsic::riscv_forza_amo_r_add8rem_no:
     return RISCVISD::AMO_R_ADD8REMNO;
+  case Intrinsic::riscv_forza_amo_r_sub8rem_no:
+    return RISCVISD::AMO_R_SUB8REMNO;
   case Intrinsic::riscv_forza_amo_r_and8rem_no:
     return RISCVISD::AMO_R_AND8REMNO;
   case Intrinsic::riscv_forza_amo_r_or8rem_no:
@@ -9008,6 +9054,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS8REMNO;
   case Intrinsic::riscv_forza_amo_r_add16rem_no:
     return RISCVISD::AMO_R_ADD16REMNO;
+  case Intrinsic::riscv_forza_amo_r_sub16rem_no:
+    return RISCVISD::AMO_R_SUB16REMNO;
   case Intrinsic::riscv_forza_amo_r_and16rem_no:
     return RISCVISD::AMO_R_AND16REMNO;
   case Intrinsic::riscv_forza_amo_r_or16rem_no:
@@ -9028,6 +9076,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS16REMNO;
   case Intrinsic::riscv_forza_amo_r_add32rem_no:
     return RISCVISD::AMO_R_ADD32REMNO;
+  case Intrinsic::riscv_forza_amo_r_sub32rem_no:
+    return RISCVISD::AMO_R_SUB32REMNO;
   case Intrinsic::riscv_forza_amo_r_and32rem_no:
     return RISCVISD::AMO_R_AND32REMNO;
   case Intrinsic::riscv_forza_amo_r_or32rem_no:
@@ -9048,6 +9098,8 @@ unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
     return RISCVISD::AMO_R_THRS32REMNO;
   case Intrinsic::riscv_forza_amo_r_add64rem_no:
     return RISCVISD::AMO_R_ADD64REMNO;
+  case Intrinsic::riscv_forza_amo_r_sub64rem_no:
+    return RISCVISD::AMO_R_SUB64REMNO;
   case Intrinsic::riscv_forza_amo_r_and64rem_no:
     return RISCVISD::AMO_R_AND64REMNO;
   case Intrinsic::riscv_forza_amo_r_or64rem_no:
@@ -9611,6 +9663,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
     return NewNode;
   }
   case Intrinsic::riscv_forza_amo_r_add8u:
+  case Intrinsic::riscv_forza_amo_r_sub8u:
   case Intrinsic::riscv_forza_amo_r_and8u:
   case Intrinsic::riscv_forza_amo_r_or8u:
   case Intrinsic::riscv_forza_amo_r_xor8u:
@@ -9621,6 +9674,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap8u:
   case Intrinsic::riscv_forza_amo_r_thrs8u:
   case Intrinsic::riscv_forza_amo_r_add16u:
+  case Intrinsic::riscv_forza_amo_r_sub16u:
   case Intrinsic::riscv_forza_amo_r_and16u:
   case Intrinsic::riscv_forza_amo_r_or16u:
   case Intrinsic::riscv_forza_amo_r_xor16u:
@@ -9631,8 +9685,8 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap16u:
   case Intrinsic::riscv_forza_amo_r_thrs16u:
   case Intrinsic::riscv_forza_amo_r_add32u:
+  case Intrinsic::riscv_forza_amo_r_sub32u:
   case Intrinsic::riscv_forza_amo_r_and32u:
-    llvm::dbgs() << "RISCV FORZA AMO AND32U\n";
   case Intrinsic::riscv_forza_amo_r_or32u:
   case Intrinsic::riscv_forza_amo_r_xor32u:
   case Intrinsic::riscv_forza_amo_r_smax32u:
@@ -9642,6 +9696,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap32u:
   case Intrinsic::riscv_forza_amo_r_thrs32u:
   case Intrinsic::riscv_forza_amo_r_add64u:
+  case Intrinsic::riscv_forza_amo_r_sub64u:
   case Intrinsic::riscv_forza_amo_r_and64u:
   case Intrinsic::riscv_forza_amo_r_or64u:
   case Intrinsic::riscv_forza_amo_r_xor64u:
@@ -9653,6 +9708,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_thrs64u:
 
   case Intrinsic::riscv_forza_amo_r_add8migr_nn:
+  case Intrinsic::riscv_forza_amo_r_sub8migr_nn:
   case Intrinsic::riscv_forza_amo_r_and8migr_nn:
   case Intrinsic::riscv_forza_amo_r_or8migr_nn:
   case Intrinsic::riscv_forza_amo_r_xor8migr_nn:
@@ -9663,6 +9719,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap8migr_nn:
   case Intrinsic::riscv_forza_amo_r_thrs8migr_nn:
   case Intrinsic::riscv_forza_amo_r_add16migr_nn:
+  case Intrinsic::riscv_forza_amo_r_sub16migr_nn:
   case Intrinsic::riscv_forza_amo_r_and16migr_nn:
   case Intrinsic::riscv_forza_amo_r_or16migr_nn:
   case Intrinsic::riscv_forza_amo_r_xor16migr_nn:
@@ -9673,6 +9730,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap16migr_nn:
   case Intrinsic::riscv_forza_amo_r_thrs16migr_nn:
   case Intrinsic::riscv_forza_amo_r_add32migr_nn:
+  case Intrinsic::riscv_forza_amo_r_sub32migr_nn:
   case Intrinsic::riscv_forza_amo_r_and32migr_nn:
   case Intrinsic::riscv_forza_amo_r_or32migr_nn:
   case Intrinsic::riscv_forza_amo_r_xor32migr_nn:
@@ -9683,6 +9741,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap32migr_nn:
   case Intrinsic::riscv_forza_amo_r_thrs32migr_nn:
   case Intrinsic::riscv_forza_amo_r_add64migr_nn:
+  case Intrinsic::riscv_forza_amo_r_sub64migr_nn:
   case Intrinsic::riscv_forza_amo_r_and64migr_nn:
   case Intrinsic::riscv_forza_amo_r_or64migr_nn:
   case Intrinsic::riscv_forza_amo_r_xor64migr_nn:
@@ -9694,6 +9753,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_thrs64migr_nn:
 
   case Intrinsic::riscv_forza_amo_r_add8migr_on:
+  case Intrinsic::riscv_forza_amo_r_sub8migr_on:
   case Intrinsic::riscv_forza_amo_r_and8migr_on:
   case Intrinsic::riscv_forza_amo_r_or8migr_on:
   case Intrinsic::riscv_forza_amo_r_xor8migr_on:
@@ -9704,6 +9764,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap8migr_on:
   case Intrinsic::riscv_forza_amo_r_thrs8migr_on:
   case Intrinsic::riscv_forza_amo_r_add16migr_on:
+  case Intrinsic::riscv_forza_amo_r_sub16migr_on:
   case Intrinsic::riscv_forza_amo_r_and16migr_on:
   case Intrinsic::riscv_forza_amo_r_or16migr_on:
   case Intrinsic::riscv_forza_amo_r_xor16migr_on:
@@ -9714,6 +9775,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap16migr_on:
   case Intrinsic::riscv_forza_amo_r_thrs16migr_on:
   case Intrinsic::riscv_forza_amo_r_add32migr_on:
+  case Intrinsic::riscv_forza_amo_r_sub32migr_on:
   case Intrinsic::riscv_forza_amo_r_and32migr_on:
   case Intrinsic::riscv_forza_amo_r_or32migr_on:
   case Intrinsic::riscv_forza_amo_r_xor32migr_on:
@@ -9724,6 +9786,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap32migr_on:
   case Intrinsic::riscv_forza_amo_r_thrs32migr_on:
   case Intrinsic::riscv_forza_amo_r_add64migr_on:
+  case Intrinsic::riscv_forza_amo_r_sub64migr_on:
   case Intrinsic::riscv_forza_amo_r_and64migr_on:
   case Intrinsic::riscv_forza_amo_r_or64migr_on:
   case Intrinsic::riscv_forza_amo_r_xor64migr_on:
@@ -9735,6 +9798,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_thrs64migr_on:
 
   case Intrinsic::riscv_forza_amo_r_add8migr_no:
+  case Intrinsic::riscv_forza_amo_r_sub8migr_no:
   case Intrinsic::riscv_forza_amo_r_and8migr_no:
   case Intrinsic::riscv_forza_amo_r_or8migr_no:
   case Intrinsic::riscv_forza_amo_r_xor8migr_no:
@@ -9745,6 +9809,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap8migr_no:
   case Intrinsic::riscv_forza_amo_r_thrs8migr_no:
   case Intrinsic::riscv_forza_amo_r_add16migr_no:
+  case Intrinsic::riscv_forza_amo_r_sub16migr_no:
   case Intrinsic::riscv_forza_amo_r_and16migr_no:
   case Intrinsic::riscv_forza_amo_r_or16migr_no:
   case Intrinsic::riscv_forza_amo_r_xor16migr_no:
@@ -9755,6 +9820,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap16migr_no:
   case Intrinsic::riscv_forza_amo_r_thrs16migr_no:
   case Intrinsic::riscv_forza_amo_r_add32migr_no:
+  case Intrinsic::riscv_forza_amo_r_sub32migr_no:
   case Intrinsic::riscv_forza_amo_r_and32migr_no:
   case Intrinsic::riscv_forza_amo_r_or32migr_no:
   case Intrinsic::riscv_forza_amo_r_xor32migr_no:
@@ -9765,6 +9831,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap32migr_no:
   case Intrinsic::riscv_forza_amo_r_thrs32migr_no:
   case Intrinsic::riscv_forza_amo_r_add64migr_no:
+  case Intrinsic::riscv_forza_amo_r_sub64migr_no:
   case Intrinsic::riscv_forza_amo_r_and64migr_no:
   case Intrinsic::riscv_forza_amo_r_or64migr_no:
   case Intrinsic::riscv_forza_amo_r_xor64migr_no:
@@ -9776,6 +9843,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_thrs64migr_no:
 
   case Intrinsic::riscv_forza_amo_r_add8rem_nn:
+  case Intrinsic::riscv_forza_amo_r_sub8rem_nn:
   case Intrinsic::riscv_forza_amo_r_and8rem_nn:
   case Intrinsic::riscv_forza_amo_r_or8rem_nn:
   case Intrinsic::riscv_forza_amo_r_xor8rem_nn:
@@ -9786,6 +9854,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap8rem_nn:
   case Intrinsic::riscv_forza_amo_r_thrs8rem_nn:
   case Intrinsic::riscv_forza_amo_r_add16rem_nn:
+  case Intrinsic::riscv_forza_amo_r_sub16rem_nn:
   case Intrinsic::riscv_forza_amo_r_and16rem_nn:
   case Intrinsic::riscv_forza_amo_r_or16rem_nn:
   case Intrinsic::riscv_forza_amo_r_xor16rem_nn:
@@ -9796,6 +9865,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap16rem_nn:
   case Intrinsic::riscv_forza_amo_r_thrs16rem_nn:
   case Intrinsic::riscv_forza_amo_r_add32rem_nn:
+  case Intrinsic::riscv_forza_amo_r_sub32rem_nn:
   case Intrinsic::riscv_forza_amo_r_and32rem_nn:
   case Intrinsic::riscv_forza_amo_r_or32rem_nn:
   case Intrinsic::riscv_forza_amo_r_xor32rem_nn:
@@ -9806,6 +9876,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap32rem_nn:
   case Intrinsic::riscv_forza_amo_r_thrs32rem_nn:
   case Intrinsic::riscv_forza_amo_r_add64rem_nn:
+  case Intrinsic::riscv_forza_amo_r_sub64rem_nn:
   case Intrinsic::riscv_forza_amo_r_and64rem_nn:
   case Intrinsic::riscv_forza_amo_r_or64rem_nn:
   case Intrinsic::riscv_forza_amo_r_xor64rem_nn:
@@ -9817,6 +9888,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_thrs64rem_nn:
 
   case Intrinsic::riscv_forza_amo_r_add8rem_on:
+  case Intrinsic::riscv_forza_amo_r_sub8rem_on:
   case Intrinsic::riscv_forza_amo_r_and8rem_on:
   case Intrinsic::riscv_forza_amo_r_or8rem_on:
   case Intrinsic::riscv_forza_amo_r_xor8rem_on:
@@ -9827,6 +9899,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap8rem_on:
   case Intrinsic::riscv_forza_amo_r_thrs8rem_on:
   case Intrinsic::riscv_forza_amo_r_add16rem_on:
+  case Intrinsic::riscv_forza_amo_r_sub16rem_on:
   case Intrinsic::riscv_forza_amo_r_and16rem_on:
   case Intrinsic::riscv_forza_amo_r_or16rem_on:
   case Intrinsic::riscv_forza_amo_r_xor16rem_on:
@@ -9837,6 +9910,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap16rem_on:
   case Intrinsic::riscv_forza_amo_r_thrs16rem_on:
   case Intrinsic::riscv_forza_amo_r_add32rem_on:
+  case Intrinsic::riscv_forza_amo_r_sub32rem_on:
   case Intrinsic::riscv_forza_amo_r_and32rem_on:
   case Intrinsic::riscv_forza_amo_r_or32rem_on:
   case Intrinsic::riscv_forza_amo_r_xor32rem_on:
@@ -9847,6 +9921,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap32rem_on:
   case Intrinsic::riscv_forza_amo_r_thrs32rem_on:
   case Intrinsic::riscv_forza_amo_r_add64rem_on:
+  case Intrinsic::riscv_forza_amo_r_sub64rem_on:
   case Intrinsic::riscv_forza_amo_r_and64rem_on:
   case Intrinsic::riscv_forza_amo_r_or64rem_on:
   case Intrinsic::riscv_forza_amo_r_xor64rem_on:
@@ -9858,6 +9933,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_thrs64rem_on:
 
   case Intrinsic::riscv_forza_amo_r_add8rem_no:
+  case Intrinsic::riscv_forza_amo_r_sub8rem_no:
   case Intrinsic::riscv_forza_amo_r_and8rem_no:
   case Intrinsic::riscv_forza_amo_r_or8rem_no:
   case Intrinsic::riscv_forza_amo_r_xor8rem_no:
@@ -9868,6 +9944,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap8rem_no:
   case Intrinsic::riscv_forza_amo_r_thrs8rem_no:
   case Intrinsic::riscv_forza_amo_r_add16rem_no:
+  case Intrinsic::riscv_forza_amo_r_sub16rem_no:
   case Intrinsic::riscv_forza_amo_r_and16rem_no:
   case Intrinsic::riscv_forza_amo_r_or16rem_no:
   case Intrinsic::riscv_forza_amo_r_xor16rem_no:
@@ -9878,6 +9955,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap16rem_no:
   case Intrinsic::riscv_forza_amo_r_thrs16rem_no:
   case Intrinsic::riscv_forza_amo_r_add32rem_no:
+  case Intrinsic::riscv_forza_amo_r_sub32rem_no:
   case Intrinsic::riscv_forza_amo_r_and32rem_no:
   case Intrinsic::riscv_forza_amo_r_or32rem_no:
   case Intrinsic::riscv_forza_amo_r_xor32rem_no:
@@ -9888,6 +9966,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap32rem_no:
   case Intrinsic::riscv_forza_amo_r_thrs32rem_no:
   case Intrinsic::riscv_forza_amo_r_add64rem_no:
+  case Intrinsic::riscv_forza_amo_r_sub64rem_no:
   case Intrinsic::riscv_forza_amo_r_and64rem_no:
   case Intrinsic::riscv_forza_amo_r_or64rem_no:
   case Intrinsic::riscv_forza_amo_r_xor64rem_no:
@@ -9896,11 +9975,9 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_smin64rem_no:
   case Intrinsic::riscv_forza_amo_r_umin64rem_no:
   case Intrinsic::riscv_forza_amo_r_swap64rem_no:
-  case Intrinsic::riscv_forza_amo_r_thrs64rem_no:
-  {
-    LLVM_DEBUG({
-      dbgs() << __PRETTY_FUNCTION__ << "Lowering Forza Intrinsics ";
-    });
+  case Intrinsic::riscv_forza_amo_r_thrs64rem_no: {
+    LLVM_DEBUG(
+        { dbgs() << __PRETTY_FUNCTION__ << "Lowering Forza Intrinsics "; });
     SDLoc DL(Op);
     MVT XLenVT = Subtarget.getXLenVT();
     unsigned Opc = getForzaOpc(IntNo);
@@ -9913,8 +9990,8 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
       SDValue Res =
           DAG.getNode(Opc, DL, MVT::i64, NewOp0, NewOp1, Op.getOperand(3));
       return DAG.getNode(ISD::TRUNCATE, DL, MVT::i32, Res);
-    }else if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType()
-              == MVT::i16) {
+    } else if (RV64LegalI32 && Subtarget.is64Bit() &&
+               Op.getValueType() == MVT::i16) {
       SDValue NewOp0 =
           DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(1));
       SDValue NewOp1 =
@@ -9922,8 +9999,8 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_W_CHAIN(SDValue Op,
       SDValue Res =
           DAG.getNode(Opc, DL, MVT::i64, NewOp0, NewOp1, Op.getOperand(3));
       return DAG.getNode(ISD::TRUNCATE, DL, MVT::i16, Res);
-    }else if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType()
-              == MVT::i8) {
+    } else if (RV64LegalI32 && Subtarget.is64Bit() &&
+               Op.getValueType() == MVT::i8) {
       SDValue NewOp0 =
           DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(1));
       SDValue NewOp1 =
@@ -10093,6 +10170,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
   }
 
   case Intrinsic::riscv_forza_amo_r_add8u:
+  case Intrinsic::riscv_forza_amo_r_sub8u:
   case Intrinsic::riscv_forza_amo_r_and8u:
   case Intrinsic::riscv_forza_amo_r_or8u:
   case Intrinsic::riscv_forza_amo_r_xor8u:
@@ -10103,6 +10181,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap8u:
   case Intrinsic::riscv_forza_amo_r_thrs8u:
   case Intrinsic::riscv_forza_amo_r_add16u:
+  case Intrinsic::riscv_forza_amo_r_sub16u:
   case Intrinsic::riscv_forza_amo_r_and16u:
   case Intrinsic::riscv_forza_amo_r_or16u:
   case Intrinsic::riscv_forza_amo_r_xor16u:
@@ -10113,6 +10192,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap16u:
   case Intrinsic::riscv_forza_amo_r_thrs16u:
   case Intrinsic::riscv_forza_amo_r_add32u:
+  case Intrinsic::riscv_forza_amo_r_sub32u:
   case Intrinsic::riscv_forza_amo_r_and32u:
   case Intrinsic::riscv_forza_amo_r_or32u:
   case Intrinsic::riscv_forza_amo_r_xor32u:
@@ -10123,6 +10203,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_swap32u:
   case Intrinsic::riscv_forza_amo_r_thrs32u:
   case Intrinsic::riscv_forza_amo_r_add64u:
+  case Intrinsic::riscv_forza_amo_r_sub64u:
   case Intrinsic::riscv_forza_amo_r_and64u:
   case Intrinsic::riscv_forza_amo_r_or64u:
   case Intrinsic::riscv_forza_amo_r_xor64u:
@@ -20160,6 +20241,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(STRICT_FSETCCS_VL)
   NODE_NAME_CASE(STRICT_VFROUND_NOEXCEPT_VL)
   NODE_NAME_CASE(AMO_R_ADD8U)
+  NODE_NAME_CASE(AMO_R_SUB8U)
   NODE_NAME_CASE(AMO_R_AND8U)
   NODE_NAME_CASE(AMO_R_OR8U)
   NODE_NAME_CASE(AMO_R_XOR8U)
@@ -20170,6 +20252,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP8U)
   NODE_NAME_CASE(AMO_R_THRS8U)
   NODE_NAME_CASE(AMO_R_ADD16U)
+  NODE_NAME_CASE(AMO_R_SUB16U)
   NODE_NAME_CASE(AMO_R_AND16U)
   NODE_NAME_CASE(AMO_R_OR16U)
   NODE_NAME_CASE(AMO_R_XOR16U)
@@ -20180,6 +20263,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP16U)
   NODE_NAME_CASE(AMO_R_THRS16U)
   NODE_NAME_CASE(AMO_R_ADD32U)
+  NODE_NAME_CASE(AMO_R_SUB32U)
   NODE_NAME_CASE(AMO_R_AND32U)
   NODE_NAME_CASE(AMO_R_OR32U)
   NODE_NAME_CASE(AMO_R_XOR32U)
@@ -20190,6 +20274,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP32U)
   NODE_NAME_CASE(AMO_R_THRS32U)
   NODE_NAME_CASE(AMO_R_ADD64U)
+  NODE_NAME_CASE(AMO_R_SUB64U)
   NODE_NAME_CASE(AMO_R_AND64U)
   NODE_NAME_CASE(AMO_R_OR64U)
   NODE_NAME_CASE(AMO_R_XOR64U)
@@ -20200,6 +20285,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP64U)
   NODE_NAME_CASE(AMO_R_THRS64U)
   NODE_NAME_CASE(AMO_R_ADD8MIGRNN)
+  NODE_NAME_CASE(AMO_R_SUB8MIGRNN)
   NODE_NAME_CASE(AMO_R_AND8MIGRNN)
   NODE_NAME_CASE(AMO_R_OR8MIGRNN)
   NODE_NAME_CASE(AMO_R_XOR8MIGRNN)
@@ -20210,6 +20296,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP8MIGRNN)
   NODE_NAME_CASE(AMO_R_THRS8MIGRNN)
   NODE_NAME_CASE(AMO_R_ADD16MIGRNN)
+  NODE_NAME_CASE(AMO_R_SUB16MIGRNN)
   NODE_NAME_CASE(AMO_R_AND16MIGRNN)
   NODE_NAME_CASE(AMO_R_OR16MIGRNN)
   NODE_NAME_CASE(AMO_R_XOR16MIGRNN)
@@ -20220,6 +20307,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP16MIGRNN)
   NODE_NAME_CASE(AMO_R_THRS16MIGRNN)
   NODE_NAME_CASE(AMO_R_ADD32MIGRNN)
+  NODE_NAME_CASE(AMO_R_SUB32MIGRNN)
   NODE_NAME_CASE(AMO_R_AND32MIGRNN)
   NODE_NAME_CASE(AMO_R_OR32MIGRNN)
   NODE_NAME_CASE(AMO_R_XOR32MIGRNN)
@@ -20230,6 +20318,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP32MIGRNN)
   NODE_NAME_CASE(AMO_R_THRS32MIGRNN)
   NODE_NAME_CASE(AMO_R_ADD64MIGRNN)
+  NODE_NAME_CASE(AMO_R_SUB64MIGRNN)
   NODE_NAME_CASE(AMO_R_AND64MIGRNN)
   NODE_NAME_CASE(AMO_R_OR64MIGRNN)
   NODE_NAME_CASE(AMO_R_XOR64MIGRNN)
@@ -20240,6 +20329,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP64MIGRNN)
   NODE_NAME_CASE(AMO_R_THRS64MIGRNN)
   NODE_NAME_CASE(AMO_R_ADD8MIGRON)
+  NODE_NAME_CASE(AMO_R_SUB8MIGRON)
   NODE_NAME_CASE(AMO_R_AND8MIGRON)
   NODE_NAME_CASE(AMO_R_OR8MIGRON)
   NODE_NAME_CASE(AMO_R_XOR8MIGRON)
@@ -20250,6 +20340,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP8MIGRON)
   NODE_NAME_CASE(AMO_R_THRS8MIGRON)
   NODE_NAME_CASE(AMO_R_ADD16MIGRON)
+  NODE_NAME_CASE(AMO_R_SUB16MIGRON)
   NODE_NAME_CASE(AMO_R_AND16MIGRON)
   NODE_NAME_CASE(AMO_R_OR16MIGRON)
   NODE_NAME_CASE(AMO_R_XOR16MIGRON)
@@ -20260,6 +20351,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP16MIGRON)
   NODE_NAME_CASE(AMO_R_THRS16MIGRON)
   NODE_NAME_CASE(AMO_R_ADD32MIGRON)
+  NODE_NAME_CASE(AMO_R_SUB32MIGRON)
   NODE_NAME_CASE(AMO_R_AND32MIGRON)
   NODE_NAME_CASE(AMO_R_OR32MIGRON)
   NODE_NAME_CASE(AMO_R_XOR32MIGRON)
@@ -20270,6 +20362,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP32MIGRON)
   NODE_NAME_CASE(AMO_R_THRS32MIGRON)
   NODE_NAME_CASE(AMO_R_ADD64MIGRON)
+  NODE_NAME_CASE(AMO_R_SUB64MIGRON)
   NODE_NAME_CASE(AMO_R_AND64MIGRON)
   NODE_NAME_CASE(AMO_R_OR64MIGRON)
   NODE_NAME_CASE(AMO_R_XOR64MIGRON)
@@ -20280,6 +20373,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP64MIGRON)
   NODE_NAME_CASE(AMO_R_THRS64MIGRON)
   NODE_NAME_CASE(AMO_R_ADD8MIGRNO)
+  NODE_NAME_CASE(AMO_R_SUB8MIGRNO)
   NODE_NAME_CASE(AMO_R_AND8MIGRNO)
   NODE_NAME_CASE(AMO_R_OR8MIGRNO)
   NODE_NAME_CASE(AMO_R_XOR8MIGRNO)
@@ -20290,6 +20384,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP8MIGRNO)
   NODE_NAME_CASE(AMO_R_THRS8MIGRNO)
   NODE_NAME_CASE(AMO_R_ADD16MIGRNO)
+  NODE_NAME_CASE(AMO_R_SUB16MIGRNO)
   NODE_NAME_CASE(AMO_R_AND16MIGRNO)
   NODE_NAME_CASE(AMO_R_OR16MIGRNO)
   NODE_NAME_CASE(AMO_R_XOR16MIGRNO)
@@ -20300,6 +20395,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP16MIGRNO)
   NODE_NAME_CASE(AMO_R_THRS16MIGRNO)
   NODE_NAME_CASE(AMO_R_ADD32MIGRNO)
+  NODE_NAME_CASE(AMO_R_SUB32MIGRNO)
   NODE_NAME_CASE(AMO_R_AND32MIGRNO)
   NODE_NAME_CASE(AMO_R_OR32MIGRNO)
   NODE_NAME_CASE(AMO_R_XOR32MIGRNO)
@@ -20310,6 +20406,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP32MIGRNO)
   NODE_NAME_CASE(AMO_R_THRS32MIGRNO)
   NODE_NAME_CASE(AMO_R_ADD64MIGRNO)
+  NODE_NAME_CASE(AMO_R_SUB64MIGRNO)
   NODE_NAME_CASE(AMO_R_AND64MIGRNO)
   NODE_NAME_CASE(AMO_R_OR64MIGRNO)
   NODE_NAME_CASE(AMO_R_XOR64MIGRNO)
@@ -20320,6 +20417,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP64MIGRNO)
   NODE_NAME_CASE(AMO_R_THRS64MIGRNO)
   NODE_NAME_CASE(AMO_R_ADD8REMNN)
+  NODE_NAME_CASE(AMO_R_SUB8REMNN)
   NODE_NAME_CASE(AMO_R_AND8REMNN)
   NODE_NAME_CASE(AMO_R_OR8REMNN)
   NODE_NAME_CASE(AMO_R_XOR8REMNN)
@@ -20330,6 +20428,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP8REMNN)
   NODE_NAME_CASE(AMO_R_THRS8REMNN)
   NODE_NAME_CASE(AMO_R_ADD16REMNN)
+  NODE_NAME_CASE(AMO_R_SUB16REMNN)
   NODE_NAME_CASE(AMO_R_AND16REMNN)
   NODE_NAME_CASE(AMO_R_OR16REMNN)
   NODE_NAME_CASE(AMO_R_XOR16REMNN)
@@ -20340,6 +20439,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP16REMNN)
   NODE_NAME_CASE(AMO_R_THRS16REMNN)
   NODE_NAME_CASE(AMO_R_ADD32REMNN)
+  NODE_NAME_CASE(AMO_R_SUB32REMNN)
   NODE_NAME_CASE(AMO_R_AND32REMNN)
   NODE_NAME_CASE(AMO_R_OR32REMNN)
   NODE_NAME_CASE(AMO_R_XOR32REMNN)
@@ -20350,6 +20450,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP32REMNN)
   NODE_NAME_CASE(AMO_R_THRS32REMNN)
   NODE_NAME_CASE(AMO_R_ADD64REMNN)
+  NODE_NAME_CASE(AMO_R_SUB64REMNN)
   NODE_NAME_CASE(AMO_R_AND64REMNN)
   NODE_NAME_CASE(AMO_R_OR64REMNN)
   NODE_NAME_CASE(AMO_R_XOR64REMNN)
@@ -20360,6 +20461,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP64REMNN)
   NODE_NAME_CASE(AMO_R_THRS64REMNN)
   NODE_NAME_CASE(AMO_R_ADD8REMON)
+  NODE_NAME_CASE(AMO_R_SUB8REMON)
   NODE_NAME_CASE(AMO_R_AND8REMON)
   NODE_NAME_CASE(AMO_R_OR8REMON)
   NODE_NAME_CASE(AMO_R_XOR8REMON)
@@ -20370,6 +20472,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP8REMON)
   NODE_NAME_CASE(AMO_R_THRS8REMON)
   NODE_NAME_CASE(AMO_R_ADD16REMON)
+  NODE_NAME_CASE(AMO_R_SUB16REMON)
   NODE_NAME_CASE(AMO_R_AND16REMON)
   NODE_NAME_CASE(AMO_R_OR16REMON)
   NODE_NAME_CASE(AMO_R_XOR16REMON)
@@ -20380,6 +20483,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP16REMON)
   NODE_NAME_CASE(AMO_R_THRS16REMON)
   NODE_NAME_CASE(AMO_R_ADD32REMON)
+  NODE_NAME_CASE(AMO_R_SUB32REMON)
   NODE_NAME_CASE(AMO_R_AND32REMON)
   NODE_NAME_CASE(AMO_R_OR32REMON)
   NODE_NAME_CASE(AMO_R_XOR32REMON)
@@ -20390,6 +20494,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP32REMON)
   NODE_NAME_CASE(AMO_R_THRS32REMON)
   NODE_NAME_CASE(AMO_R_ADD64REMON)
+  NODE_NAME_CASE(AMO_R_SUB64REMON)
   NODE_NAME_CASE(AMO_R_AND64REMON)
   NODE_NAME_CASE(AMO_R_OR64REMON)
   NODE_NAME_CASE(AMO_R_XOR64REMON)
@@ -20400,6 +20505,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP64REMON)
   NODE_NAME_CASE(AMO_R_THRS64REMON)
   NODE_NAME_CASE(AMO_R_ADD8REMNO)
+  NODE_NAME_CASE(AMO_R_SUB8REMNO)
   NODE_NAME_CASE(AMO_R_AND8REMNO)
   NODE_NAME_CASE(AMO_R_OR8REMNO)
   NODE_NAME_CASE(AMO_R_XOR8REMNO)
@@ -20410,6 +20516,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP8REMNO)
   NODE_NAME_CASE(AMO_R_THRS8REMNO)
   NODE_NAME_CASE(AMO_R_ADD16REMNO)
+  NODE_NAME_CASE(AMO_R_SUB16REMNO)
   NODE_NAME_CASE(AMO_R_AND16REMNO)
   NODE_NAME_CASE(AMO_R_OR16REMNO)
   NODE_NAME_CASE(AMO_R_XOR16REMNO)
@@ -20420,6 +20527,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP16REMNO)
   NODE_NAME_CASE(AMO_R_THRS16REMNO)
   NODE_NAME_CASE(AMO_R_ADD32REMNO)
+  NODE_NAME_CASE(AMO_R_SUB32REMNO)
   NODE_NAME_CASE(AMO_R_AND32REMNO)
   NODE_NAME_CASE(AMO_R_OR32REMNO)
   NODE_NAME_CASE(AMO_R_XOR32REMNO)
@@ -20430,6 +20538,7 @@ const char *RISCVTargetLowering::getTargetNodeName(unsigned Opcode) const {
   NODE_NAME_CASE(AMO_R_SWAP32REMNO)
   NODE_NAME_CASE(AMO_R_THRS32REMNO)
   NODE_NAME_CASE(AMO_R_ADD64REMNO)
+  NODE_NAME_CASE(AMO_R_SUB64REMNO)
   NODE_NAME_CASE(AMO_R_AND64REMNO)
   NODE_NAME_CASE(AMO_R_OR64REMNO)
   NODE_NAME_CASE(AMO_R_XOR64REMNO)

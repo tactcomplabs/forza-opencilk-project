@@ -11,11 +11,25 @@ void amo_r_add8u(char *a, char b){
   __forza_amo_r_add8u(a,b);
 }
 
+// RV64XFORZA-LABEL: @amo_r_sub8u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.sub8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+void amo_r_sub8u(char *a, char b){
+  __forza_amo_r_sub8u(a,b);
+}
+
 // RV64XFORZA-LABEL: @amo_r_add16u(
 // RV64XFORZA-NEXT:  entry:
 // RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.add16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
 void amo_r_add16u(short *a, short b){
   __forza_amo_r_add16u(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub16u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.sub16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+void amo_r_sub16u(short *a, short b){
+  __forza_amo_r_sub16u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_add32u(
@@ -25,11 +39,25 @@ void amo_r_add32u(int *a, int b){
   __forza_amo_r_add32u(a,b);
 }
 
+// RV64XFORZA-LABEL: @amo_r_sub32u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.sub32u(ptr [[RS1:%.*]], i32 [[RS2:%.*]])
+void amo_r_sub32u(int *a, int b){
+  __forza_amo_r_sub32u(a,b);
+}
+
 // RV64XFORZA-LABEL: @amo_r_add64u(
 // RV64XFORZA-NEXT:  entry:
 // RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.add64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_add64u(long int *a, long int b){
   __forza_amo_r_add64u(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub64u(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.sub64u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+void amo_r_sub64u(long int *a, long int b){
+  __forza_amo_r_sub64u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_and8u(
@@ -1044,6 +1072,34 @@ long int amo_r_add64rem_nn(long int *a, long int b){
   return __forza_amo_r_add64rem_nn(a,b);
 }
 
+// RV64XFORZA-LABEL: @amo_r_sub8rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i8 @llvm.riscv.forza.amo.r.sub8rem.nn(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+char amo_r_sub8rem_nn(char *a, char b){
+  return __forza_amo_r_sub8rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub16rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i16 @llvm.riscv.forza.amo.r.sub16rem.nn(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+short amo_r_sub16rem_nn(short *a, short b){
+  return __forza_amo_r_sub16rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub32rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i32 @llvm.riscv.forza.amo.r.sub32rem.nn(ptr [[RS1:%.*]], i32 [[RS2:%.*]])
+int amo_r_sub32rem_nn(int *a, int b){
+  return __forza_amo_r_sub32rem_nn(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub64rem_nn(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.sub64rem.nn(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_sub64rem_nn(long int *a, long int b){
+  return __forza_amo_r_sub64rem_nn(a,b);
+}
+
 // RV64XFORZA-LABEL: @amo_r_and8rem_nn(
 // RV64XFORZA-NEXT:  entry:
 // RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i8 @llvm.riscv.forza.amo.r.and8rem.nn(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
@@ -1296,6 +1352,35 @@ long int amo_r_add64rem_on(long int *a, long int b){
   return __forza_amo_r_add64rem_on(a,b);
 }
 
+// RV64XFORZA-LABEL: @amo_r_sub8rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i8 @llvm.riscv.forza.amo.r.sub8rem.on(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+char amo_r_sub8rem_on(char *a, char b){
+  return __forza_amo_r_sub8rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub16rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i16 @llvm.riscv.forza.amo.r.sub16rem.on(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+short amo_r_sub16rem_on(short *a, short b){
+  return __forza_amo_r_sub16rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub32rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i32 @llvm.riscv.forza.amo.r.sub32rem.on(ptr [[RS1:%.*]], i32 [[RS2:%.*]])
+int amo_r_sub32rem_on(int *a, int b){
+  return __forza_amo_r_sub32rem_on(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub64rem_on(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.sub64rem.on(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_sub64rem_on(long int *a, long int b){
+  return __forza_amo_r_sub64rem_on(a,b);
+}
+
+
 // RV64XFORZA-LABEL: @amo_r_and8rem_on(
 // RV64XFORZA-NEXT:  entry:
 // RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i8 @llvm.riscv.forza.amo.r.and8rem.on(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
@@ -1547,6 +1632,34 @@ int amo_r_add32rem_no(int *a, int b){
 long int amo_r_add64rem_no(long int *a, long int b){
   return __forza_amo_r_add64rem_no(a,b);
 }
+// RV64XFORZA-LABEL: @amo_r_sub8rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i8 @llvm.riscv.forza.amo.r.sub8rem.no(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+char amo_r_sub8rem_no(char *a, char b){
+  return __forza_amo_r_sub8rem_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub16rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i16 @llvm.riscv.forza.amo.r.sub16rem.no(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+short amo_r_sub16rem_no(short *a, short b){
+  return __forza_amo_r_sub16rem_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub32rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i32 @llvm.riscv.forza.amo.r.sub32rem.no(ptr [[RS1:%.*]], i32 [[RS2:%.*]])
+int amo_r_sub32rem_no(int *a, int b){
+  return __forza_amo_r_sub32rem_no(a,b);
+}
+
+// RV64XFORZA-LABEL: @amo_r_sub64rem_no(
+// RV64XFORZA-NEXT:  entry:
+// RV64XFORZA-NEXT:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.sub64rem.no(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
+long int amo_r_sub64rem_no(long int *a, long int b){
+  return __forza_amo_r_sub64rem_no(a,b);
+}
+
 
 // RV64XFORZA-LABEL: @amo_r_and8rem_no(
 // RV64XFORZA-NEXT:  entry:

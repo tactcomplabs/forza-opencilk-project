@@ -71,6 +71,7 @@ let TargetPrefix = "riscv" in {
                               [IntrNoMem,IntrHasSideEffects]>;
 
   def int_riscv_forza_amo_r_add8u : ForzaAMOInt8UIntrinsic;
+  def int_riscv_forza_amo_r_sub8u : ForzaAMOInt8UIntrinsic;
   def int_riscv_forza_amo_r_and8u : ForzaAMOInt8UIntrinsic;
   def int_riscv_forza_amo_r_or8u : ForzaAMOInt8UIntrinsic;
   def int_riscv_forza_amo_r_xor8u : ForzaAMOInt8UIntrinsic;
@@ -82,6 +83,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs8u : ForzaAMOInt8UIntrinsic;
 
   def int_riscv_forza_amo_r_add16u : ForzaAMOInt16UIntrinsic;
+  def int_riscv_forza_amo_r_sub16u : ForzaAMOInt16UIntrinsic;
   def int_riscv_forza_amo_r_and16u : ForzaAMOInt16UIntrinsic;
   def int_riscv_forza_amo_r_or16u : ForzaAMOInt16UIntrinsic;
   def int_riscv_forza_amo_r_xor16u : ForzaAMOInt16UIntrinsic;
@@ -93,6 +95,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs16u : ForzaAMOInt16UIntrinsic;
 
   def int_riscv_forza_amo_r_add32u : ForzaAMOInt32UIntrinsic;
+  def int_riscv_forza_amo_r_sub32u : ForzaAMOInt32UIntrinsic;
   def int_riscv_forza_amo_r_and32u : ForzaAMOInt32UIntrinsic;
   def int_riscv_forza_amo_r_or32u : ForzaAMOInt32UIntrinsic;
   def int_riscv_forza_amo_r_xor32u : ForzaAMOInt32UIntrinsic;
@@ -104,6 +107,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs32u : ForzaAMOInt32UIntrinsic;
 
   def int_riscv_forza_amo_r_add64u : ForzaAMOInt64UIntrinsic;
+  def int_riscv_forza_amo_r_sub64u : ForzaAMOInt64UIntrinsic;
   def int_riscv_forza_amo_r_and64u : ForzaAMOInt64UIntrinsic;
   def int_riscv_forza_amo_r_or64u : ForzaAMOInt64UIntrinsic;
   def int_riscv_forza_amo_r_xor64u : ForzaAMOInt64UIntrinsic;
@@ -115,6 +119,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs64u : ForzaAMOInt64UIntrinsic;
 
   def int_riscv_forza_amo_r_add8migr_nn : ForzaAMOInt8Intrinsic;
+  def int_riscv_forza_amo_r_sub8migr_nn : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_and8migr_nn : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_or8migr_nn : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_xor8migr_nn : ForzaAMOInt8Intrinsic;
@@ -126,6 +131,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs8migr_nn : ForzaAMOInt8Intrinsic;
 
   def int_riscv_forza_amo_r_add16migr_nn : ForzaAMOInt16Intrinsic;
+  def int_riscv_forza_amo_r_sub16migr_nn : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_and16migr_nn : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_or16migr_nn : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_xor16migr_nn : ForzaAMOInt16Intrinsic;
@@ -137,6 +143,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs16migr_nn : ForzaAMOInt16Intrinsic;
 
   def int_riscv_forza_amo_r_add32migr_nn : ForzaAMOInt32Intrinsic;
+  def int_riscv_forza_amo_r_sub32migr_nn : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_and32migr_nn : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_or32migr_nn : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_xor32migr_nn : ForzaAMOInt32Intrinsic;
@@ -148,6 +155,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs32migr_nn : ForzaAMOInt32Intrinsic;
 
   def int_riscv_forza_amo_r_add64migr_nn : ForzaAMOInt64Intrinsic;
+  def int_riscv_forza_amo_r_sub64migr_nn : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_and64migr_nn : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_or64migr_nn : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_xor64migr_nn : ForzaAMOInt64Intrinsic;
@@ -159,6 +167,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs64migr_nn : ForzaAMOInt64Intrinsic;
 
   def int_riscv_forza_amo_r_add8migr_on : ForzaAMOInt8Intrinsic;
+  def int_riscv_forza_amo_r_sub8migr_on : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_and8migr_on : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_or8migr_on : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_xor8migr_on : ForzaAMOInt8Intrinsic;
@@ -170,6 +179,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs8migr_on : ForzaAMOInt8Intrinsic;
 
   def int_riscv_forza_amo_r_add16migr_on : ForzaAMOInt16Intrinsic;
+  def int_riscv_forza_amo_r_sub16migr_on : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_and16migr_on : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_or16migr_on : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_xor16migr_on : ForzaAMOInt16Intrinsic;
@@ -181,6 +191,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs16migr_on : ForzaAMOInt16Intrinsic;
 
   def int_riscv_forza_amo_r_add32migr_on : ForzaAMOInt32Intrinsic;
+  def int_riscv_forza_amo_r_sub32migr_on : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_and32migr_on : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_or32migr_on : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_xor32migr_on : ForzaAMOInt32Intrinsic;
@@ -192,6 +203,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs32migr_on : ForzaAMOInt32Intrinsic;
 
   def int_riscv_forza_amo_r_add64migr_on : ForzaAMOInt64Intrinsic;
+  def int_riscv_forza_amo_r_sub64migr_on : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_and64migr_on : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_or64migr_on : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_xor64migr_on : ForzaAMOInt64Intrinsic;
@@ -203,6 +215,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs64migr_on : ForzaAMOInt64Intrinsic;
 
   def int_riscv_forza_amo_r_add8migr_no : ForzaAMOInt8Intrinsic;
+  def int_riscv_forza_amo_r_sub8migr_no : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_and8migr_no : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_or8migr_no : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_xor8migr_no : ForzaAMOInt8Intrinsic;
@@ -214,6 +227,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs8migr_no : ForzaAMOInt8Intrinsic;
 
   def int_riscv_forza_amo_r_add16migr_no : ForzaAMOInt16Intrinsic;
+  def int_riscv_forza_amo_r_sub16migr_no : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_and16migr_no : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_or16migr_no : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_xor16migr_no : ForzaAMOInt16Intrinsic;
@@ -225,6 +239,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs16migr_no : ForzaAMOInt16Intrinsic;
 
   def int_riscv_forza_amo_r_add32migr_no : ForzaAMOInt32Intrinsic;
+  def int_riscv_forza_amo_r_sub32migr_no : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_and32migr_no : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_or32migr_no : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_xor32migr_no : ForzaAMOInt32Intrinsic;
@@ -236,6 +251,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs32migr_no : ForzaAMOInt32Intrinsic;
 
   def int_riscv_forza_amo_r_add64migr_no : ForzaAMOInt64Intrinsic;
+  def int_riscv_forza_amo_r_sub64migr_no : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_and64migr_no : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_or64migr_no : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_xor64migr_no : ForzaAMOInt64Intrinsic;
@@ -247,6 +263,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs64migr_no : ForzaAMOInt64Intrinsic;
 
   def int_riscv_forza_amo_r_add8rem_nn : ForzaAMOInt8Intrinsic;
+  def int_riscv_forza_amo_r_sub8rem_nn : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_and8rem_nn : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_or8rem_nn : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_xor8rem_nn : ForzaAMOInt8Intrinsic;
@@ -258,6 +275,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs8rem_nn : ForzaAMOInt8Intrinsic;
 
   def int_riscv_forza_amo_r_add16rem_nn : ForzaAMOInt16Intrinsic;
+  def int_riscv_forza_amo_r_sub16rem_nn : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_and16rem_nn : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_or16rem_nn : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_xor16rem_nn : ForzaAMOInt16Intrinsic;
@@ -269,6 +287,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs16rem_nn : ForzaAMOInt16Intrinsic;
 
   def int_riscv_forza_amo_r_add32rem_nn : ForzaAMOInt32Intrinsic;
+  def int_riscv_forza_amo_r_sub32rem_nn : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_and32rem_nn : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_or32rem_nn : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_xor32rem_nn : ForzaAMOInt32Intrinsic;
@@ -280,6 +299,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs32rem_nn : ForzaAMOInt32Intrinsic;
 
   def int_riscv_forza_amo_r_add64rem_nn : ForzaAMOInt64Intrinsic;
+  def int_riscv_forza_amo_r_sub64rem_nn : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_and64rem_nn : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_or64rem_nn : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_xor64rem_nn : ForzaAMOInt64Intrinsic;
@@ -291,6 +311,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs64rem_nn : ForzaAMOInt64Intrinsic;
 
   def int_riscv_forza_amo_r_add8rem_on : ForzaAMOInt8Intrinsic;
+  def int_riscv_forza_amo_r_sub8rem_on : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_and8rem_on : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_or8rem_on : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_xor8rem_on : ForzaAMOInt8Intrinsic;
@@ -302,6 +323,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs8rem_on : ForzaAMOInt8Intrinsic;
 
   def int_riscv_forza_amo_r_add16rem_on : ForzaAMOInt16Intrinsic;
+  def int_riscv_forza_amo_r_sub16rem_on : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_and16rem_on : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_or16rem_on : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_xor16rem_on : ForzaAMOInt16Intrinsic;
@@ -313,6 +335,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs16rem_on : ForzaAMOInt16Intrinsic;
 
   def int_riscv_forza_amo_r_add32rem_on : ForzaAMOInt32Intrinsic;
+  def int_riscv_forza_amo_r_sub32rem_on : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_and32rem_on : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_or32rem_on : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_xor32rem_on : ForzaAMOInt32Intrinsic;
@@ -324,6 +347,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs32rem_on : ForzaAMOInt32Intrinsic;
 
   def int_riscv_forza_amo_r_add64rem_on : ForzaAMOInt64Intrinsic;
+  def int_riscv_forza_amo_r_sub64rem_on : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_and64rem_on : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_or64rem_on : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_xor64rem_on : ForzaAMOInt64Intrinsic;
@@ -335,6 +359,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs64rem_on : ForzaAMOInt64Intrinsic;
 
   def int_riscv_forza_amo_r_add8rem_no : ForzaAMOInt8Intrinsic;
+  def int_riscv_forza_amo_r_sub8rem_no : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_and8rem_no : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_or8rem_no : ForzaAMOInt8Intrinsic;
   def int_riscv_forza_amo_r_xor8rem_no : ForzaAMOInt8Intrinsic;
@@ -346,6 +371,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs8rem_no : ForzaAMOInt8Intrinsic;
 
   def int_riscv_forza_amo_r_add16rem_no : ForzaAMOInt16Intrinsic;
+  def int_riscv_forza_amo_r_sub16rem_no : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_and16rem_no : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_or16rem_no : ForzaAMOInt16Intrinsic;
   def int_riscv_forza_amo_r_xor16rem_no : ForzaAMOInt16Intrinsic;
@@ -357,6 +383,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs16rem_no : ForzaAMOInt16Intrinsic;
 
   def int_riscv_forza_amo_r_add32rem_no : ForzaAMOInt32Intrinsic;
+  def int_riscv_forza_amo_r_sub32rem_no : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_and32rem_no : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_or32rem_no : ForzaAMOInt32Intrinsic;
   def int_riscv_forza_amo_r_xor32rem_no : ForzaAMOInt32Intrinsic;
@@ -368,6 +395,7 @@ let TargetPrefix = "riscv" in {
   def int_riscv_forza_amo_r_thrs32rem_no : ForzaAMOInt32Intrinsic;
 
   def int_riscv_forza_amo_r_add64rem_no : ForzaAMOInt64Intrinsic;
+  def int_riscv_forza_amo_r_sub64rem_no : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_and64rem_no : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_or64rem_no : ForzaAMOInt64Intrinsic;
   def int_riscv_forza_amo_r_xor64rem_no : ForzaAMOInt64Intrinsic;
