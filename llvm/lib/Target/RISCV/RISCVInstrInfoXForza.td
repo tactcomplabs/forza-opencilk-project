@@ -503,10 +503,10 @@ let Predicates = [HasVendorXForza] in {
   }
 
   multiclass ForzaAmoVoidIntrin<string name> {
-    //def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "8u") GPRMem:$rs1, GPR:$rs2),
-    //          (!cast<RVInst>("AMO_R_" # !toupper(name) # "8U") GPRMem:$rs1, GPR:$rs2)>;
-    //def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16u") GPRMem:$rs1, GPR:$rs2),
-    //          (!cast<RVInst>("AMO_R_" # !toupper(name) # "16U") GPRMem:$rs1, GPR:$rs2)>;
+    def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "8u") (i64 GPRMem:$rs1), (i64 GPR:$rs2)),
+                  (!cast<RVInst>("AMO_R_" # !toupper(name) # "8U") (i64 GPRMem:$rs1), (i64 GPR:$rs2))>;
+    def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "16u") (i64 GPRMem:$rs1), (i64 GPR:$rs2)),
+                  (!cast<RVInst>("AMO_R_" # !toupper(name) # "16U") (i64 GPRMem:$rs1), (i64 GPR:$rs2))>;
     def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "32u") GPRMem:$rs1, GPR:$rs2),
               (!cast<RVInst>("AMO_R_" # !toupper(name) # "32U") GPRMem:$rs1, GPR:$rs2)>;
     def : Pat<(!cast<SDPatternOperator>("int_riscv_forza_amo_r_" # name # "64u") GPRMem:$rs1, GPR:$rs2),
@@ -581,10 +581,18 @@ let Predicates = [HasVendorXForza] in {
   defm "" : ForzaAmoPatGprMemFpr<"fsub">;
   defm "" : ForzaAmoPatGprMemFpr<"fsubr">;
 
-  def : Pat<(int_riscv_forza_amo_r_and16u (i64 GPRMem:$rs1), (i64 GPR:$rs2)),
-             (AMO_R_AND16U (i64 GPRMem:$rs1), (i64 GPR:$rs2))>;
-
+  defm "" : ForzaAmoVoidIntrin<"add">;
   defm "" : ForzaAmoVoidIntrin<"and">;
+  defm "" : ForzaAmoVoidIntrin<"or">;
+  defm "" : ForzaAmoVoidIntrin<"xor">;
+  defm "" : ForzaAmoVoidIntrin<"smax">;
+  defm "" : ForzaAmoVoidIntrin<"umax">;
+  defm "" : ForzaAmoVoidIntrin<"smin">;
+  defm "" : ForzaAmoVoidIntrin<"umin">;
+  defm "" : ForzaAmoVoidIntrin<"swap">;
+  defm "" : ForzaAmoVoidIntrin<"thrs">;
+
+
 
   def : Pat<(int_riscv_forza_quit), (QUIT)>;
   def : Pat<(int_riscv_forza_resched), (RESCHED)>;

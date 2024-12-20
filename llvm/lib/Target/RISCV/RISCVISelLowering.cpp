@@ -10114,7 +10114,6 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_thrs16u:
   case Intrinsic::riscv_forza_amo_r_add32u:
   case Intrinsic::riscv_forza_amo_r_and32u:
-    llvm::dbgs() << "RISCV FORZA AMO AND32U\n";
   case Intrinsic::riscv_forza_amo_r_or32u:
   case Intrinsic::riscv_forza_amo_r_xor32u:
   case Intrinsic::riscv_forza_amo_r_smax32u:
@@ -10132,8 +10131,7 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_smin64u:
   case Intrinsic::riscv_forza_amo_r_umin64u:
   case Intrinsic::riscv_forza_amo_r_swap64u:
-  case Intrinsic::riscv_forza_amo_r_thrs64u:
-  {
+  case Intrinsic::riscv_forza_amo_r_thrs64u: {
     dbgs() << __PRETTY_FUNCTION__ << "Lowering Forza Intrinsics ";
 
     SDLoc DL(Op);
@@ -10141,36 +10139,29 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
     unsigned Opc = getForzaOpc(IntNo);
 
     dbgs() << "Lowering Forza Intrinsic: Opc = " << Opc
-         << ", ValueType = " << Op.getValueType() << "\n";
-      for( unsigned i=0; i<Op.getNumOperands(); i++ ){
-        dbgs() << "Operand(" << i << "): ";
-        Op.getOperand(i)->print(llvm::dbgs());
-        dbgs() << "\n";
-      }
-
-    switch(Opc){
-    default:
-      llvm_unreachable("Unknown Forza U-type intrinsic");
-      break;
-    case RISCVISD::AMO_R_AND32U:
-      dbgs() << "Found a RISCVISD::AMO_R_AND32U\n";
-      SDValue NewOp0 = Op.getOperand(0);
-      SDValue NewOp1 = Op.getOperand(1);
-      SDValue NewOp2 = Op.getOperand(2);
-      SDValue NewOp3 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(3));
-      SDValue Res = DAG.getNode(ISD::INTRINSIC_VOID, DL, MVT::isVoid,
-                                NewOp0, NewOp1, NewOp2, NewOp3);
-
-      dbgs() << "Lowered Forza Intrinsic: Opc = " << Opc
-          << ", ValueType = " << Res.getValueType() << "\n";
-      for( unsigned i=0; i<Res.getNumOperands(); i++ ){
-        dbgs() << "Operand(" << i << "): ";
-        Res.getOperand(i)->print(llvm::dbgs());
-        dbgs() << "\n";
-      }
-      return Res;
+           << ", ValueType = " << Op.getValueType() << "\n";
+    for (unsigned i = 0; i < Op.getNumOperands(); i++) {
+      dbgs() << "Operand(" << i << "): ";
+      Op.getOperand(i)->print(llvm::dbgs());
+      dbgs() << "\n";
     }
+
+    SDValue NewOp0 = Op.getOperand(0);
+    SDValue NewOp1 = Op.getOperand(1);
+    SDValue NewOp2 = Op.getOperand(2);
+    SDValue NewOp3 =
+        DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(3));
+    SDValue Res = DAG.getNode(ISD::INTRINSIC_VOID, DL, MVT::isVoid, NewOp0,
+                              NewOp1, NewOp2, NewOp3);
+
+    dbgs() << "Lowered Forza Intrinsic: Opc = " << Opc
+           << ", ValueType = " << Res.getValueType() << "\n";
+    for (unsigned i = 0; i < Res.getNumOperands(); i++) {
+      dbgs() << "Operand(" << i << "): ";
+      Res.getOperand(i)->print(llvm::dbgs());
+      dbgs() << "\n";
+    }
+    return Res;
 #if 0
     if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType() == MVT::i32) {
       SDValue NewOp0 =
@@ -10246,7 +10237,6 @@ static unsigned getRVVReductionOp(unsigned ISDOpcode) {
   case ISD::VP_REDUCE_FMIN:
     return RISCVISD::VECREDUCE_FMIN_VL;
   }
-
 }
 
 SDValue RISCVTargetLowering::lowerVectorMaskVecReduction(SDValue Op,

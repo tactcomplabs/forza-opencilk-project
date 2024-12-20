@@ -25,7 +25,7 @@ let TargetPrefix = "riscv" in {
                               [IntrWillReturn, IntrHasSideEffects]>;
 
   class ForzaAMOInt8UIntrinsic
-      :  DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_i8_ty],
+      :  DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_i64_ty],
                                [IntrHasSideEffects]>;
   class ForzaAMOInt16UIntrinsic
       :  DefaultAttrsIntrinsic<[], [llvm_ptr_ty, llvm_i64_ty],
