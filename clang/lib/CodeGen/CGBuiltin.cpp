@@ -21481,6 +21481,9 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
   case RISCV::BI__forza_amo_r_add8u:
     ID = Intrinsic::riscv_forza_amo_r_add8u;
     break;
+  case RISCV::BI__forza_amo_r_sub8u:
+    ID = Intrinsic::riscv_forza_amo_r_sub8u;
+    break;
   case RISCV::BI__forza_amo_r_and8u:
     ID = Intrinsic::riscv_forza_amo_r_and8u;
     break;
@@ -21511,6 +21514,9 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
 
   case RISCV::BI__forza_amo_r_add16u:
     ID = Intrinsic::riscv_forza_amo_r_add16u;
+    break;
+  case RISCV::BI__forza_amo_r_sub16u:
+    ID = Intrinsic::riscv_forza_amo_r_sub16u;
     break;
   case RISCV::BI__forza_amo_r_and16u:
     ID = Intrinsic::riscv_forza_amo_r_and16u;
@@ -21543,6 +21549,9 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
   case RISCV::BI__forza_amo_r_add32u:
     ID = Intrinsic::riscv_forza_amo_r_add32u;
     break;
+  case RISCV::BI__forza_amo_r_sub32u:
+    ID = Intrinsic::riscv_forza_amo_r_sub32u;
+    break;
   case RISCV::BI__forza_amo_r_and32u:
     ID = Intrinsic::riscv_forza_amo_r_and32u;
     break;
@@ -21573,6 +21582,9 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
 
   case RISCV::BI__forza_amo_r_add64u:
     ID = Intrinsic::riscv_forza_amo_r_add64u;
+    break;
+  case RISCV::BI__forza_amo_r_sub64u:
+    ID = Intrinsic::riscv_forza_amo_r_sub64u;
     break;
   case RISCV::BI__forza_amo_r_and64u:
     ID = Intrinsic::riscv_forza_amo_r_and64u;

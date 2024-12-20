@@ -8494,14 +8494,16 @@ static inline bool isValidEGW(int EGS, EVT VT,
          EGS * VT.getScalarSizeInBits();
 }
 
-unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const{
-  switch(IntNo){
+unsigned RISCVTargetLowering::getForzaOpc(unsigned IntNo) const {
+  switch (IntNo) {
   default:
     LLVM_DEBUG(dbgs() << "Unknown Forza intrinsic: " << IntNo << "\n");
     llvm_unreachable("Unexpected Forza opcode");
     break;
   case Intrinsic::riscv_forza_amo_r_add8u:
     return RISCVISD::AMO_R_ADD8U;
+  case Intrinsic::riscv_forza_amo_r_sub8u:
+    return RISCVISD::AMO_R_SUB8U;
   case Intrinsic::riscv_forza_amo_r_and8u:
     return RISCVISD::AMO_R_AND8U;
   case Intrinsic::riscv_forza_amo_r_or8u:
