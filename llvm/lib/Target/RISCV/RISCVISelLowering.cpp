@@ -10215,19 +10215,22 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
   case Intrinsic::riscv_forza_amo_r_umin64u:
   case Intrinsic::riscv_forza_amo_r_swap64u:
   case Intrinsic::riscv_forza_amo_r_thrs64u: {
+      LLVM_DEBUG({
     dbgs() << __PRETTY_FUNCTION__ << "Lowering Forza Intrinsics ";
+      });
 
     SDLoc DL(Op);
-    MVT XLenVT = Subtarget.getXLenVT();
     unsigned Opc = getForzaOpc(IntNo);
 
-    dbgs() << "Lowering Forza Intrinsic: Opc = " << Opc
-           << ", ValueType = " << Op.getValueType() << "\n";
-    for (unsigned i = 0; i < Op.getNumOperands(); i++) {
-      dbgs() << "Operand(" << i << "): ";
-      Op.getOperand(i)->print(llvm::dbgs());
-      dbgs() << "\n";
-    }
+    LLVM_DEBUG({
+      dbgs() << "Lowering Forza Intrinsic: Opc = " << Opc
+            << ", ValueType = " << Op.getValueType() << "\n";
+      for (unsigned i = 0; i < Op.getNumOperands(); i++) {
+        dbgs() << "Operand(" << i << "): ";
+        Op.getOperand(i)->print(llvm::dbgs());
+        dbgs() << "\n";
+      }
+    });
 
     SDValue NewOp0 = Op.getOperand(0);
     SDValue NewOp1 = Op.getOperand(1);
@@ -10237,47 +10240,18 @@ SDValue RISCVTargetLowering::LowerINTRINSIC_VOID(SDValue Op,
     SDValue Res = DAG.getNode(ISD::INTRINSIC_VOID, DL, MVT::isVoid, NewOp0,
                               NewOp1, NewOp2, NewOp3);
 
-    dbgs() << "Lowered Forza Intrinsic: Opc = " << Opc
-           << ", ValueType = " << Res.getValueType() << "\n";
-    for (unsigned i = 0; i < Res.getNumOperands(); i++) {
-      dbgs() << "Operand(" << i << "): ";
-      Res.getOperand(i)->print(llvm::dbgs());
-      dbgs() << "\n";
-    }
+    LLVM_DEBUG({
+      dbgs() << "Lowered Forza Intrinsic: Opc = " << Opc
+            << ", ValueType = " << Res.getValueType() << "\n";
+      for (unsigned i = 0; i < Res.getNumOperands(); i++) {
+        dbgs() << "Operand(" << i << "): ";
+        Res.getOperand(i)->print(llvm::dbgs());
+        dbgs() << "\n";
+      }
+    });
     return Res;
-#if 0
-    if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType() == MVT::i32) {
-      SDValue NewOp0 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(1));
-      SDValue NewOp1 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(2));
-      SDValue Res =
-          DAG.getNode(Opc, DL, MVT::i64, NewOp0, NewOp1, Op.getOperand(3));
-      return DAG.getNode(ISD::TRUNCATE, DL, MVT::i32, Res);
-    }else if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType()
-              == MVT::i16) {
-      SDValue NewOp0 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(1));
-      SDValue NewOp1 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(2));
-      SDValue Res =
-          DAG.getNode(Opc, DL, MVT::i64, NewOp0, NewOp1, Op.getOperand(3));
-      return DAG.getNode(ISD::TRUNCATE, DL, MVT::i16, Res);
-    }else if (RV64LegalI32 && Subtarget.is64Bit() && Op.getValueType()
-              == MVT::i8) {
-      SDValue NewOp0 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(1));
-      SDValue NewOp1 =
-          DAG.getNode(ISD::ANY_EXTEND, DL, MVT::i64, Op.getOperand(2));
-      SDValue Res =
-          DAG.getNode(Opc, DL, MVT::i64, NewOp0, NewOp1, Op.getOperand(3));
-      return DAG.getNode(ISD::TRUNCATE, DL, MVT::i8, Res);
-    }
-    return DAG.getNode(Opc, DL, XLenVT, Op.getOperand(1), Op.getOperand(2),
-                       Op.getOperand(3));
-#endif
     break;
-  }
+    }
   }
 
   return lowerVectorIntrinsicScalars(Op, DAG, Subtarget);
@@ -13124,7 +13098,6 @@ void RISCVTargetLowering::ReplaceNodeResults(SDNode *N,
   }
   case ISD::INTRINSIC_WO_CHAIN: {
 
-      llvm::dbgs() << "INTRINSIC_WO_CHAIN\n";
     unsigned IntNo = N->getConstantOperandVal(0);
     switch (IntNo) {
     default:
@@ -13258,7 +13231,6 @@ void RISCVTargetLowering::ReplaceNodeResults(SDNode *N,
     break;
   }
   case ISD::INTRINSIC_W_CHAIN: {
-      llvm::dbgs() << "INTRINSIC_W_CHAIN\n";
     unsigned IntNo = N->getConstantOperandVal(1);
     unsigned Opc = getForzaOpc(IntNo);
 
@@ -17265,13 +17237,10 @@ SDValue RISCVTargetLowering::PerformDAGCombine(SDNode *N,
     break;
   }
   case ISD::INTRINSIC_VOID:
-      llvm::dbgs() << "INTRINSIC_VOID\n";
-      break;
+    break;
   case ISD::INTRINSIC_W_CHAIN:
-      llvm::dbgs() << "INTRINSIC_W_CHAIN\n";
     break;
   case ISD::INTRINSIC_WO_CHAIN: {
-      llvm::dbgs() << "INTRINSIC_WO_CHAIN\n";
     unsigned IntOpNo = N->getOpcode() == ISD::INTRINSIC_WO_CHAIN ? 0 : 1;
     unsigned IntNo = N->getConstantOperandVal(IntOpNo);
     switch (IntNo) {
