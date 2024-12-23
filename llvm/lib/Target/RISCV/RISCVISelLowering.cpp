@@ -5849,9 +5849,11 @@ SDValue RISCVTargetLowering::LowerOperation(SDValue Op,
                                             SelectionDAG &DAG) const {
   switch (Op.getOpcode()) {
   default:
+      LLVM_DEBUG({
       Op.dump();
       llvm::dbgs() << "Op.getOpcode() = " << Op.getOpcode() << "\n";
       llvm::dbgs() << Op.getNode()->getOperationName() << "\n";
+      });
     report_fatal_error("unimplemented operand");
   case ISD::ATOMIC_FENCE:
     return LowerATOMIC_FENCE(Op, DAG, Subtarget);
