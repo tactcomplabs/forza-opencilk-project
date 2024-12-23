@@ -33,10 +33,9 @@ void mcopy(unsigned long *dest, unsigned long *src, unsigned long sz){
 
 // RV64XFORZA-LABEL: @fence_test(
 // RV64XFORZA-NEXT:  entry:
-// CHECK:  [[TMP0:%.*]] = call i64 @llvm.riscv.forza.amo.r.add64u(ptr %0, i64 %1)
+// CHECK:  [[TMP0:%.*]] = call void @llvm.riscv.forza.amo.r.add64u(ptr %0, i64 %1)
 // CHECK:  call void @llvm.riscv.forza.fence()
-long fence_test(long *a, unsigned long b){
-  volatile unsigned long rtn = __forza_amo_r_add64u(a,b);
+void fence_test(long *a, unsigned long b){
+  __forza_amo_r_add64u(a,b);
   __forza_fence();
-  return rtn;
 }

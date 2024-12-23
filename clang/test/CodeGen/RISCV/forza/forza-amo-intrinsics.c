@@ -6,28 +6,32 @@
 
 // RV64XFORZA-LABEL: @amo_r_add8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.add8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.add8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_add8u(long int *a, char b){
   __forza_amo_r_add8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_sub8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.sub8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.sub8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_sub8u(long int *a, char b){
   __forza_amo_r_sub8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_add16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.add16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.add16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_add16u(long int *a, short b){
   __forza_amo_r_add16u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_sub16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.sub16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.sub16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_sub16u(long int *a, short b){
   __forza_amo_r_sub16u(a,b);
 }
@@ -62,14 +66,16 @@ void amo_r_sub64u(long int *a, long int b){
 
 // RV64XFORZA-LABEL: @amo_r_and8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.and8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.and8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_and8u(long int *a, char b){
   __forza_amo_r_and8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_and16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.and16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.and16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_and16u(long int *a, short b){
   __forza_amo_r_and16u(a,b);
 }
@@ -90,14 +96,16 @@ void amo_r_and64u(long int *a, long int b){
 
 // RV64XFORZA-LABEL: @amo_r_or8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.or8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.or8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_or8u(long int *a, char b){
   __forza_amo_r_or8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_or16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.or16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.or16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 short amo_r_or16u(long int *a, short b){
    __forza_amo_r_or16u(a,b);
 }
@@ -118,14 +126,16 @@ void amo_r_or64u(long int *a, long int b){
 
 // RV64XFORZA-LABEL: @amo_r_xor8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.xor8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.xor8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_xor8u(long int *a, char b){
    __forza_amo_r_xor8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_xor16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.xor16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.xor16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_xor16u(long int *a, short b){
    __forza_amo_r_xor16u(a,b);
 }
@@ -146,14 +156,16 @@ void amo_r_xor64u(long int *a, long int b){
 
 // RV64XFORZA-LABEL: @amo_r_smax8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.smax8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.smax8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_smax8u(long int *a, char b){
    __forza_amo_r_smax8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_smax16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.smax16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.smax16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_smax16u(long int *a, short b){
    __forza_amo_r_smax16u(a,b);
 }
@@ -174,14 +186,16 @@ void amo_r_smax64u(long int *a, long int b){
 
 // RV64XFORZA-LABEL: @amo_r_umax8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.umax8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.umax8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_umax8u(unsigned long *a, char b){
    __forza_amo_r_umax8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_umax16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.umax16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.umax16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_umax16u(unsigned long *a, short b){
    __forza_amo_r_umax16u(a,b);
 }
@@ -202,14 +216,16 @@ void amo_r_umax64u(unsigned long *a, long int b){
 
 // RV64XFORZA-LABEL: @amo_r_smin8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.smin8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.smin8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_smin8u(long *a, char b){
    __forza_amo_r_smin8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_smin16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.smin16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.smin16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_smin16u(long int *a, short b){
    __forza_amo_r_smin16u(a,b);
 }
@@ -230,14 +246,16 @@ void amo_r_smin64u(long int *a, long int b){
 
 // RV64XFORZA-LABEL: @amo_r_umin8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.umin8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.umin8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_umin8u(unsigned long *a, char b){
    __forza_amo_r_umin8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_umin16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.umin16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.umin16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_umin16u(unsigned long *a, short b){
    __forza_amo_r_umin16u(a,b);
 }
@@ -258,14 +276,16 @@ void amo_r_umin64u(unsigned long *a, long int b){
 
 // RV64XFORZA-LABEL: @amo_r_thrs8u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.thrs8u(ptr [[RS1:%.*]], i8 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i8 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.thrs8u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_thrs8u(long int *a, char b){
    __forza_amo_r_thrs8u(a,b);
 }
 
 // RV64XFORZA-LABEL: @amo_r_thrs16u(
 // RV64XFORZA-NEXT:  entry:
-// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.thrs16u(ptr [[RS1:%.*]], i16 [[RS2:%.*]])
+// RV64XFORZA-NEXT:  %conv = sext i16 %b to i64
+// RV64XFORZA-NEXT:  call void @llvm.riscv.forza.amo.r.thrs16u(ptr [[RS1:%.*]], i64 [[RS2:%.*]])
 void amo_r_thrs16u(long int *a, short b){
    __forza_amo_r_thrs16u(a,b);
 }
