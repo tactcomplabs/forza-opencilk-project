@@ -1,4 +1,4 @@
-//==- RISCVSchedForza.td - Rocket Scheduling Definitions ----*- tablegen -*-=//
+//==- RISCVSchedForza.td - Forza Scheduling Definitions ----*- tablegen -*-=//
 //
 // Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
 // See https://llvm.org/LICENSE.txt for license information.
@@ -10,9 +10,9 @@
 // The following definitions describe the simpler per-operand machine model.
 // This works with MachineScheduler. See MCSchedule.h for details.
 
-// Rocket machine model for scheduling and other instruction cost heuristics.
+// Forza machine model for scheduling and other instruction cost heuristics.
 def ForzaModel : SchedMachineModel {
-  let MicroOpBufferSize = 0; // Rocket is in-order.
+  let MicroOpBufferSize = 0; // Forza is in-order.
   let IssueWidth = 2;        // 1 micro-op is dispatched per cycle.
   let LoadLatency = 3;
   let MispredictPenalty = 3;
@@ -27,7 +27,7 @@ def ForzaModel : SchedMachineModel {
 // Define each kind of processor resource and number available.
 
 // Modeling each pipeline as a ProcResource using the BufferSize = 0 since
-// Rocket is in-order.
+// Forza is in-order.
 
 let BufferSize = 0 in {
 def ForzaUnitALU        : ProcResource<1>; // Int ALU
@@ -61,7 +61,7 @@ def : WriteRes<WriteShiftReg32, [ForzaUnitALU]>;
 def : WriteRes<WriteShiftReg, [ForzaUnitALU]>;
 
 // Integer multiplication
-let Latency = 4 in {
+let Latency = 3 in {
 def : WriteRes<WriteIMul, [ForzaUnitIMul]>;
 def : WriteRes<WriteIMul32, [ForzaUnitIMul]>;
 }
